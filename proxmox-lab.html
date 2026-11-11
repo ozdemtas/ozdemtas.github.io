@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proxmox Lab Environment for IT Trainees – Project by Özdem Tas</title>
+  <meta name="description" content="Project by Özdem Tas: an isolated Proxmox VE lab with 8 VMs, WireGuard VPN, firewall and role-based access for IT trainees – planned and built on a single bare-metal server.">
+  <meta name="author" content="Özdem Tas">
+  <link rel="canonical" href="https://ozdemtas.github.io/proxmox-lab.html">
+  <link rel="alternate" hreflang="en" href="https://ozdemtas.github.io/proxmox-lab.html">
+  <link rel="alternate" hreflang="de" href="https://ozdemtas.github.io/de/proxmox-lab.html">
+  <link rel="alternate" hreflang="x-default" href="https://ozdemtas.github.io/proxmox-lab.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Proxmox Lab Environment for IT Trainees – Project by Özdem Tas">
+  <meta property="og:description" content="Project by Özdem Tas: an isolated Proxmox VE lab with 8 VMs, WireGuard VPN, firewall and role-based access for IT trainees – planned and built on a single bare-metal server.">
+  <meta property="og:url" content="https://ozdemtas.github.io/proxmox-lab.html">
+  <meta property="og:locale" content="en_US">
+  <link rel="stylesheet" href="/style.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Proxmox lab environment for IT trainees",
+  "description": "Project by Özdem Tas: an isolated Proxmox VE lab with 8 VMs, WireGuard VPN, firewall and role-based access for IT trainees – planned and built on a single bare-metal server.",
+  "url": "https://ozdemtas.github.io/proxmox-lab.html",
+  "inLanguage": "en",
+  "author": {
+    "@id": "https://ozdemtas.github.io/#person",
+    "@type": "Person",
+    "name": "Özdem Tas"
+  },
+  "about": [
+    "Proxmox VE",
+    "Virtualization",
+    "WireGuard",
+    "Linux",
+    "Network isolation"
+  ]
+}
+  </script>
+</head>
+<body>
+  <main>
+    <nav>
+      <div><a href="/">Home</a><a href="/proxmox-lab.html" class="active">Project</a></div>
+      <div class="lang"><a href="/proxmox-lab.html" class="active" hreflang="en">EN</a><a href="/de/proxmox-lab.html" hreflang="de">DE</a></div>
+    </nav>
+    <h1>Proxmox lab environment for IT trainees</h1>
+    <p class="sub">Project by Özdem Tas · final project of my vocational training</p>
+
+    <p>For my IHK final project I planned and built a virtual lab environment in which IT trainees
+       can practise Linux administration on their own isolated machines – safely separated from
+       production systems, reachable from anywhere via VPN and without any licence costs.</p>
+
+    <h2>At a glance</h2>
+    <table>
+      <tr><th>Platform</th><td>Proxmox VE 9 on a single bare-metal server</td></tr>
+      <tr><th>Virtual machines</th><td>8 lab VMs for trainees + 3 infrastructure VMs (DHCP, DNS, WireGuard)</td></tr>
+      <tr><th>Templates</th><td>Debian, Ubuntu Server, AlmaLinux</td></tr>
+      <tr><th>Resources allocated</th><td>64 GB RAM · 640 GB storage</td></tr>
+      <tr><th>Access</th><td>WireGuard VPN · role-based permissions (RBAC)</td></tr>
+      <tr><th>Licence costs</th><td>€0</td></tr>
+      <tr><th>Project scope</th><td>40 hours – from requirements to handover</td></tr>
+    </table>
+
+    <h2>Why this project?</h2>
+    <p>Trainees learn Linux administration best by doing it: installing packages, configuring
+       services, breaking things and fixing them again. That needs real systems – but practising on
+       shared or production-adjacent machines is risky. The goal was a dedicated environment where
+       every trainee has their own server to experiment with, while the rest of the network stays
+       completely untouched.</p>
+
+    <h3>Requirements</h3>
+    <ul>
+      <li>One separate VM per trainee, isolated from production networks</li>
+      <li>Secure remote access from outside</li>
+      <li>Trainees may only use their own VM – no access to others or to the host</li>
+      <li>New or reset VMs quickly provided from templates</li>
+      <li>Several Linux distributions for different training scenarios</li>
+      <li>Reuse of existing hardware, no licence costs</li>
+    </ul>
+
+    <h2>Choosing the platform</h2>
+    <p>I compared <strong>Proxmox VE</strong>, <strong>VMware ESXi</strong> and <strong>XCP-ng</strong>
+       using a five-year cost comparison and a weighted scoring model. Proxmox VE came out on top:
+       no licence costs, a full web interface, a complete API for automation and built-in templates,
+       firewall and permission system. The free ESXi edition is limited to non-production use without
+       vCenter, and XCP-ng would have meant noticeably more setup effort.</p>
+
+    <h2>Architecture</h2>
+    <div class="diagram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-label="Architecture of the Proxmox lab environment" font-family="system-ui,-apple-system,Segoe UI,sans-serif">
+<title>Architecture of the Proxmox lab environment</title>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8b949e"/></marker></defs>
+<rect x="40" y="16" width="180" height="46" rx="8" fill="#161b22" stroke="#30363d"/>
+<text x="130" y="44" font-size="14" fill="#e6edf3" text-anchor="middle" font-weight="600">Internet</text>
+<rect x="480" y="12" width="220" height="54" rx="8" fill="#161b22" stroke="#3fb950"/>
+<text x="590" y="35" font-size="14" fill="#e6edf3" text-anchor="middle" font-weight="600">Trainees</text>
+<text x="590" y="54" font-size="11.5" fill="#8b949e" text-anchor="middle" font-weight="400">remote via WireGuard VPN</text>
+<rect x="20" y="98" width="680" height="312" rx="12" fill="#0d1117" stroke="#30363d"/>
+<text x="36" y="120" font-size="12.5" fill="#8b949e" text-anchor="start" font-weight="600">Proxmox VE host (single bare-metal server)</text>
+<rect x="36" y="136" width="648" height="30" rx="6" fill="#0c2d6b" stroke="#2f81f7"/>
+<text x="360" y="156" font-size="12.5" fill="#e6edf3" text-anchor="middle" font-weight="400">Proxmox firewall: admin access only from lab network or VPN</text>
+<line x1="130" y1="62" x2="130" y2="134" stroke="#8b949e" marker-end="url(#ar)"/>
+<line x1="590" y1="66" x2="590" y2="134" stroke="#3fb950" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<rect x="36" y="184" width="174" height="40" rx="8" fill="#161b22" stroke="#30363d"/>
+<text x="123" y="209" font-size="12.5" fill="#e6edf3" text-anchor="middle" font-weight="400">vmbr0 · management</text>
+<rect x="232" y="176" width="456" height="150" rx="10" fill="none" stroke="#30363d" stroke-dasharray="5 4"/>
+<rect x="245" y="184" width="435" height="40" rx="8" fill="#161b22" stroke="#2f81f7"/>
+<text x="462" y="209" font-size="12.5" fill="#e6edf3" text-anchor="middle" font-weight="400">vmbr1 · isolated lab network (no physical port)</text>
+<line x1="212" y1="204" x2="243" y2="204" stroke="#8b949e" marker-start="url(#ar)" marker-end="url(#ar)"/>
+<text x="226" y="198" font-size="10" fill="#8b949e" text-anchor="middle" font-weight="400">NAT</text>
+<rect x="245.0" y="238" width="138" height="34" rx="8" fill="#161b22" stroke="#30363d"/>
+<text x="314.0" y="260" font-size="12.5" fill="#e6edf3" text-anchor="middle" font-weight="400">DHCP</text>
+<rect x="393.5" y="238" width="138" height="34" rx="8" fill="#161b22" stroke="#30363d"/>
+<text x="462.5" y="260" font-size="12.5" fill="#e6edf3" text-anchor="middle" font-weight="400">DNS</text>
+<rect x="542.0" y="238" width="138" height="34" rx="8" fill="#161b22" stroke="#30363d"/>
+<text x="611.0" y="260" font-size="12.5" fill="#e6edf3" text-anchor="middle" font-weight="400">WireGuard</text>
+<rect x="245" y="284" width="48" height="34" rx="8" fill="#161b22" stroke="#2ea043"/>
+<text x="269" y="306" font-size="11.5" fill="#e6edf3" text-anchor="middle" font-weight="400">VM 1</text>
+<rect x="300" y="284" width="48" height="34" rx="8" fill="#161b22" stroke="#2ea043"/>
+<text x="324" y="306" font-size="11.5" fill="#e6edf3" text-anchor="middle" font-weight="400">VM 2</text>
+<rect x="355" y="284" width="48" height="34" rx="8" fill="#161b22" stroke="#2ea043"/>
+<text x="379" y="306" font-size="11.5" fill="#e6edf3" text-anchor="middle" font-weight="400">VM 3</text>
+<rect x="410" y="284" width="48" height="34" rx="8" fill="#161b22" stroke="#2ea043"/>
+<text x="434" y="306" font-size="11.5" fill="#e6edf3" text-anchor="middle" font-weight="400">VM 4</text>
+<rect x="465" y="284" width="48" height="34" rx="8" fill="#161b22" stroke="#2ea043"/>
+<text x="489" y="306" font-size="11.5" fill="#e6edf3" text-anchor="middle" font-weight="400">VM 5</text>
+<rect x="520" y="284" width="48" height="34" rx="8" fill="#161b22" stroke="#2ea043"/>
+<text x="544" y="306" font-size="11.5" fill="#e6edf3" text-anchor="middle" font-weight="400">VM 6</text>
+<rect x="575" y="284" width="48" height="34" rx="8" fill="#161b22" stroke="#2ea043"/>
+<text x="599" y="306" font-size="11.5" fill="#e6edf3" text-anchor="middle" font-weight="400">VM 7</text>
+<rect x="630" y="284" width="48" height="34" rx="8" fill="#161b22" stroke="#2ea043"/>
+<text x="654" y="306" font-size="11.5" fill="#e6edf3" text-anchor="middle" font-weight="400">VM 8</text>
+<rect x="36" y="238" width="174" height="80" rx="8" fill="#161b22" stroke="#30363d"/>
+<text x="123" y="258" font-size="12.5" fill="#e6edf3" text-anchor="middle" font-weight="600">Linux templates</text>
+<text x="123" y="278" font-size="11.5" fill="#8b949e" text-anchor="middle" font-weight="400">Debian</text>
+<text x="123" y="294" font-size="11.5" fill="#8b949e" text-anchor="middle" font-weight="400">Ubuntu Server</text>
+<text x="123" y="310" font-size="11.5" fill="#8b949e" text-anchor="middle" font-weight="400">AlmaLinux</text>
+<line x1="210" y1="301" x2="243" y2="301" stroke="#8b949e" marker-end="url(#ar)"/>
+<text x="226" y="295" font-size="9.5" fill="#8b949e" text-anchor="middle" font-weight="400">clone</text>
+<rect x="36" y="354" width="174" height="40" rx="8" fill="#161b22" stroke="#30363d"/>
+<text x="123" y="379" font-size="12" fill="#e6edf3" text-anchor="middle" font-weight="400">Backup (local disk)</text>
+<rect x="245" y="354" width="435" height="40" rx="8" fill="#161b22" stroke="#30363d"/>
+<text x="462" y="379" font-size="12" fill="#e6edf3" text-anchor="middle" font-weight="400">RBAC: each trainee only their own VM (start · stop · console)</text>
+</svg>
+
+    </div>
+    <p class="caption">Simplified overview – addresses, ports and hostnames intentionally omitted.</p>
+
+    <h2>Implementation</h2>
+    <ol class="steps">
+      <li><strong>Planning</strong> – requirements, IP concept and resource planning. CPU is deliberately overcommitted, because not all VMs run under full load at the same time.</li>
+      <li><strong>Installation</strong> – Proxmox VE installed remotely on the bare-metal server via the IPMI/KVM console.</li>
+      <li><strong>Network</strong> – isolated bridge <code>vmbr1</code> without a physical port; internet access for the lab via NAT, selected services via DNAT.</li>
+      <li><strong>Infrastructure services</strong> – own VMs for DHCP, DNS (bind9 with forwarding) and the WireGuard VPN server.</li>
+      <li><strong>Templates &amp; lab VMs</strong> – three Linux templates created, eight lab VMs cloned from them.</li>
+      <li><strong>Permissions</strong> – users, a resource pool and path-based RBAC: each trainee may only start, stop and open the console of their own VM.</li>
+      <li><strong>Security</strong> – Proxmox firewall activated as the last step: admin access only from the lab network or through the VPN.</li>
+      <li><strong>Testing &amp; handover</strong> – functional tests of network, DNS, VPN and permissions, followed by a handover documentation for the support team.</li>
+    </ol>
+
+    <h2>Challenges &amp; solutions</h2>
+    <h3>Activating the firewall without locking myself out</h3>
+    <p>A wrong firewall rule on a remote server can cut off your own access. So I first tested
+       WireGuard as a fallback route and checked NAT and DNAT together with the planned rules. Only then
+       did I activate the firewall and verified web interface and SSH access again.</p>
+    <h3>Fitting 11 VMs onto one server</h3>
+    <p>Eight trainee VMs and three infrastructure VMs had to share the resources of one machine.
+       I sized RAM and storage per VM so that everything fits fixed limits, and planned CPU with
+       deliberate overcommitting – realistic for a training lab where machines are rarely under full load at once.</p>
+
+    <h2>Result</h2>
+    <ul>
+      <li>Eight ready-to-use, isolated lab VMs based on Linux</li>
+      <li>Secure remote access for trainees via WireGuard VPN</li>
+      <li>Clear permissions: trainees cannot affect other VMs or the host</li>
+      <li>New VMs can be provided at any time from the templates</li>
+      <li>No licence or hardware costs</li>
+    </ul>
+    <p class="muted">Next steps: an external backup target (currently backups are stored locally) and central monitoring of CPU, RAM and storage.</p>
+
+    <h2>Skills used</h2>
+    <div class="tags"><span>Proxmox VE</span><span>Linux</span><span>Debian</span><span>Ubuntu Server</span><span>AlmaLinux</span><span>Linux bridges</span><span>NAT / DNAT</span><span>WireGuard</span><span>DHCP</span><span>DNS / bind9</span><span>Firewall</span><span>RBAC</span><span>IPMI / KVM</span><span>Cost-benefit analysis</span><span>Documentation</span></div>
+
+    <p class="note">Company names, hostnames, IP addresses and access data are intentionally not published.</p>
+
+    <h2>Contact</h2>
+    <div class="links">
+      <a class="linkedin" href="https://www.linkedin.com/in/oezdem-tas" rel="me">LinkedIn</a>
+      <a class="xing" href="https://www.xing.com/profile/Oezdem_Tas" rel="me">XING</a>
+      <a class="github" href="https://github.com/ozdemtas" rel="me">GitHub</a>
+    </div>
+
+    <footer>© Özdem Tas</footer>
+  </main>
+</body>
+</html>
