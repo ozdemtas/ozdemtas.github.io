@@ -37,3 +37,4 @@ th { color:var(--muted); font-weight:600; width:38%; }
 footer { margin-top:56px; color:var(--muted); font-size:.85rem; }
 .shot { margin:20px 0 0; }
 .shot img { display:block; max-width:100%; height:auto; border:1px solid var(--line); border-radius:10px; }
+.credly { background:#ff6b00; color:#fff; }
