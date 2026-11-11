@@ -35,3 +35,5 @@ th { color:var(--muted); font-weight:600; width:38%; }
 .tags span { display:inline-block; margin:4px 6px 0 0; padding:3px 10px; border-radius:20px; background:var(--panel); border:1px solid var(--line); font-size:.85rem; }
 .note { margin-top:40px; padding:12px 16px; border-left:3px solid var(--line); color:var(--muted); font-size:.9rem; }
 footer { margin-top:56px; color:var(--muted); font-size:.85rem; }
+.shot { margin:20px 0 0; }
+.shot img { display:block; max-width:100%; height:auto; border:1px solid var(--line); border-radius:10px; }
