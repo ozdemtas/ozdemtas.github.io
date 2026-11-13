@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Troubleshooting &amp; Log-Analyse – Kapitel 24 | FISI AP2 Lernskript</title>
+<meta name="description" content="Systematisch vorgehen: von unten nach oben im OSI-Modell (Kabel/Link → IP → Gateway → DNS → Dienst/Port → Anwendung). Werkzeuge: ipconfig /all , ping , …">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-24-troubleshooting-log-analyse.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Troubleshooting &amp; Log-Analyse – Kapitel 24 | FISI AP2 Lernskript">
+<meta property="og:description" content="Systematisch vorgehen: von unten nach oben im OSI-Modell (Kabel/Link → IP → Gateway → DNS → Dienst/Port → Anwendung). Werkzeuge: ipconfig /all , ping , …">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-24-troubleshooting-log-analyse.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 24: Troubleshooting & Log-Analyse", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-24-troubleshooting-log-analyse.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a class="active" href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/pruefungspraxis.html">Prüfungspraxis &amp; Anhang</a> / 24 Troubleshooting &amp; Log-Analyse</div>
+<h1><span class="num">24</span>Troubleshooting &amp; Log-Analyse</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip">Screenshot-Aufgaben: 4–6 Punkte mit wenig Schreibaufwand</span><span class="chip">Lernzeit ca. 90 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li>Systematisch vorgehen: <strong>von unten nach oben</strong> im OSI-Modell (Kabel/Link → IP → Gateway → DNS → Dienst/Port → Anwendung).</li><li>Werkzeuge: <code>ipconfig /all</code> , <code>ping</code> , <code>tracert</code> , <code>nslookup</code> , <code>Test-NetConnection -Port</code> / <code>telnet</code> , <code>netstat</code> /<code> ss</code> , Ereignisanzeige/Logs.</li><li>Typische Schlüsse: 169.254.x.x → DHCP · IP geht, Name nicht → DNS · Ping geht, Dienst nicht → Port/Firewall/Dienst.</li></ul></div>
+<h2 id="systematische-fehlersuche">Systematische Fehlersuche</h2>
+<ol><li><strong>Problem eingrenzen:</strong> Wer ist betroffen (ein Nutzer, eine Abteilung, alle)? Seit wann? Was wurde geändert?</li><li><strong>Hypothese</strong> aufstellen und von unten nach oben prüfen.</li><li><strong>Lösung umsetzen</strong>, testen, dokumentieren (Ticket, Wissensdatenbank).</li></ol>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Schritt</strong></th><th><strong>Test</strong></th><th><strong>Wenn fehlerhaft → wahrscheinliche Ursache</strong></th></tr></thead><tbody><tr><td>1 Link</td><td>Link-LED, <code>ip link</code> , Kabeltest</td><td>Kabel, Port deaktiviert, falscher VLAN-/Portmodus</td></tr><tr><td>2 IP-Konfiguration</td><td><code>ipconfig /all</code> / <code>ip a</code></td><td>169.254.x.x = kein DHCP; falsche Maske oder falsches Gateway</td></tr><tr><td>3 Lokales Netz</td><td><code>ping</code> Gateway</td><td>VLAN, Switch, Gateway down, IP-Konflikt</td></tr><tr><td>4 Entfernte Netze</td><td><code>ping</code> externe IP, <code>tracert</code></td><td>Routing, NAT, Firewall, Provider</td></tr><tr><td>5 Namensauflösung</td><td><code>nslookup</code> / <code>dig</code></td><td>DNS-Server falsch/nicht erreichbar, Record fehlt</td></tr><tr><td>6 Dienst</td><td><code>Test-NetConnection host -Port 443</code> , <code>telnet</code> <code>host 80</code> , <code>ss -tulpn</code></td><td>Dienst gestoppt, lauscht auf falschem Port, Host-Firewall</td></tr><tr><td>7 Anwendung</td><td>Logs, Fehlermeldungen, Browser</td><td>Zertifikat, Berechtigungen, Konfiguration</td></tr></tbody></table></div>
+<h2 id="fehlerbilder-und-bedeutung">Fehlerbilder und Bedeutung</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Meldung / Symptom</strong></th><th><strong>Bedeutung</strong></th></tr></thead><tbody><tr><td>ping: „Zeitüberschreitung der Anforderung“</td><td>keine Antwort: Host aus, Firewall blockiert ICMP, fehlende Route (auch Rückroute!)</td></tr><tr><td>ping: „Zielhost nicht erreichbar“</td><td>ein Router/der eigene Rechner kennt keinen Weg bzw. ARP scheitert im lokalen Netz</td></tr><tr><td>tracert endet mit * * *</td><td>ab diesem Hop keine Antwort: Firewall oder Routingfehler dort</td></tr><tr><td>nslookup: „DNS request timed out“</td><td>DNS-Server nicht erreichbar oder Dienst aus</td></tr><tr><td>nslookup: „Non-existent domain“</td><td>Name existiert nicht (Tippfehler, Record fehlt)</td></tr><tr><td>Doppelte IP-Adresse (Windows-Warnung)</td><td>IP-Konflikt: statische Adresse im DHCP-Bereich</td></tr><tr><td>Linux: „Permission denied“</td><td>fehlende Rechte (r/w/x) → <code>ls -l</code> prüfen, <code>chmod</code> /<code> chown</code></td></tr><tr><td>Port auf Switch „blocking“</td><td>Spanning Tree hat Port wegen Redundanz blockiert</td></tr><tr><td>nur 100 Mbit/s statt 1 Gbit/s</td><td>defektes/falsches Kabel (nur 2 Adernpaare), Treiber, Autonegotiation</td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>HTTP-Statuscode</strong></th><th><strong>Bedeutung</strong></th><th><strong>HTTP-Statuscode</strong></th><th><strong>Bedeutung</strong></th></tr></thead><tbody><tr><td>200</td><td>OK</td><td>404</td><td>Seite nicht gefunden</td></tr><tr><td>301 / 302</td><td>dauerhafte / temporäre Weiterleitung</td><td>500</td><td>interner Serverfehler</td></tr><tr><td>401</td><td>Anmeldung erforderlich</td><td>502</td><td>Bad Gateway (Proxy/Load Balancer erreicht Backend nicht)</td></tr><tr><td>403</td><td>verboten (angemeldet, aber keine Rechte)</td><td>503</td><td>Dienst nicht verfügbar (Überlast, Wartung)</td></tr></tbody></table></div>
+<p>SMTP-Codes und Mail-Logs → Kapitel 15. TLS-Fehlermeldungen → Kapitel 14. VPN-Fehlerbilder → Kapitel 17.</p>
+<h2 id="performance-screenshots-auswerten">Performance-Screenshots auswerten</h2>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: BOTTLENECK ERKENNEN</div><div class="table-wrap"><table class=""><thead><tr><th><strong>Server</strong></th><th><strong>CPU</strong></th><th><strong>RAM</strong></th><th><strong>Datenträger</strong></th><th><strong>Netzwerk</strong></th><th><strong>Engpass</strong></th></tr></thead><tbody><tr><td>A</td><td>98 %</td><td>45 %</td><td>5 %</td><td>10 %</td><td><strong>CPU</strong> → mehr Kerne/vCPUs, Last verteilen</td></tr><tr><td>B</td><td>30 %</td><td>97 %</td><td>100 % (Auslagerung)</td><td>5 %</td><td><strong>RAM</strong> → Platte ist nur Folge der Auslagerung</td></tr><tr><td>C</td><td>20 %</td><td>40 %</td><td>100 %, hohe Warteschlange</td><td>15 %</td><td><strong>Datenträger</strong> → SSD/NVMe, RAID 10, Cache</td></tr><tr><td>D</td><td>15 %</td><td>35 %</td><td>10 %</td><td>~95 Mbit/s konstant</td><td><strong>Netzwerk</strong> → Link nur 100 Mbit/s (Kabel/Treiber), Upgrade/LACP</td></tr></tbody></table></div></div>
+<h2 id="netzwerkanalyse-mit-wireshark-und-nmap">Netzwerkanalyse mit Wireshark und Nmap</h2>
+<p><strong>Wireshark</strong> (Kommandozeile: <strong>tshark</strong>; unter Linux auch <strong>tcpdump</strong>) ist ein Paketanalysator (Sniffer): Er zeichnet den Verkehr an einer Schnittstelle auf (Datei .pcap) und zeigt jedes Paket mit allen Schichten (Ethernet, IP, TCP/UDP, Anwendung).</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Anzeigefilter</strong></th><th><strong>zeigt</strong></th></tr></thead><tbody><tr><td><code>ip.addr == 192.168.1.10</code></td><td>Verkehr von und zu diesem Host</td></tr><tr><td><code>tcp.port == 443</code></td><td>HTTPS-Verkehr</td></tr><tr><td><code>dns · dhcp · arp · icmp</code></td><td>nur dieses Protokoll (z. B. DHCP-DORA oder DNS-Anfrage und -Antwort)</td></tr><tr><td><code>tcp.flags.syn==1 &amp;&amp; tcp.flags.ack==0</code></td><td>Verbindungsaufbauten (erstes Paket des 3-Wege-Handshakes)</td></tr></tbody></table></div>
+<ul><li><strong>Typische Befunde:</strong> SYN → SYN-ACK → ACK = Verbindung klappt · SYN → <strong>RST</strong> = Port geschlossen, kein Dienst · SYN ohne Antwort, mehrfach wiederholt = Firewall verwirft · viele <strong>Retransmissions</strong> = Paketverlust/Überlast · lesbare Passwörter bei FTP, Telnet oder HTTP = unverschlüsseltes Protokoll.</li><li><strong>Mitschneiden im Switch-Netz:</strong> Ein Switch leitet nur den eigenen Verkehr und Broadcasts an den Analyse-PC. Für fremden Verkehr braucht man <strong>Port-Mirroring</strong> (SPAN-Port) oder einen Netzwerk-TAP.</li></ul>
+<p><strong>Nmap</strong> ist ein Portscanner für Inventarisierung und Sicherheitsprüfung: Welche Hosts sind online, welche Ports offen, welche Dienste laufen?</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Befehl</strong></th><th><strong>Zweck</strong></th></tr></thead><tbody><tr><td><code>nmap -sn 192.168.1.0/24</code></td><td>Ping-Scan: welche Hosts im Netz antworten</td></tr><tr><td><code>nmap -p 1-1024 192.168.1.20</code></td><td>bestimmte Ports prüfen</td></tr><tr><td><code>nmap -sV 192.168.1.20</code></td><td>Dienste und Versionen auf offenen Ports erkennen</td></tr><tr><td><code>nmap -O 192.168.1.20</code></td><td>Betriebssystem schätzen</td></tr></tbody></table></div>
+<p>Portzustände: <strong>open</strong> (Dienst antwortet) · <strong>closed</strong> (erreichbar, aber kein Dienst) · <strong>filtered</strong> (keine Antwort, eine Firewall verwirft). Einsatz: nach einer Härtung prüfen, dass nur die nötigen Ports offen sind, und Firewall-Regeln testen.</p>
+<div class="box box-fallen"><div class="box-label">FALLE</div><p>Mitschneiden und Scannen nur im eigenen Netz und mit Genehmigung: Mitschnitte enthalten personenbezogene Daten (DSGVO, Betriebsrat), und das Scannen fremder Netze kann strafbar sein.</p></div>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE</div><p><em>Ein Client erreicht den Webserver 192.168.1.20 nicht. Im Wireshark-Mitschnitt sieht man vom Client ein TCP-SYN an</em> <em>Port 443, der Server antwortet mit RST. Was bedeutet das?</em></p>
+<p><strong>Lösung:</strong> Der Server ist erreichbar (Routing und Firewall lassen das Paket durch), aber auf Port 443 lauscht kein Dienst. Webserverdienst prüfen (läuft er? richtiger Port?), z. B. mit <code>systemctl status nginx</code> und <code>ss -tulpn</code>.</p></div>
+<h2 id="befehle-fuer-die-fehlersuche-windows">Befehle für die Fehlersuche (Windows)</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Befehl</strong></th><th><strong>Zweck</strong></th></tr></thead><tbody><tr><td><code>ipconfig /all</code></td><td>IP, Maske, Gateway, DNS, MAC, DHCP-Server, Lease</td></tr><tr><td><code>ipconfig /release</code> · <code>/renew</code> · <code>/flushdns</code></td><td>DHCP-Adresse abgeben / neu anfordern · DNS-Cache leeren</td></tr><tr><td><code>ping -t ziel</code> · <code>ping -6 ziel</code></td><td>Dauerping · über IPv6</td></tr><tr><td><code>tracert ziel</code> · <code>pathping ziel</code></td><td>Weg · Weg mit Verlustrate je Hop</td></tr></tbody></table></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü24.1</strong> Ein Nutzer kann <code>ping 8.8.8.8</code> erfolgreich ausführen, <code>www.firma.de</code> öffnet sich aber nicht. Nächster Schritt und wahrscheinliche Ursache?</p>
+<p><strong>Ü24.2</strong> Ein neuer Webserver antwortet auf ping, die Webseite lädt aber nicht. Wie gehst du vor?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 24</h3>
+<p><span style="color:#9a6200"><strong>Ü24.1</strong></span><code> nslookup www.firma.de</code> ausführen. IP-Konnektivität funktioniert, also liegt das Problem wahrscheinlich bei der Namensauflösung (falscher/nicht erreichbarer DNS-Server, fehlender Record). Danach ggf. <code>ipconfig /flushdns</code> .</p>
+<p><span style="color:#9a6200"><strong>Ü24.2</strong></span> Port prüfen: <code>Test-NetConnection server -Port 443</code> bzw. 80. Geschlossen → auf dem Server prüfen, ob der Webdienst läuft (<code> systemctl status nginx</code> ) und auf welchem Port er lauscht (<code> ss -tulpn</code> ), Host-Firewall und Netzwerk-Firewall-Regeln prüfen. Port offen → Logs des Webservers, Zertifikat, Konfiguration prüfen.</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-23-rechentrainer.html">← 23 Rechentrainer</a><a class="next" href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

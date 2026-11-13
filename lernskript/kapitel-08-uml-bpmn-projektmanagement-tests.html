@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UML, BPMN, Projektmanagement &amp; Tests – Kapitel 8 | FISI AP2 Lernskript</title>
+<meta name="description" content="Statische Sicht (Struktur): Klassendiagramm. Dynamische Sicht (Verhalten): Aktivitäts-, Sequenz-, Anwendungsfalldiagramm. Aktivitätsdiagramm: Start ●, A…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UML, BPMN, Projektmanagement &amp; Tests – Kapitel 8 | FISI AP2 Lernskript">
+<meta property="og:description" content="Statische Sicht (Struktur): Klassendiagramm. Dynamische Sicht (Verhalten): Aktivitäts-, Sequenz-, Anwendungsfalldiagramm. Aktivitätsdiagramm: Start ●, A…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 8: UML, BPMN, Projektmanagement & Tests", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a class="active" href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-1-konzeption-administration.html">Teil 1 · Konzeption &amp; Administration</a> / 8 UML, BPMN, Projektmanagement &amp; Tests</div>
+<h1><span class="num">8</span>UML, BPMN, Projektmanagement &amp; Tests</h1>
+
+<div class="chips"><span class="chip">Relevanz ★★</span><span class="chip">4–8 Punkte · BPMN neu im Katalog</span><span class="chip">Lernzeit ca. 90 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li><strong>Statische Sicht</strong> (Struktur): Klassendiagramm. <strong>Dynamische Sicht</strong> (Verhalten): Aktivitäts-, Sequenz-, Anwendungsfalldiagramm.</li><li>Aktivitätsdiagramm: Start ●, Aktion (abgerundetes Rechteck), Entscheidung ◇ mit <strong>[Bedingungen]</strong>, Gabelung/Vereinigung (Balken), Ende ◉.</li><li>Klassendiagramm: <strong>Aggregation</strong> = leere Raute (Teil existiert allein weiter). <strong>Komposition</strong> = gefüllte Raute (Teil stirbt mit dem Ganzen).</li><li>BPMN: Ereignisse = Kreise, Aufgaben = abgerundete Rechtecke, Gateways = Rauten, Pools/Lanes = Verantwortliche.</li><li>Black-Box-Test (ohne Code, nur Ein-/Ausgabe) vs. White-Box-Test (mit Kenntnis des Codes).</li></ul></div>
+<h2 id="uml-aktivitaetsdiagramm">UML-Aktivitätsdiagramm</h2>
+<figure class="diagram"><img src="img/abb-kapitel-08-uml-bpmn-projektmanagement-tests-2.png" alt="Diagramm: Aktion Start Aktivitätsende Ablaufende Entscheidung Gabelung" width="420" loading="lazy"></figure>
+<p>Bedingungen stehen in eckigen Klammern an den Pfeilen: [Ping erfolgreich] / [sonst]. Schwimmbahnen (Swimlanes) trennen Verantwortliche (z. B. Kunde | Service Desk | 2nd Level).</p>
+<ul><li><strong>Aktivitätsende</strong> (Kreis mit Punkt) beendet die <strong>gesamte</strong> Aktivität. <strong>Ablaufende</strong> (Kreis mit X) beendet nur einen Zweig.</li><li><strong>Gabelung (Fork)</strong> startet parallele Abläufe, <strong>Vereinigung (Join)</strong> wartet, bis alle fertig sind. <strong>Verzweigung</strong> (Raute) wählt genau einen Weg, <strong>Zusammenführung</strong> (Raute) führt Wege wieder zusammen.</li></ul>
+<div class="box box-aufgabe"><div class="box-label">PRÜFUNGS-CHECK FÜR AKTIVITÄTSDIAGRAMME</div><ul><li>Jede Raute hat an allen ausgehenden Pfeilen eine Bedingung in [ ], und die Bedingungen schließen sich gegenseitig aus.</li><li>Jeder Pfad endet in einem Endknoten, keine „losen“ Pfeile.</li><li>Schleifen (z. B. „erneut versuchen“) laufen über eine Raute zurück.</li></ul></div>
+<h2 id="uml-klassendiagramm">UML-Klassendiagramm</h2>
+<pre class="formel">┌────────────────────────┐
+│ Server                 │   Sichtbarkeit:  + public   - private   # protected
+├────────────────────────┤
+│ - hostname : String    │   Attribute
+│ - ramGB : int          │
+├────────────────────────┤
+│ + starten() : void     │   Methoden
+│ + getRamGB() : int     │
+└────────────────────────┘</pre>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Beziehung</strong></th><th><strong>Symbol</strong></th><th><strong>Bedeutung / Beispiel</strong></th></tr></thead><tbody><tr><td>Assoziation</td><td>einfache Linie</td><td>Objekte kennen sich (Techniker – Ticket)</td></tr><tr><td>Aggregation</td><td>Linie mit <strong>leerer</strong> Raute am Ganzen</td><td>Teile existieren unabhängig weiter (Abteilung ◇— Mitarbeiter)</td></tr><tr><td>Komposition</td><td>Linie mit <strong>gefüllter</strong> Raute am Ganzen</td><td>Teile existenzabhängig (Gebäude ◆— Raum)</td></tr><tr><td>Vererbung (Generalisierung)</td><td>Pfeil mit leerem Dreieck zur Oberklasse</td><td>Datenbankserver ▷ Server</td></tr></tbody></table></div>
+<p><strong>Multiplizitäten</strong> stehen an den Linienenden: <code>1</code> , <code>0..1</code> , <code>*</code> bzw. <code>0..*</code> , <code>1..*</code> . Sie entsprechen den Kardinalitäten im ER-Modell.</p>
+<h2 id="weitere-uml-diagramme-und-epk">Weitere UML-Diagramme und EPK</h2>
+<p>Selbst zeichnen können solltest du <strong>Aktivitäts- und Klassendiagramm</strong> (und das ER-Modell, Kap. 6). <strong>Anwendungsfall- und</strong> <strong>Sequenzdiagramm</strong> stehen ebenfalls im FISI-Katalog: lesen, ergänzen, Fehler finden. Das Zustandsdiagramm ist laut Katalog FIAE-Stoff.</p>
+<h3>Klassendiagramm – Details aus dem Katalog-Anhang</h3>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Element</strong></th><th><strong>Darstellung</strong></th></tr></thead><tbody><tr><td>Sichtbarkeit</td><td><strong>+</strong> public · <strong>-</strong> private · <strong>#</strong> protected · <strong>~</strong> package</td></tr><tr><td>Attribut / Methode</td><td><code>- hostname : String bzw. + starten(modus : int) : void</code></td></tr><tr><td>Abstrakte Klasse</td><td>Name kursiv oder mit {abstract}; man kann keine Objekte davon erzeugen</td></tr><tr><td>Schnittstelle</td><td>«interface» über dem Namen; legt nur Methoden fest, die andere Klassen umsetzen</td></tr><tr><td>Implementierung</td><td><strong>gestrichelte</strong> Linie mit leerem Dreieck zur Schnittstelle</td></tr><tr><td>Gerichtete Assoziation</td><td>Linie mit offener Pfeilspitze: nur eine Seite kennt die andere</td></tr></tbody></table></div>
+<h3>Anwendungsfalldiagramm (Use Case)</h3>
+<p><strong>Akteur</strong> (Strichmännchen, außerhalb des Systems) · <strong>Anwendungsfall</strong> (Ellipse) · <strong>Systemgrenze</strong> (Rechteck). <strong>«include»</strong> = wird immer mit ausgeführt (z. B. „Anmelden“) · <strong>«extend»</strong> = optionale Erweiterung unter einer Bedingung · Generalisierung (leeres Dreieck) zwischen Akteuren, z. B. Administrator erbt alles vom Benutzer.</p>
+<h3>Sequenzdiagramm</h3>
+<p>Beteiligte oben, darunter gestrichelte <strong>Lebenslinien</strong>; die Zeit läuft von oben nach unten. <strong>Synchrone Nachricht</strong> (gefüllte Pfeilspitze): Sender wartet auf das Ende bzw. die Rückgabe. <strong>Asynchrone Nachricht</strong> (offene Pfeilspitze): Sender wartet nicht. <strong>Rückgabe</strong> = gestrichelter Pfeil. Schmaler Balken auf der Lebenslinie = Objekt ist gerade aktiv. Rahmen: <strong>alt</strong> (Verzweigung mit [Bedingung]/[else]), <strong>opt</strong> (nur wenn Bedingung erfüllt), <strong>loop</strong> (Wiederholung). <strong>create</strong> erzeugt ein Objekt, ein <strong>X</strong> am Ende der Lebenslinie zerstört es. FISI-Beispiele: DHCP (DORA), TLS-Handshake (Kap. 14).</p>
+<h3>Ereignisgesteuerte Prozesskette (EPK)</h3>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Symbol</strong></th><th><strong>Bedeutung</strong></th></tr></thead><tbody><tr><td>Sechseck</td><td><strong>Ereignis</strong>: eingetretener Zustand, z. B. „Störung gemeldet“</td></tr><tr><td>Abgerundetes Rechteck</td><td><strong>Funktion</strong>: Tätigkeit, z. B. „Störung analysieren“</td></tr><tr><td>Oval</td><td><strong>Organisationseinheit</strong>: wer die Funktion ausführt (z. B. Service Desk), per Linie zugeordnet</td></tr><tr><td>Rechteck</td><td><strong>Objekt</strong>: Informationsobjekt (z. B. Ticket), Material, Ressource oder Produkt</td></tr><tr><td>Kreis mit Zeichen</td><td><strong>Konnektoren</strong>: UND (alle), XOR (genau einer), ODER (mindestens einer)</td></tr><tr><td>Pfeile und Linien</td><td><strong>Kontrollfluss</strong> (Pfeil zwischen Ereignis, Funktion, Konnektor) · <strong>Informationsfluss</strong> (Objekt wird gelesen/geschrieben) · <strong>Material-/Ressourcenfluss</strong> (wird verbraucht) · <strong>Zuordnung</strong> (einfache Linie: Organisationseinheit oder Objekt zur Funktion)</td></tr></tbody></table></div>
+<p><strong>Regeln:</strong> Beginnt und endet mit einem Ereignis · Ereignis und Funktion wechseln sich ab · nach einem Ereignis darf <strong>kein</strong> <strong>XOR/ODER verzweigen</strong> (ein Ereignis kann nicht entscheiden, nur eine Funktion).</p>
+<p><strong>Ergänzungen aus dem Katalog-Anhang:</strong> <strong>Aktivitätsdiagramm</strong> – Katalogbegriffe: Teilung (Splitting) und Synchronisation (Und) für parallele Abläufe, Entscheidung und Zusammenführung (Oder); ein <strong>Konnektor</strong> (Kreis mit Buchstabe, z. B. A) verbindet Ablaufteile als Sprungmarke; Ablaufende (Kreis mit X) beendet nur den aktuellen Fluss. <strong>Use Case</strong> – «include»: gestrichelter Pfeil vom Basis- zum eingebundenen Anwendungsfall; «extend»: gestrichelter Pfeil vom erweiternden zum Basis-Anwendungsfall, Bedingung und Erweiterungspunkt (extension point) als Notiz; Generalisierung auch zwischen Anwendungsfällen. <strong>Sequenzdiagramm</strong> – Selbstaufruf = Pfeil zurück auf die eigene Lebenslinie; bei loop auch feste Anzahl, z. B. loop(10). <strong>Klassendiagramm</strong> – Eigenschaften in geschweiften Klammern, z. B. <code>- anzahl : int {static}</code>. <strong>BPMN</strong> – Start-, Zwischen- und Endereignis gibt es jeweils als Nachrichten-, Timer- oder Exception-Event; <strong>Datenobjekt</strong> = Blatt mit Eselsohr; Sequenzfluss = durchgezogener Pfeil im Pool, <strong>Nachrichtenfluss</strong> = gestrichelter Pfeil mit kleinem Kreis am Anfang zwischen Pools.</p>
+<h2 id="bpmn-2-0-geschaeftsprozesse-modellieren">BPMN 2.0 – Geschäftsprozesse modellieren</h2>
+<figure class="diagram"><img src="img/abb-kapitel-08-uml-bpmn-projektmanagement-tests-3.png" alt="Diagramm: × + Aufgabe Start Zwischen Ende XOR parallel inklusiv Sequenzfluss (im Pool) Nachrichtenfluss" width="460" loading="lazy"></figure>
+<ul><li><strong>Ereignisse</strong> (Kreise): Start (dünn), Zwischenereignis (doppelt, z. B. Timer, Nachricht), Ende (dick).</li><li><strong>Aufgaben</strong> (abgerundete Rechtecke): Tätigkeiten.</li><li><strong>Gateways</strong> (Rauten): <strong>×</strong> exklusiv (genau ein Weg), <strong>+</strong> parallel (alle Wege), <strong>○</strong> inklusiv (einer oder mehrere).</li><li><strong>Pool</strong> = Organisation/Teilnehmer, <strong>Lane</strong> = Rolle/Abteilung darin. Zwischen Pools gibt es nur <strong>Nachrichtenflüsse</strong> (gestrichelt).</li><li>Unterschied zu UML-Aktivitätsdiagramm: BPMN ist für <strong>Geschäftsprozesse</strong> gedacht und von Fachabteilungen lesbar; UML eher für Software- und Systemabläufe.</li></ul>
+<h2 id="anforderungen-erfassen-und-architektur-waehlen">Anforderungen erfassen und Architektur wählen</h2>
+<p><strong>Qualitätsmerkmale</strong> (ISO/IEC 25010, im Katalog genannt): <strong>Funktionalität</strong> (tut, was gefordert ist) · <strong>Zuverlässigkeit</strong> (stabil, fehlertolerant) · <strong>Benutzbarkeit</strong> (verständlich, ergonomisch, <strong>barrierefrei</strong>) · <strong>Effizienz</strong> (Antwortzeit, Ressourcenverbrauch) · <strong>Wartbarkeit/Anpassbarkeit</strong> (leicht änderbar) · <strong>Übertragbarkeit</strong> (auf andere Plattformen) · dazu Sicherheit und Kompatibilität. Anforderungen werden <strong>messbar</strong> formuliert („Antwortzeit unter 2 s bei 100 Nutzern“) und nach geltenden <strong>Normen</strong> umgesetzt. Kunde beschreibt im <strong>Lastenheft</strong> was, Auftragnehmer im <strong>Pflichtenheft</strong> wie.</p>
+<p><strong>Mock-up:</strong> Entwurf/Skizze einer Oberfläche, bevor programmiert wird. Kunden sehen früh, wie es aussehen soll; Missverständnisse werden billig korrigiert.</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Architektur</strong></th><th><strong>Aufbau</strong></th><th><strong>Bewertung</strong></th></tr></thead><tbody><tr><td>2-Tier (Client-Server)</td><td>Client mit Oberfläche und Logik ↔ Datenbankserver</td><td>einfach; Clients müssen bei Änderungen aktualisiert werden, DB direkt aus dem Netz erreichbar</td></tr><tr><td>3-Tier</td><td>Präsentation (Browser/Client) ↔ Anwendungs-/Logikserver ↔ Datenbankserver</td><td>Standard für Webanwendungen: Schichten getrennt skalierbar und absicherbar (Webserver in DMZ, DB intern)</td></tr><tr><td>Multi-Tier</td><td>weitere Schichten (Load Balancer, Cache, Microservices)</td><td>sehr skalierbar, aber komplex</td></tr></tbody></table></div>
+<h2 id="projektmanagement-und-netzplan">Projektmanagement und Netzplan</h2>
+<p><strong>Projekt</strong> = einmalig, zeitlich begrenzt, klares Ziel, begrenzte Ressourcen. Ziele <strong>SMART</strong> formulieren (spezifisch, messbar, attraktiv, realistisch, terminiert). <strong>Magisches Dreieck:</strong> Leistung/Qualität, Zeit und Kosten beeinflussen sich gegenseitig. <strong>Vorgehen:</strong> klassisch (Wasserfall: Phasen nacheinander, gut bei klaren, stabilen Anforderungen) oder agil (<strong>Scrum</strong>: kurze Sprints von 1–4 Wochen mit Product Owner, Scrum Master und Developers; gut, wenn sich Anforderungen ändern).</p>
+<p><strong>Projektstrukturplan (PSP):</strong> zerlegt das Projekt hierarchisch bis zu <strong>Arbeitspaketen</strong>. Daraus entstehen Zeitplan (<strong>Gantt-Diagramm</strong>: Balken auf einer Zeitachse) und Netzplan.</p>
+<p><strong>Netzplan:</strong> <strong>Vorwärtsrechnung:</strong> FAZ = größtes FEZ aller Vorgänger, FEZ = FAZ + Dauer. <strong>Rückwärtsrechnung:</strong> SEZ = kleinstes SAZ aller Nachfolger, SAZ = SEZ − Dauer. <strong>Gesamtpuffer</strong> GP = SAZ − FAZ (Verzögerung ohne Auswirkung auf das Projektende). <strong>Freier Puffer</strong> FP = kleinstes FAZ der Nachfolger − FEZ (Verzögerung ohne Auswirkung auf den Nachfolger). <strong>Kritischer Pfad</strong> = alle Vorgänge mit GP = 0; jede Verzögerung dort verschiebt das Projektende. <strong>Knoten im IHK-Format</strong> (Katalog-Anhang): oben links FAZ, oben rechts FEZ · Mitte Vorgang und Beschreibung · darunter Dauer | GP | FP · unten links SAZ, unten rechts SEZ.</p>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: NETZPLAN</div><p><em>A Ist-Analyse 2 Tage · B Hardware bestellen 5 (nach A) · C Konzept 3 (nach A) · D Server einrichten 4 (nach B und C) ·</em> <em>E Schulung vorbereiten 2 (nach C) · F Test und Abnahme 2 (nach D und E). Berechne Zeiten, Puffer und kritischen</em> <em>Pfad.</em></p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Vorgang</strong></th><th><strong>Dauer</strong></th><th><strong>FAZ</strong></th><th><strong>FEZ</strong></th><th><strong>SAZ</strong></th><th><strong>SEZ</strong></th><th><strong>GP</strong></th><th><strong>FP</strong></th></tr></thead><tbody><tr><td>A</td><td>2</td><td>0</td><td>2</td><td>0</td><td>2</td><td>0</td><td>0</td></tr><tr><td>B</td><td>5</td><td>2</td><td>7</td><td>2</td><td>7</td><td>0</td><td>0</td></tr><tr><td>C</td><td>3</td><td>2</td><td>5</td><td>4</td><td>7</td><td>2</td><td>0</td></tr><tr><td>D</td><td>4</td><td>7</td><td>11</td><td>7</td><td>11</td><td>0</td><td>0</td></tr><tr><td>E</td><td>2</td><td>5</td><td>7</td><td>9</td><td>11</td><td>4</td><td>4</td></tr><tr><td>F</td><td>2</td><td>11</td><td>13</td><td>11</td><td>13</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p><strong>Lösung:</strong> Projektdauer 13 Tage, kritischer Pfad <strong>A → B → D → F</strong>. D startet erst bei 7, weil B (FEZ 7) später fertig ist als C (FEZ 5). Verzögert sich C um 3 Tage, ist der Gesamtpuffer von 2 Tagen aufgebraucht und das Projekt endet 1 Tag später (Tag 14).</p></div>
+<p><strong>Wirtschaftlichkeit von IT-Investitionen:</strong> <strong>TCO</strong> (Total Cost of Ownership) = Anschaffung + alle laufenden Kosten über die Nutzungsdauer (Strom, Wartung, Lizenzen, Personal, Entsorgung). <strong>ROI</strong> (Return on Investment) = Gewinn bzw. Ersparnis ÷ Investition × 100 %. Amortisation und Nutzwertanalyse → Kapitel 23.</p>
+<h2 id="softwarequalitaet-und-tests">Softwarequalität und Tests</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Testart</strong></th><th><strong>Beschreibung</strong></th></tr></thead><tbody><tr><td><strong>Black-Box-Test</strong></td><td>ohne Kenntnis des Quellcodes; nur Eingaben und erwartete Ausgaben laut Anforderung (Grenzwerte, Äquivalenzklassen)</td></tr><tr><td><strong>White-Box-Test</strong></td><td>mit Kenntnis des Codes; alle Zweige und Pfade werden durchlaufen</td></tr><tr><td>Unit-/Komponententest</td><td>einzelne Funktion/Methode isoliert</td></tr><tr><td>Integrationstest</td><td>Zusammenspiel mehrerer Komponenten/Systeme</td></tr><tr><td>Systemtest</td><td>Gesamtsystem gegen die Anforderungen, in produktionsnaher Testumgebung</td></tr><tr><td>Abnahmetest</td><td>Kunde/Fachabteilung prüft und nimmt ab (Abnahmeprotokoll)</td></tr><tr><td>Regressionstest</td><td>nach Änderungen prüfen, ob Bestehendes noch funktioniert</td></tr><tr><td>Last-/Performancetest</td><td>Verhalten unter hoher Last</td></tr></tbody></table></div>
+<p><strong>Versionsverwaltung</strong> (z. B. Git): Jede Änderung an Code, Skripten oder Konfigurationen wird mit Autor und Zeitpunkt gespeichert. Ältere Stände sind wiederherstellbar, mehrere Personen arbeiten parallel (Branches).</p>
+<p><strong>Grenzwerttest</strong> (Beispiel): Eingabe erlaubt 1–100 → teste 0, 1, 100, 101 und einen typischen Wert (50).</p>
+<p><strong>Weitere Testbegriffe aus dem Katalog:</strong> <strong>statische Tests</strong> (Code wird nicht ausgeführt: Review, Code-Inspektion) vs. <strong>dynamische Tests</strong> (Programm läuft mit Testdaten) · <strong>Debugging</strong>: Breakpoint setzen, schrittweise ausführen, Variablen beobachten; print-Debugging = Zwischenwerte ausgeben · <strong>Extremwertetest</strong> = Grenzwerttest plus Sonderfälle (0, negative Werte, leere Eingabe, sehr große Werte) · <strong>TDD</strong> (Test Driven Development): erst den Test schreiben, dann den Code · <strong>E2E-Test</strong>: ganzer Ablauf aus Nutzersicht · <strong>Testdatengenerator</strong>: erzeugt große oder anonymisierte Testdaten · <strong>Testprotokoll</strong>: Testfall, erwartetes und tatsächliches Ergebnis, Abweichung, Datum, Prüfer.</p>
+<p><strong>Dokumentation:</strong> Benutzerdokumentation (Anleitung für Anwender), Administrator-/Betriebsdokumentation (Konfiguration, Netzwerkplan, Passwörter getrennt sicher), Projektunterlagen, Change-Log. Dokumentation muss aktuell gehalten werden.</p>
+<h2 id="praesentieren-und-bildschirmmasken">Präsentieren und Bildschirmmasken</h2>
+<ul><li><strong>Diagrammart wählen:</strong> Linie = Verlauf über die Zeit · Säule/Balken = Vergleich von Werten · Kreis = Anteile an einem Ganzen (100 %) · Streudiagramm = Zusammenhang zweier Größen · Gantt = Zeitplan.</li><li><strong>Präsentation:</strong> eine Kernaussage pro Folie, Stichpunkte statt Fließtext, gut lesbare Schrift, hoher Kontrast, Quellen angeben, <strong>Corporate Identity</strong> beachten (einheitliches Erscheinungsbild: Logo, Farben, Schriften, Sprache).</li><li><strong>Tabellenkalkulation:</strong> relativer Bezug <code>A1</code> passt sich beim Kopieren an, absoluter Bezug <code>$A$1</code> bleibt fest · SUMME, MITTELWERT, MIN/MAX, ANZAHL · <code>WENN(Bedingung; Dann; Sonst)</code> · <code>SVERWEIS(Suchwert; Bereich;</code> <code>Spalte; FALSCH)</code> sucht den Wert in der ersten Spalte des Bereichs und liefert den Wert aus der angegebenen Spalte · <code>ZÄHLENWENN(Bereich; Kriterium)</code>.</li><li><strong>Bild und Video:</strong> Rastergrafik (Pixel; JPEG verlustbehaftet für Fotos, PNG verlustfrei für Screenshots) vs. Vektorgrafik (SVG, beliebig skalierbar für Logos und Pläne). Videogröße ≈ Bitrate × Dauer ÷ 8; ein Codec (z. B. H.264/H.265) komprimiert.</li><li><strong>Bildschirmmasken – Softwareergonomie</strong> (DIN EN ISO 9241-110): aufgabenangemessen, selbstbeschreibend, erwartungskonform, steuerbar, robust gegen Benutzungsfehler. <strong>Barrierefreiheit</strong> (BITV, WCAG): ausreichender Kontrast, skalierbare Schrift, Bedienung per Tastatur, Alternativtexte für Screenreader, Informationen nicht nur über Farbe.</li></ul>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü8.1</strong> Aggregation oder Komposition? a) Rechnung – Rechnungsposition · b) Rack – Server · c) Bestellung – Kunde.</p>
+<p><strong>Ü8.2</strong> Skizziere ein Aktivitätsdiagramm: Ein Monitoring-Skript pingt einen Server. Antwortet er, wird „OK“ protokolliert. Antwortet er nicht, wird nach 30 s erneut gepingt; nach 3 Fehlversuchen wird ein Ticket erstellt und parallel eine SMS verschickt.</p>
+<p><strong>Ü8.3</strong> Eine Funktion akzeptiert Portnummern von 1 bis 65535. Welche Testwerte wählst du für einen Grenzwerttest?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 8</h3>
+<p><span style="color:#9a6200"><strong>Ü8.1</strong></span> a) Komposition (Position ohne Rechnung sinnlos) · b) Aggregation (Server existiert ohne Rack weiter) · c) Assoziation (Kunde ist kein Teil der Bestellung)</p>
+<p><span style="color:#9a6200"><strong>Ü8.2</strong></span> Start → [Aktion] Zähler = 0 → [Aktion] Server pingen → ◇ [Antwort] → [Aktion] „OK“ protokollieren → Ende · [keine Antwort] → Zähler + 1 → ◇ [Zähler &lt; 3] → [Aktion] 30 s warten → zurück zu „Server pingen“ · [Zähler = 3] → Gabelung (Balken) → Ticket erstellen ‖ SMS senden → Vereinigung (Balken) → Ende.</p>
+<p><span style="color:#9a6200"><strong>Ü8.3</strong></span> 0 (ungültig), 1 (gültig), 65535 (gültig), 65536 (ungültig), ein typischer Wert wie 443, dazu evtl. ungültige Typen (Text, negative Zahl).</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">← 7 Programmierung, Skripte &amp; Schnittstellen</a><a class="next" href="/lernskript/teil-2-netzwerke.html">Teil 2 · Netzwerke →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

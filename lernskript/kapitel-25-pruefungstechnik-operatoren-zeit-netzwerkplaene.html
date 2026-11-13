@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne – Kapitel 25 | FISI AP2 Lernskript</title>
+<meta name="description" content="Kapitel 25: Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne – AP2-Lernskript für Fachinformatiker Systemintegration.">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne – Kapitel 25 | FISI AP2 Lernskript">
+<meta property="og:description" content="Kapitel 25: Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne – AP2-Lernskript für Fachinformatiker Systemintegration.">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 25: Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a class="active" href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/pruefungspraxis.html">Prüfungspraxis &amp; Anhang</a> / 25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</div>
+<h1><span class="num">25</span>Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip">bringt Punkte in jeder Aufgabe</span><span class="chip">Lernzeit ca. 45 min</span></div>
+<h2 id="operatoren-was-genau-verlangt-wird">Operatoren: Was genau verlangt wird</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Operator</strong></th><th><strong>Erwartung</strong></th><th><strong>Beispiel-Antwortumfang</strong></th></tr></thead><tbody><tr><td><strong>Nennen</strong></td><td>Begriffe/Fakten ohne Erklärung aufzählen</td><td>„Zutrittskontrolle, Zugangskontrolle“</td></tr><tr><td><strong>Beschreiben</strong></td><td>Sachverhalt/Ablauf mit eigenen Worten wiedergeben</td><td>2–3 Sätze</td></tr><tr><td><strong>Erläutern / Erklären</strong></td><td>beschreiben <strong>und</strong> Zusammenhänge/Gründe darstellen, oft mit Beispiel</td><td>3–4 Sätze inkl. „weil …“, „dadurch …“</td></tr><tr><td><strong>Begründen</strong></td><td>Aussage durch Argumente stützen</td><td>Aussage + Argument mit Szenariobezug</td></tr><tr><td><strong>Vergleichen /Gegenüberstellen</strong></td><td>Gemeinsamkeiten und Unterschiede nach Kriterien</td><td>am besten als Tabelle</td></tr><tr><td><strong>Bewerten / Beurteilen</strong></td><td>Vor- und Nachteile abwägen, eigenes Urteil</td><td>Pro, Contra, Fazit</td></tr><tr><td><strong>Berechnen</strong></td><td>Rechenweg + Ergebnis mit Einheit</td><td>Formel, Zwischenschritte, Antwortsatz</td></tr><tr><td><strong>Ergänzen / Vervollständigen</strong></td><td>Lücken in Code, Tabelle, Diagramm füllen</td><td>genau in der vorgegebenen Form</td></tr></tbody></table></div>
+<div class="box box-begriffe"><div class="box-label">FORMEL FÜR VOLLE PUNKTE BEI TEXTAUFGABEN</div><p><strong>Fachbegriff + Erklärung + Bezug zum Szenario.</strong> Beispiel: „Ich empfehle RAID 6 (Fachbegriff), da es den gleichzeitigen Ausfall von zwei Festplatten verkraftet (Erklärung). Bei den großen 18-TB-Platten des Kunden dauert ein Rebuild viele Stunden, in denen bei RAID 5 keine Redundanz bestünde (Szenario).“ Werden „zwei Vorteile“ verlangt, genau zwei nennen – der dritte wird nicht bewertet, ein falscher erster kostet aber.</p></div>
+<h2 id="zeitmanagement">Zeitmanagement</h2>
+<ul><li>GA 1 und GA 2: je 90 Minuten für 100 Punkte → etwa <strong>0,9 Minuten pro Punkt</strong>. Eine 25-Punkte-Aufgabe darf also rund 22 Minuten dauern.</li><li>Zuerst 5 Minuten alle Aufgaben überfliegen und das Szenario lesen. Mit sicheren Aufgaben beginnen.</li><li>Bei Blockade: markieren, weitergehen, am Ende zurückkommen. Keine Aufgabe leer lassen – Ansatz und Formel bringen Teilpunkte.</li><li>WiSo: 60 Minuten; erst alle sicheren Fragen, dann die Rechenaufgaben.</li><li>Erlaubt ist ein nicht programmierbarer Taschenrechner. Belegsätze (SQL-/Pseudocode-Syntax) liegen der Prüfung bei, wenn vorgesehen – aber nicht darauf verlassen.</li></ul>
+<h2 id="netzwerkplaene-lesen">Netzwerkpläne lesen</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Symbol / Beschriftung</strong></th><th><strong>Bedeutung</strong></th></tr></thead><tbody><tr><td>runder Knoten mit Pfeilen</td><td>Router</td></tr><tr><td>Rechteck/Quader (oft mit Pfeilen)</td><td>Switch; L3-/Core-Switch oft Gateway der VLANs</td></tr><tr><td>Mauer / Kasten mit Flammen</td><td>Firewall</td></tr><tr><td>Wolke</td><td>Internet/Provider, WAN (VDSL, Glasfaser, LTE/5G)</td></tr><tr><td>Röhre durch die Wolke</td><td>VPN-Tunnel (Site-to-Site oder End-to-Site)</td></tr><tr><td>eth0, g0/1, tun0, Po1</td><td>Interfaces (Ethernet, GigabitEthernet, Tunnel, Portchannel/LACP)</td></tr><tr><td>10.0.0.0/8, .1, .254</td><td>Netz-ID mit Präfix, Host-Anteil der Schnittstelle</td></tr><tr><td>VLAN-IDs an Ports, T/U</td><td>tagged/untagged</td></tr><tr><td>dicke/beschriftete Linie „LWL“</td><td>Glasfaser, oft zwischen Gebäuden</td></tr></tbody></table></div>
+<p><strong>Symbole laut Katalog-Anhang:</strong> Switch (Layer 2) · Router (Layer 3, rundes Symbol, oft mit NAT/PAT) · Firewall (Mauer, Stateful Inspection bis Layer 4, ggf. Next Generation Firewall) · SOHO-Kombigerät (Router, Switch, Firewall und Accesspoint in einem) · Accesspoint · Server · ein (Teil-)Netz als <strong>Ellipse mit Netz-ID</strong>, z. B. 192.0.2.0/24. Weitere Symbole (Drucker, Clients, VPN) ergeben sich aus der Aufgabe; ein Netzwerkplan zeigt meist nur den relevanten Ausschnitt.</p>
+<p><strong>Vorgehen in 4 Schritten:</strong></p>
+<ol><li><strong>Orientierung:</strong> Internetzugang und zentralen Router/Firewall finden.</li><li><strong>Zonen erkennen:</strong> LAN-Bereiche (Verwaltung, Produktion), DMZ, Server, Gäste, Management, VPN-Standorte.</li><li><strong>Adressierung prüfen:</strong> Netze, Masken, Gateways; IPv4, IPv6 oder Dual Stack?</li><li><strong>Paketweg verfolgen:</strong> Vom Client über Switch, Gateway, Firewall, Router zum Ziel – und zurück. So findest du fehlende Routen, falsche Gateways oder blockierende Regeln.</li></ol>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">← 24 Troubleshooting &amp; Log-Analyse</a><a class="next" href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

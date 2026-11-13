@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kryptografie, PKI &amp; TLS – Kapitel 14 | FISI AP2 Lernskript</title>
+<meta name="description" content="Symmetrisch (AES): ein gemeinsamer Schlüssel, schnell, Problem: sicherer Schlüsselaustausch. Asymmetrisch (RSA, ECC): Schlüsselpaar aus öffentlichem und…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-14-kryptografie-pki-tls.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kryptografie, PKI &amp; TLS – Kapitel 14 | FISI AP2 Lernskript">
+<meta property="og:description" content="Symmetrisch (AES): ein gemeinsamer Schlüssel, schnell, Problem: sicherer Schlüsselaustausch. Asymmetrisch (RSA, ECC): Schlüsselpaar aus öffentlichem und…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-14-kryptografie-pki-tls.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 14: Kryptografie, PKI & TLS", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-14-kryptografie-pki-tls.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a class="active" href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-2-netzwerke.html">Teil 2 · Netzwerke</a> / 14 Kryptografie, PKI &amp; TLS</div>
+<h1><span class="num">14</span>Kryptografie, PKI &amp; TLS</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip-lila">auch in GA 1</span><span class="chip">Grundlage für E-Mail, VPN, HTTPS</span><span class="chip">Lernzeit ca. 120 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li><strong>Symmetrisch</strong> (AES): ein gemeinsamer Schlüssel, schnell, Problem: sicherer Schlüsselaustausch.</li><li><strong>Asymmetrisch</strong> (RSA, ECC): Schlüsselpaar aus öffentlichem und privatem Schlüssel, langsam, löst das Austauschproblem.</li><li><strong>Hybrid</strong> (TLS, S/MIME): asymmetrisch einen Sitzungsschlüssel austauschen, dann symmetrisch verschlüsseln.</li><li><strong>Verschlüsseln</strong> mit dem <strong>öffentlichen Schlüssel des Empfängers</strong>. <strong>Signieren</strong> mit dem <strong>eigenen privaten Schlüssel</strong>.</li><li><strong>Hash</strong> (SHA-256): Einweg-Prüfsumme für Integrität. MD5 und SHA-1 gelten als unsicher.</li><li><strong>Zertifikat</strong> (X.509) = öffentlicher Schlüssel + Identität, bestätigt durch die Signatur einer CA.</li></ul></div>
+<h2 id="verschluesselungsverfahren-im-vergleich">Verschlüsselungsverfahren im Vergleich</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Merkmal</strong></th><th><strong>Symmetrisch</strong></th><th><strong>Asymmetrisch</strong></th></tr></thead><tbody><tr><td>Schlüssel</td><td>ein geheimer Schlüssel für Ver- und Entschlüsselung</td><td>Schlüsselpaar: öffentlicher (darf jeder haben) + privater (bleibt geheim)</td></tr><tr><td>Geschwindigkeit</td><td>sehr schnell → große Datenmengen</td><td>langsam (Faktor ~1.000) → nur kleine Daten, Schlüssel, Signaturen</td></tr><tr><td>Problem</td><td>Schlüssel muss sicher übertragen werden; viele Schlüssel bei vielen Partnern</td><td>Echtheit des öffentlichen Schlüssels muss gesichert sein (→ Zertifikate/PKI)</td></tr><tr><td>Schlüsselanzahl bei n Teilnehmern</td><td><strong>n × (n − 1) / 2</strong></td><td><strong>2 × n</strong> (jeder ein Paar)</td></tr><tr><td>Beispiele</td><td>AES (128/256 Bit), ChaCha20; veraltet: DES, 3DES</td><td>RSA (≥ 3.000 Bit empfohlen), ECC/ECDSA, Diffie-Hellman (Schlüsseltausch)</td></tr></tbody></table></div>
+<p><strong>Beispiel Schlüsselanzahl:</strong> 10 Mitarbeiter wollen paarweise vertraulich kommunizieren. Symmetrisch: 10 × 9 / 2 = <strong>45</strong> Schlüssel. Asymmetrisch: 2 × 10 = <strong>20</strong> Schlüssel.</p>
+<h2 id="hashfunktionen-und-digitale-signatur">Hashfunktionen und digitale Signatur</h2>
+<p>Eine <strong>Hashfunktion</strong> berechnet aus beliebigen Daten einen Wert fester Länge (SHA-256: 256 Bit). Eigenschaften: nicht umkehrbar (Einweg), kleinste Änderung → völlig anderer Hash, praktisch keine Kollisionen. Einsatz: Integritätsprüfung (Download-Prüfsummen), Passwortspeicherung (mit <strong>Salt</strong>), Signaturen. MD5 und SHA-1 sind für Sicherheitszwecke gebrochen (Kollisionen).</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Digitale Signatur erstellen (Absender)</strong></th><th><strong>Signatur prüfen (Empfänger)</strong></th></tr></thead><tbody><tr><td><ol><li>Hash der Nachricht bilden</li><li>Hash mit dem <strong>eigenen privaten Schlüssel</strong> verschlüsseln = Signatur</li><li>Nachricht + Signatur (+ Zertifikat) senden</li></ol></td><td><ol><li>Signatur mit dem <strong>öffentlichen Schlüssel des Absenders</strong> entschlüsseln → Hash A</li><li>Selbst Hash der empfangenen Nachricht bilden → Hash B</li><li>A = B → Nachricht unverändert (<strong>Integrität</strong>) und vom Besitzer des privaten Schlüssels (<strong>Authentizität</strong>)</li></ol></td></tr></tbody></table></div>
+<p>Eine Signatur allein macht die Nachricht <strong>nicht vertraulich</strong> – jeder kann sie lesen. Für Vertraulichkeit muss zusätzlich verschlüsselt werden.</p>
+<h2 id="hybride-verschluesselung">Hybride Verschlüsselung</h2>
+<ol><li>Absender erzeugt einen zufälligen symmetrischen <strong>Sitzungsschlüssel</strong> (Session Key, z. B. AES-256).</li><li>Die Nachricht wird schnell <strong>symmetrisch</strong> mit dem Sitzungsschlüssel verschlüsselt.</li><li>Der Sitzungsschlüssel wird <strong>asymmetrisch</strong> mit dem öffentlichen Schlüssel des Empfängers verschlüsselt und mitgeschickt.</li><li>Empfänger entschlüsselt mit seinem privaten Schlüssel den Sitzungsschlüssel und damit die Nachricht.</li></ol>
+<p>So vereint man die Geschwindigkeit symmetrischer mit dem sicheren Schlüsselaustausch asymmetrischer Verfahren.</p>
+<h2 id="pki-und-zertifikate">PKI und Zertifikate</h2>
+<p>Eine <strong>PKI</strong> (Public Key Infrastructure) stellt sicher, dass ein öffentlicher Schlüssel wirklich zu einer Person/einem Server gehört. Bestandteile: <strong>CA</strong> (Certificate Authority, stellt Zertifikate aus und signiert sie), <strong>RA</strong> (Registration Authority, prüft die Identität), Verzeichnis, Sperrliste.</p>
+<p><strong>Inhalt eines X.509-Zertifikats:</strong> Inhaber (Subject, z. B. CN=www.beispiel.de, dazu Subject Alternative Names), öffentlicher Schlüssel des Inhabers, Aussteller (Issuer), Gültigkeitszeitraum, Seriennummer, Verwendungszweck, <strong>Signatur der CA</strong>.</p>
+<ul><li><strong>Vertrauenskette (Chain of Trust):</strong> Root-CA (im Betriebssystem/Browser als vertrauenswürdig hinterlegt) → Intermediate-CA → Server-Zertifikat. Der Server muss die Zwischenzertifikate mitliefern.</li><li><strong>Sperrung:</strong> Kompromittierte Zertifikate werden über <strong>CRL</strong> (Sperrliste) oder <strong>OCSP</strong> (Online-Abfrage) widerrufen.</li><li><strong>Selbstsigniert:</strong> kein Vertrauensanker → Browserwarnung. Für interne Dienste eigene Unternehmens-CA verteilen (z. B. per GPO).</li><li><strong>Let’s Encrypt:</strong> kostenlose, automatisierte Zertifikate (Domain-Validierung, ACME-Protokoll).</li></ul>
+<h2 id="tls-transport-layer-security">TLS – Transport Layer Security</h2>
+<p>TLS sichert HTTPS, IMAPS, SMTPS, SSL-VPN usw. ab: <strong>Vertraulichkeit</strong> (Verschlüsselung), <strong>Integrität</strong> und <strong>Authentizität des</strong> <strong>Servers</strong> (Zertifikat). Heute nur <strong>TLS 1.2 und 1.3</strong> einsetzen; SSL 2.0/3.0, TLS 1.0 und 1.1 sind veraltet.</p>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: TLS-HANDSHAKE ALS SEQUENZ (VEREINFACHT)</div><div class="table-wrap"><table class=""><thead><tr><th><strong>Nr.</strong></th><th><strong>Client (Browser)</strong></th><th><strong>Richtung</strong></th><th><strong>Server</strong></th></tr></thead><tbody><tr><td>1</td><td><strong>ClientHello</strong>: unterstützte TLS-Versionen, Cipher Suites, Zufallszahl</td><td>→</td><td></td></tr><tr><td>2</td><td></td><td>←</td><td><strong>ServerHello</strong>: gewählte Version und Cipher Suite, Zufallszahl</td></tr><tr><td>3</td><td></td><td>←</td><td><strong>Zertifikat</strong> (mit öffentlichem Schlüssel)</td></tr><tr><td>4</td><td>prüft Zertifikat: Signatur der CA, Gültigkeit, Name, Sperrstatus</td><td></td><td></td></tr><tr><td>5</td><td><strong>Schlüsselaustausch</strong>: klassisch Pre-Master-Secret mit öffentlichem Server-Schlüssel verschlüsselt; modern (EC)DHE</td><td>→</td><td></td></tr><tr><td>6</td><td>Beide berechnen daraus denselben symmetrischen <strong>Sitzungsschlüssel</strong> (z. B. AES)</td><td></td><td></td></tr><tr><td>7</td><td><strong>Finished</strong></td><td>⇄</td><td><strong>Finished</strong></td></tr><tr><td>8</td><td>Nutzdaten werden symmetrisch verschlüsselt übertragen</td><td></td><td></td></tr></tbody></table></div>
+<p><strong>TLS 1.3</strong> verkürzt das auf einen Round-Trip (Schlüsselanteile schon im ClientHello), erlaubt nur noch sichere Verfahren und verwendet immer (EC)DHE → <strong>Forward Secrecy</strong>: Für jede Sitzung ein neuer Schlüssel; wird der private Server-Schlüssel später gestohlen, bleiben alte Mitschnitte trotzdem geheim.</p></div>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Browser-/Clientmeldung</strong></th><th><strong>Ursache</strong></th><th><strong>Lösung</strong></th></tr></thead><tbody><tr><td><code>SEC_ERROR_UNKNOWN_ISSUER</code></td><td>ausstellende CA ist dem Client unbekannt (selbstsigniert, interne CA oder Firewall-CA bei SSL-Inspection nicht importiert, Zwischenzertifikat fehlt)</td><td>CA-Zertifikat im Client-Trust-Store verteilen, Kette vollständig ausliefern</td></tr><tr><td><code>SEC_ERROR_EXPIRED_CERTIFICATE</code> / <code>…</code> <code>EXPIRED_ISSUER_CERTIFICATE</code></td><td>Server- bzw. CA-Zertifikat abgelaufen (oder Uhrzeit des Clients falsch)</td><td>Zertifikat erneuern, NTP prüfen</td></tr><tr><td><code>SSL_ERROR_BAD_CERT_DOMAIN</code></td><td>Name im Zertifikat passt nicht zur aufgerufenen Adresse</td><td>Zertifikat mit korrektem Namen/SAN ausstellen</td></tr><tr><td><code>SSL_ERROR_VERSION_OR_CIPHER_MISMATCH</code></td><td>keine gemeinsame TLS-Version oder Cipher Suite</td><td>Server/Client auf TLS 1.2/1.3 und aktuelle Cipher konfigurieren</td></tr></tbody></table></div>
+<div class="box box-fallen"><div class="box-label">FALLEN</div><ul><li>Verschlüsseln mit dem <strong>eigenen</strong> privaten Schlüssel ist keine Verschlüsselung, sondern eine Signatur.</li><li>HTTPS schützt die Übertragung, nicht die Daten auf dem Server.</li><li>Hash ≠ Verschlüsselung: Ein Hash lässt sich nicht „entschlüsseln“.</li></ul></div>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Verfahren</strong></span></td><td><strong>Diffie-Hellman</strong> = beide berechnen einen gemeinsamen Schlüssel, ohne ihn zu übertragen <span style="color:#7a8599">1×</span> · <strong>TLS 1.3</strong> = unsichere Altverfahren entfernt, schnellerer Handshake, Forward Secrecy <span style="color:#7a8599">2×</span> · <strong>MD5-Kollision</strong> = zwei Eingaben mit gleichem Hash → Zertifikate fälschbar; SHA-256 nutzen <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Zertifikatsfehler</strong></span></td><td><strong>VERSION_OR_CIPHER_MISMATCH</strong> = kein gemeinsames TLS-Verfahren <span style="color:#7a8599">1×</span> · <strong>Private Key weitergegeben</strong> = Zertifikat sperren (widerrufen), neues Schlüsselpaar erzeugen <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text:</span> <span style="color:#7a8599">UNKNOWN_ISSUER, EXPIRED</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü14.1</strong> Anna schickt Ben eine vertrauliche und signierte Mail. Welche Schlüssel werden bei a) Signieren, b) Verschlüsseln, c) Prüfen der Signatur, d) Entschlüsseln verwendet?</p>
+<p><strong>Ü14.2</strong> 25 Filialen sollen jeweils paarweise mit symmetrischen Schlüsseln verbunden werden. Wie viele Schlüssel? Wie viele wären es asymmetrisch?</p>
+<p><strong>Ü14.3</strong> Erkläre Forward Secrecy in zwei Sätzen.</p></div>
+<h3 class="loesungen">Lösungen Kapitel 14</h3>
+<p><span style="color:#9a6200"><strong>Ü14.1</strong></span> a) Annas privater Schlüssel · b) Bens öffentlicher Schlüssel (hybrid: für den Sitzungsschlüssel) · c) Annas öffentlicher Schlüssel · d) Bens privater Schlüssel</p>
+<p><span style="color:#9a6200"><strong>Ü14.2</strong></span> 25 × 24 / 2 = <strong>300</strong> Schlüssel · asymmetrisch 2 × 25 = <strong>50</strong></p>
+<p><span style="color:#9a6200"><strong>Ü14.3</strong></span> Für jede Sitzung wird per (EC)DHE ein neuer, temporärer Schlüssel ausgehandelt, der nicht aus dem langfristigen privaten Schlüssel abgeleitet werden kann. Wird dieser private Schlüssel später bekannt, lassen sich früher aufgezeichnete Sitzungen trotzdem nicht entschlüsseln.</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">← 13 DHCP, DNS &amp; weitere Dienste</a><a class="next" href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

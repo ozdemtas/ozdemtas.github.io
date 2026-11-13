@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoIP, QoS, Multicast &amp; MQTT – Kapitel 18 | FISI AP2 Lernskript</title>
+<meta name="description" content="VoIP: SIP für Verbindungsaufbau (5060/5061), RTP (UDP) für die Sprache. G.711 = 64 kbit/s. Qualität: Latenz &lt; 150 ms (eine Richtung), Jitter &lt; 30 ms, Pa…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VoIP, QoS, Multicast &amp; MQTT – Kapitel 18 | FISI AP2 Lernskript">
+<meta property="og:description" content="VoIP: SIP für Verbindungsaufbau (5060/5061), RTP (UDP) für die Sprache. G.711 = 64 kbit/s. Qualität: Latenz &lt; 150 ms (eine Richtung), Jitter &lt; 30 ms, Pa…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 18: VoIP, QoS, Multicast & MQTT", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-18-voip-qos-multicast-mqtt.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a class="active" href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-2-netzwerke.html">Teil 2 · Netzwerke</a> / 18 VoIP, QoS, Multicast &amp; MQTT</div>
+<h1><span class="num">18</span>VoIP, QoS, Multicast &amp; MQTT</h1>
+
+<div class="chips"><span class="chip">Relevanz ★★</span><span class="chip">Bandbreitenrechnung</span><span class="chip">Lernzeit ca. 75 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li>VoIP: <strong>SIP</strong> für Verbindungsaufbau (5060/5061), <strong>RTP</strong> (UDP) für die Sprache. G.711 = 64 kbit/s.</li><li>Qualität: Latenz &lt; 150 ms (eine Richtung), Jitter &lt; 30 ms, Paketverlust &lt; 1 %.</li><li>QoS: eigenes Voice-VLAN + Markierung (DSCP EF / CoS 5) + Priorisierung.</li><li>Bandbreite = Codec-Rate × Gespräche × (1 + Overhead).</li><li><strong>MQTT</strong>: Publish/Subscribe über einen <strong>Broker</strong>, TCP 1883 bzw. 8883 mit TLS.</li></ul></div>
+<h2 id="voip">VoIP</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Protokoll / Codec</strong></th><th><strong>Aufgabe</strong></th></tr></thead><tbody><tr><td>SIP (UDP/TCP 5060, TLS 5061)</td><td>Signalisierung: Anmelden (REGISTER), Anruf aufbauen (INVITE), beenden (BYE)</td></tr><tr><td>RTP / SRTP</td><td>Übertragung der Sprachdaten über UDP (dynamische Ports); SRTP verschlüsselt</td></tr><tr><td>G.711</td><td>unkomprimiert, 64 kbit/s, Standard-Telefonqualität</td></tr><tr><td>G.722</td><td>HD-Voice (Wideband), 64 kbit/s</td></tr><tr><td>G.729</td><td>stark komprimiert, 8 kbit/s, etwas schlechtere Qualität</td></tr><tr><td>T.38</td><td>Fax over IP (klassisches Fax über G.711 reagiert empfindlich auf Paketverlust und Jitter)</td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Qualitätsparameter</strong></th><th><strong>Bedeutung</strong></th><th><strong>Richtwert</strong></th></tr></thead><tbody><tr><td>Latenz (Delay)</td><td>Laufzeit eines Pakets</td><td>&lt; 150 ms Ende-zu-Ende (ITU-T G.114)</td></tr><tr><td>Jitter</td><td>Schwankung der Laufzeit</td><td>&lt; 30 ms (Jitter-Buffer gleicht aus)</td></tr><tr><td>Paketverlust</td><td>verlorene Pakete</td><td>&lt; 1 %</td></tr></tbody></table></div>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: VOIP-BANDBREITE</div><p><em>Am Standort sollen 20 gleichzeitige Gespräche mit 64 kbit/s möglich sein. Der Protokoll-Overhead beträgt 10 %.</em> <em>Welche Bandbreite ist nötig?</em></p>
+<p>20 × 64 kbit/s × 1,1 = <strong>1.408 kbit/s ≈ 1,41 Mbit/s</strong> – und zwar <strong>je Richtung</strong> (Upload und Download), da Gespräche in beide Richtungen laufen. Realistisch ist der Overhead bei G.711 deutlich größer (IP/UDP/RTP-Header, ca. 80–90 kbit/s pro Richtung); in der Prüfung gilt der angegebene Wert.</p></div>
+<h2 id="qos-quality-of-service">QoS – Quality of Service</h2>
+<ul><li><strong>Klassifizieren und markieren:</strong> auf Schicht 2 per <strong>802.1p/CoS</strong> (3 Bit im VLAN-Tag, Sprache = 5), auf Schicht 3 per <strong>DSCP</strong> im IP-Header (Sprache = <strong>EF</strong>, Expedited Forwarding, Wert 46).</li><li><strong>Priorisieren:</strong> Switches und Router bedienen markierte Pakete zuerst (Priority Queue), Rest nach Gewichtung.</li><li><strong>Bandbreite reservieren/begrenzen:</strong> Traffic Shaping, z. B. Backups nachts oder gedrosselt.</li><li>Bei Videokonferenzen hat <strong>Audio Vorrang</strong> vor Video: Bei Engpass sinken Auflösung (1080p → 720p) oder Bildrate, die Sprache bleibt verständlich.</li><li>QoS wirkt nur dort, wo man die Geräte kontrolliert. Im Internet gibt es keine garantierte Priorisierung.</li></ul>
+<h2 id="uebertragungsarten">Übertragungsarten</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Art</strong></th><th><strong>Ziel</strong></th><th><strong>Beispiel</strong></th></tr></thead><tbody><tr><td>Unicast</td><td>1 : 1</td><td>Webseitenaufruf</td></tr><tr><td>Multicast</td><td>1 : Gruppe (nur Interessierte)</td><td>IPTV, Videoverteilung in Agenturen, Routingprotokolle; IPv4 224.0.0.0–239.255.255.255 (binär 1110…), Gruppenverwaltung per IGMP, IPv6 ff00::/8</td></tr><tr><td>Broadcast</td><td>1 : alle im Subnetz</td><td>ARP-Anfrage, DHCP Discover (nur IPv4)</td></tr><tr><td>Anycast</td><td>1 : nächster aus einer Gruppe</td><td>DNS-Root-Server, CDN</td></tr></tbody></table></div>
+<p>Vorteil Multicast: Der Sender schickt einen Datenstrom nur einmal, das Netz vervielfältigt ihn erst dort, wo es nötig ist → spart Bandbreite gegenüber vielen Unicasts.</p>
+<h2 id="iot-und-mqtt">IoT und MQTT</h2>
+<ul><li><strong>MQTT</strong> (Message Queuing Telemetry Transport): leichtgewichtiges Protokoll für Sensordaten. Geräte senden (<strong>publish</strong>) Nachrichten zu einem <strong>Topic</strong> (z. B. <code>halle1/temperatur</code> ) an einen zentralen <strong>Broker</strong>; Interessenten abonnieren (<strong>subscribe</strong>) das Topic. Sender und Empfänger kennen sich nicht.</li><li>Ablauf: <code>CONNECT</code> → <code>CONNACK</code> → <code>PUBLISH</code> / <code>SUBSCRIBE</code> …</li></ul>
+<ul><li>Transport über <strong>TCP</strong> (zuverlässige Zustellung), Port <strong>1883</strong>, mit TLS <strong>8883</strong>. QoS-Stufen: 0 = höchstens einmal, 1 = mindestens einmal, 2 = genau einmal.</li><li>Sicherheit: TLS, Anmeldung am Broker, IoT-Geräte in ein eigenes VLAN/WLAN, Standardpasswörter ändern, Firmware aktualisieren.</li></ul>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: IOT-BANDBREITE</div><p><em>500 Sensoren senden alle 2 Sekunden eine MQTT-Nachricht mit 66 Byte. Welche Datenrate entsteht?</em></p>
+<p>500 × 66 Byte × 8 = 264.000 Bit pro Sendeintervall ÷ 2 s = <strong>132.000 bit/s = 132 kbit/s</strong>. Bei zusätzlichem Overhead (z. B. 20 %) entsprechend × 1,2.</p></div>
+<p><strong>Cyber-physische Systeme (CPS)</strong> verbinden Software mit der realen Welt: <strong>Sensoren</strong> messen (Temperatur, Feuchte, Bewegung), <strong>Aktoren</strong> handeln (Lüfter, Ventil, Relais). Der <strong>Abfragerhythmus</strong> bestimmt Aktualität und Datenmenge: Polling in festem Intervall oder ereignisgesteuert (nur bei Änderung senden, z. B. per MQTT).</p>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Sprache &amp; Video</strong></span></td><td><strong>Bandbreite zu klein</strong> = Paketverlust, Ruckeln, Aussetzer; Video wird reduziert <span style="color:#7a8599">2×</span> · <strong>Fax über VoIP</strong> = Kompression/Jitter stören → T.38 oder G.711 <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: Voice-VLAN, QoS</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>IoT &amp; Rechnen</strong></span></td><td><strong>MQTT über TCP</strong> = zuverlässige, geordnete Zustellung, Verbindungsstatus bekannt <span style="color:#7a8599">1×</span> · <strong>Übertragungsdauer</strong> = Datenmenge × 8 × (1 + Overhead) ÷ Bandbreite <span style="color:#7a8599">3×</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü18.1</strong> Wie viele gleichzeitige G.711-Gespräche (64 kbit/s, 25 % Overhead) passen in einen Upload von 10 Mbit/s, wenn maximal 60 % für Sprache reserviert werden?</p>
+<p><strong>Ü18.2</strong> Nach der Umstellung von ISDN auf VoIP kommen Faxe unvollständig an. Ursache und Lösung?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 18</h3>
+<p><span style="color:#9a6200"><strong>Ü18.1</strong></span> Verfügbar: 10.000 kbit/s × 0,6 = 6.000 kbit/s. Pro Gespräch: 64 × 1,25 = 80 kbit/s. 6.000 ÷ 80 = <strong>75 Gespräche</strong>.</p>
+<p><span style="color:#9a6200"><strong>Ü18.2</strong></span> Fax-Signale vertragen keine Paketverluste und keinen Jitter; komprimierende Codecs verfälschen sie. Lösung: T.38 verwenden bzw. G.711 ohne Kompression, QoS für Fax/Voice, Jitter-Buffer anpassen, oder auf E-Mail/Cloud-Fax umstellen.</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-17-firewall-dmz-vpn.html">← 17 Firewall, DMZ &amp; VPN</a><a class="next" href="/lernskript/wiso.html">WiSo →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

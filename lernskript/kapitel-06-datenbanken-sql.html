@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenbanken &amp; SQL – Kapitel 6 | FISI AP2 Lernskript</title>
+<meta name="description" content="Primärschlüssel (PK) identifiziert eine Zeile eindeutig. Fremdschlüssel (FK) verweist auf den PK einer anderen Tabelle. m:n-Beziehungen werden über eine…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-06-datenbanken-sql.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Datenbanken &amp; SQL – Kapitel 6 | FISI AP2 Lernskript">
+<meta property="og:description" content="Primärschlüssel (PK) identifiziert eine Zeile eindeutig. Fremdschlüssel (FK) verweist auf den PK einer anderen Tabelle. m:n-Beziehungen werden über eine…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-06-datenbanken-sql.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 6: Datenbanken & SQL", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-06-datenbanken-sql.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a class="active" href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-1-konzeption-administration.html">Teil 1 · Konzeption &amp; Administration</a> / 6 Datenbanken &amp; SQL</div>
+<h1><span class="num">6</span>Datenbanken &amp; SQL</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip">10–15 Punkte · seit Katalog 2025 nur noch in der AP2</span><span class="chip">Lernzeit ca. 180 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li><strong>Primärschlüssel (PK)</strong> identifiziert eine Zeile eindeutig. <strong>Fremdschlüssel (FK)</strong> verweist auf den PK einer anderen Tabelle.</li><li><strong>m:n-Beziehungen</strong> werden über eine <strong>Zwischentabelle</strong> mit zwei Fremdschlüsseln aufgelöst.</li><li><strong>3. Normalform:</strong> atomare Werte (1NF), alles hängt vom ganzen Schlüssel ab (2NF), keine Abhängigkeit zwischen Nicht-Schlüssel-Spalten (3NF).</li><li>Reihenfolge einer Abfrage: <code>SELECT … FROM … JOIN … WHERE … GROUP BY … HAVING … ORDER BY</code> .</li><li><code>WHERE</code> filtert Zeilen <strong>vor</strong> der Gruppierung, <code>HAVING</code> filtert Gruppen <strong>danach</strong>.</li></ul></div>
+<h2 id="das-relationale-modell">Das relationale Modell</h2>
+<p>Daten liegen in Tabellen (Relationen). Eine Zeile ist ein <strong>Datensatz (Tupel)</strong>, eine Spalte ein <strong>Attribut</strong>. Tabellen werden über Schlüssel verknüpft.</p>
+<ul><li><strong>Primärschlüssel:</strong> eindeutig, nie leer (NOT NULL). Oft eine künstliche ID. Aus mehreren Spalten = zusammengesetzter Schlüssel.</li><li><strong>Fremdschlüssel:</strong> Spalte, deren Werte im PK einer anderen Tabelle vorkommen müssen.</li><li><strong>Referenzielle Integrität:</strong> Die Datenbank verhindert Verweise ins Leere. Ein Kunde mit Bestellungen kann nicht einfach gelöscht werden (oder wird per <code>ON DELETE CASCADE</code> samt Bestellungen gelöscht).</li></ul>
+<h2 id="er-modell-und-kardinalitaeten">ER-Modell und Kardinalitäten</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Kardinalität</strong></th><th><strong>Beispiel</strong></th><th><strong>Umsetzung in Tabellen</strong></th></tr></thead><tbody><tr><td><strong>1:1</strong></td><td>Mitarbeiter – Dienstwagen</td><td>FK in einer der beiden Tabellen (mit UNIQUE) oder zusammenlegen</td></tr><tr><td><strong>1:n</strong></td><td>Kunde – Bestellungen</td><td>FK auf der <strong>n-Seite</strong>: <code>Bestellung.KundeID</code></td></tr><tr><td><strong>m:n</strong></td><td>Bestellung – Artikel</td><td><strong>Zwischentabelle</strong><code> Bestellposition(BestellID, ArtikelID, Menge)</code> , PK aus beiden FKs</td></tr></tbody></table></div>
+<p>Unser Beispielschema für dieses Kapitel:</p>
+<pre class="formel">Kunde        (KundeID, Name, Ort)
+Bestellung   (BestellID, Datum, ↑KundeID)
+Artikel      (ArtikelID, Bezeichnung, Preis)
+Position     (↑BestellID, ↑ArtikelID, Menge)         unterstrichen = PK, ↑ = FK</pre>
+<h2 id="normalisierung">Normalisierung</h2>
+<p>Ziel: <strong>Redundanzen vermeiden</strong>, damit keine Anomalien entstehen (Einfüge-, Änderungs-, Löschanomalie).</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Normalform</strong></th><th><strong>Regel</strong></th><th><strong>Typischer Verstoß</strong></th></tr></thead><tbody><tr><td><ol><li><strong>NF</strong></li></ol></td><td>Jedes Feld enthält nur einen (atomaren) Wert, keine Wiederholungsgruppen.</td><td>„Telefon: 069-123, 0171-456“ oder „Adresse“ in einem Feld</td></tr><tr><td><ol><li><strong>NF</strong></li></ol></td><td><ol><li>NF + jedes Nicht-Schlüssel-Attribut hängt vom <strong>gesamten</strong></li></ol>
+<p>Schlüssel ab (nur relevant bei zusammengesetztem PK).</p></td><td>In Position(BestellID, ArtikelID, Menge, <strong>Bezeichnung</strong>): Bezeichnung hängt nur von ArtikelID ab</td></tr><tr><td><ol><li><strong>NF</strong></li></ol></td><td><ol><li>NF + keine <strong>transitiven</strong> Abhängigkeiten (Nicht-Schlüssel</li></ol>
+<p>hängt von Nicht-Schlüssel ab).</p></td><td>Kunde(KundeID, PLZ, <strong>Ort</strong>): Ort hängt von PLZ ab</td></tr></tbody></table></div>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: IN DIE 3. NF BRINGEN</div><p><em>Tabelle: Einsatz(TechnikerNr, TechnikerName, KundeNr, KundeName, KundeOrt, Datum, Stunden). Ein Techniker hat</em> <em>viele Einsätze, ein Kunde auch.</em></p>
+<p><strong>Lösung:</strong> Techniker(TechnikerNr, TechnikerName) · Kunde(KundeNr, KundeName, KundeOrt) · Einsatz(EinsatzID, ↑TechnikerNr, ↑KundeNr, Datum, Stunden). Name und Ort stehen nur noch einmal pro Techniker bzw. Kunde; Änderungen erfolgen an einer Stelle.</p></div>
+<h2 id="sql-datentypen-und-tabellen-anlegen-ddl">SQL: Datentypen und Tabellen anlegen (DDL)</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Datentyp</strong></th><th><strong>Verwendung</strong></th><th><strong>Datentyp</strong></th><th><strong>Verwendung</strong></th></tr></thead><tbody><tr><td><code>INT / INTEGER</code></td><td>Ganzzahlen, IDs</td><td><code>DATE</code></td><td>Datum, Literal <code>&#x27;25.11.2026&#x27;</code></td></tr><tr><td><code>DECIMAL(10,2)</code></td><td>Geldbeträge (exakt)</td><td><code>DATETIME / TIMESTAMP</code></td><td>Datum + Uhrzeit</td></tr><tr><td><code>FLOAT / DOUBLE</code></td><td>Gleitkomma (ungenau)</td><td><code>BOOLEAN</code></td><td>wahr/falsch</td></tr><tr><td><code>VARCHAR(n)</code></td><td>Text variabler Länge bis n</td><td><code>CHAR(n)</code></td><td>Text fester Länge (z. B. PLZ CHAR(5))</td></tr><tr><td><code>BLOB / CLOB</code></td><td>große Binär-/Textdaten</td><td></td><td></td></tr></tbody></table></div>
+<pre class="formel">CREATE TABLE Kunde (
+  KundeID  INT          NOT NULL,
+  Name     VARCHAR(100) NOT NULL,
+  Ort      VARCHAR(50),
+  PRIMARY KEY (KundeID)
+);
+CREATE TABLE Bestellung (
+  BestellID INT  NOT NULL,
+  Datum     DATE NOT NULL,
+  KundeID   INT  NOT NULL,
+  PRIMARY KEY (BestellID),
+  FOREIGN KEY (KundeID) REFERENCES Kunde(KundeID)
+);
+ALTER TABLE Kunde ADD COLUMN Email VARCHAR(120); -- Spalte ergänzen
+DROP TABLE Testdaten;                           -- Tabelle komplett löschen</pre>
+<p><strong>SQL-Sprachteile: DDL</strong> (Struktur: CREATE, ALTER, DROP) · <strong>DML</strong> (Daten: SELECT, INSERT, UPDATE, DELETE) · <strong>DCL</strong> (Rechte: GRANT, REVOKE) · <strong>TCL</strong> (Transaktionen: COMMIT, ROLLBACK).</p>
+<h2 id="sql-daten-aendern-dml">SQL: Daten ändern (DML)</h2>
+<pre class="formel">INSERT INTO Kunde (KundeID, Name, Ort) VALUES (17, &#x27;Müller GmbH&#x27;, &#x27;Frankfurt&#x27;);
+UPDATE Artikel SET Preis = Preis * 1.05 WHERE ArtikelID = 3;     -- 5 % teurer
+DELETE FROM Bestellung WHERE Datum &lt; &#x27;01.01.2020&#x27;;
+GRANT SELECT, INSERT ON Bestellung TO vertrieb;  REVOKE INSERT ON Bestellung FROM vertrieb;</pre>
+<div class="box box-fallen"><div class="box-label">FALLE</div><p><code>UPDATE</code> oder <code>DELETE</code><strong> ohne WHERE</strong> betrifft alle Zeilen der Tabelle. In der Prüfung gibt es dafür null Punkte.</p></div>
+<h2 id="sql-abfragen-select">SQL: Abfragen (SELECT)</h2>
+<pre class="formel">SELECT   Spalten / Aggregatfunktionen      -- 5. was ausgeben
+FROM     Tabelle                           -- 1. woher
+JOIN     Tabelle ON Bedingung              -- 1. verknüpfen
+WHERE    Bedingung auf Zeilen              -- 2. Zeilen filtern
+GROUP BY Spalten                           -- 3. gruppieren
+HAVING   Bedingung auf Gruppen             -- 4. Gruppen filtern
+ORDER BY Spalte ASC|DESC;                  -- 6. sortieren</pre>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Operator</strong></th><th><strong>Beispiel</strong></th></tr></thead><tbody><tr><td>Vergleich</td><td><code>Preis &gt;= 100</code> , <code>Ort &lt;&gt; &#x27;Berlin&#x27;</code></td></tr><tr><td>LIKE (% = beliebig viele, _ = genau ein Zeichen)</td><td><code>Name LIKE &#x27;M%&#x27;</code> (beginnt mit M), <code>PLZ LIKE &#x27;60___&#x27;</code></td></tr><tr><td>BETWEEN, IN</td><td><code>Datum BETWEEN &#x27;01.01.2026&#x27; AND &#x27;30.06.2026&#x27;</code> , <code>Ort IN</code> <code>(&#x27;Frankfurt&#x27;,&#x27;Mainz&#x27;)</code></td></tr><tr><td>NULL-Prüfung</td><td><code>Email IS NULL</code> (niemals <code>= NULL</code> !)</td></tr><tr><td>Doppelte entfernen</td><td><code>SELECT DISTINCT Ort FROM Kunde</code></td></tr><tr><td>Aggregatfunktionen</td><td><code>COUNT(*)</code> , <code>SUM()</code> , <code>AVG()</code> , <code>MIN()</code> , <code>MAX()</code></td></tr><tr><td>Alias</td><td><code>SELECT COUNT(*) AS Anzahl</code> , <code>FROM Kunde k</code></td></tr></tbody></table></div>
+<h3>JOINs</h3>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>JOIN</strong></th><th><strong>Ergebnis</strong></th></tr></thead><tbody><tr><td><code>INNER JOIN</code> (= JOIN)</td><td>nur Zeilen mit Treffer in <strong>beiden</strong> Tabellen</td></tr><tr><td><code>LEFT JOIN</code></td><td>alle Zeilen der linken Tabelle, rechts NULL, wenn kein Treffer (z. B. auch Kunden ohne Bestellung)</td></tr><tr><td><code>RIGHT JOIN</code></td><td>alle Zeilen der rechten Tabelle</td></tr></tbody></table></div>
+<pre class="formel">-- Alle Bestellungen mit Kundenname, neueste zuerst
+SELECT b.BestellID, b.Datum, k.Name
+FROM Bestellung b
+INNER JOIN Kunde k ON b.KundeID = k.KundeID
+ORDER BY b.Datum DESC;
+-- Kunden ohne Bestellung
+SELECT k.Name FROM Kunde k
+LEFT JOIN Bestellung b ON k.KundeID = b.KundeID
+WHERE b.BestellID IS NULL;
+-- Umsatz pro Kunde, nur Kunden über 1.000 €
+SELECT k.Name, SUM(p.Menge * a.Preis) AS Umsatz
+FROM Kunde k
+JOIN Bestellung b ON k.KundeID = b.KundeID
+JOIN Position p   ON b.BestellID = p.BestellID
+JOIN Artikel a    ON p.ArtikelID = a.ArtikelID
+GROUP BY k.Name
+HAVING SUM(p.Menge * a.Preis) &gt; 1000
+ORDER BY Umsatz DESC;
+-- Unterabfrage: Artikel teurer als der Durchschnitt
+SELECT Bezeichnung, Preis FROM Artikel
+WHERE Preis &gt; (SELECT AVG(Preis) FROM Artikel);</pre>
+<div class="box box-fallen"><div class="box-label">FALLEN</div><ul><li>Jede Spalte im SELECT, die nicht in einer Aggregatfunktion steht, muss im <code>GROUP BY</code> stehen.</li><li>Aggregatfunktionen gehören nie in <code>WHERE</code> , sondern in <code>HAVING</code> .</li><li>Bei JOIN die ON-Bedingung nicht vergessen, sonst entsteht ein kartesisches Produkt (jede Zeile mit jeder).</li><li>Text und Datum in einfache Hochkommas: <code>&#x27;Frankfurt&#x27;</code> , <code>&#x27;25.11.2026&#x27;</code> .</li></ul></div>
+<h2 id="weitere-sql-syntax-aus-dem-katalog-anhang">Weitere SQL-Syntax aus dem Katalog-Anhang</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Syntax</strong></th><th><strong>Bedeutung</strong></th></tr></thead><tbody><tr><td><code>ALTER TABLE Bestellung ADD FOREIGN KEY (KundeID)</code> <code>REFERENCES Kunde(KundeID);</code></td><td>Fremdschlüssel nachträglich anlegen</td></tr><tr><td><code>ALTER TABLE Kunde MODIFY COLUMN Name VARCHAR(80);</code></td><td>Datentyp einer Spalte ändern</td></tr><tr><td><code>ALTER TABLE Kunde DROP COLUMN Email;</code></td><td>Spalte löschen</td></tr><tr><td><code>CREATE USER max IDENTIFIED BY &#x27;Pw!2026&#x27;;</code></td><td>neuen Benutzer anlegen (danach GRANT/REVOKE)</td></tr><tr><td><code>GRANT SELECT ON shop.Kunde TO max WITH GRANT</code> <code>OPTION;</code></td><td>Recht auf ein Objekt vergeben; WITH GRANT OPTION = max darf es weitergeben</td></tr><tr><td><code>INSERT INTO Archiv SELECT * FROM Bestellung WHERE</code> <code>Datum &lt; &#x27;01.01.2020&#x27;;</code></td><td>Ergebnis einer Abfrage einfügen (statt VALUES)</td></tr><tr><td><code>SELECT AVG(Anz) FROM (SELECT KundeID, COUNT(*) AS</code> <code>Anz FROM Bestellung GROUP BY KundeID) AS tbl;</code></td><td>Unterabfrage im FROM wie eine Tabelle, mit Alias</td></tr></tbody></table></div>
+<p>Kunden ohne Bestellung (EXISTS = mindestens eine <code>WHERE NOT EXISTS (SELECT * FROM Bestellung b WHERE</code></p>
+<p><code>b.KundeID = k.KundeID)</code> Zeile vorhanden)</p>
+<div class="table-wrap"><table class="grid"><tbody><tr><td><code>SELECT Ort FROM Kunde UNION SELECT Ort FROM</code> <code>Lieferant;</code></td><td>Ergebnisse zusammenfassen, Duplikate entfallen</td></tr><tr><td><code>LEFT(Text, n) · RIGHT(Text, n)</code></td><td>n Zeichen von links/rechts, z. B. LEFT(PLZ, 2)</td></tr><tr><td><code>NOW() · YEAR(d) · MONTH(d) · DAY(d) · WEEKDAY(d)</code></td><td>aktuelles Datum mit Uhrzeit, Teile davon (WEEKDAY: Montag = 0; analog HOUR, MINUTE)</td></tr><tr><td><code>DATEDIFF(DAY, Bestelldatum, Lieferdatum)</code></td><td>Differenz in der angegebenen Einheit; DATEADD(DAY, 14, Datum) addiert</td></tr><tr><td><code>STDDEV(x) · VARIANCE(x) · CORR(x, y)</code></td><td>Standardabweichung, Varianz, Korrelation (1 = voll, 0 = kein Zusammenhang)</td></tr></tbody></table></div>
+<p><strong>Datumsformat:</strong> Der Katalog-Anhang gibt DATE im Format <strong>TT.MM.JJJJ</strong> an (z. B. &#x27;25.11.2026&#x27;); so steht es auch in diesem Kapitel. Echte Datenbanken erwarten meist ISO &#x27;JJJJ-MM-TT&#x27; – in der Prüfung gilt das Format der Aufgabe bzw. des Belegsatzes. <strong>COUNT(*)</strong> zählt alle Zeilen, <strong>COUNT(Spalte)</strong> nur Zeilen ohne NULL in dieser Spalte (wichtig bei LEFT JOIN). <strong>Referenzielle Integrität:</strong> ON DELETE CASCADE löscht abhängige Datensätze mit, ON UPDATE CASCADE gibt eine Schlüsseländerung an die Fremdschlüssel weiter. Weiterer Datentyp laut Katalog: Geokoordinaten (Breite/Länge, meist DECIMAL).</p>
+<h2 id="betrieb-transaktionen-index-sicherheit-nosql">Betrieb: Transaktionen, Index, Sicherheit, NoSQL</h2>
+<ul><li><strong>Transaktion (ACID): A</strong>tomarität (ganz oder gar nicht), <strong>C</strong>onsistency/Konsistenz, <strong>I</strong>solation (parallele Transaktionen stören sich nicht), <strong>D</strong>auerhaftigkeit. Beispiel Überweisung: Abbuchung und Gutschrift gemeinsam mit <code>COMMIT</code> , bei Fehler <code>ROLLBACK</code> .</li><li><strong>Locking:</strong> sperrt Datensätze während des Schreibens, damit gleichzeitige Änderungen sich nicht überschreiben.</li><li><strong>Index:</strong> beschleunigt Suchen und JOINs auf einer Spalte deutlich, verlangsamt aber INSERT/UPDATE leicht und braucht Speicher. Sinnvoll auf häufig gesuchten Spalten und FKs.</li><li><strong>Sicherheit:</strong> Rechte per GRANT/REVOKE nach Least Privilege, Prepared Statements gegen SQL-Injection, Backups (Dump oder konsistenter Snapshot, auf getrenntes Medium kopiert), Protokollierung für Nachvollziehbarkeit.</li><li><strong>NoSQL:</strong> ohne festes Tabellenschema, horizontal gut skalierbar. Arten: Dokument (MongoDB), Key-Value (Redis), Graph (Neo4j), Wide-Column (Cassandra).</li><li><strong>Datenbankanbindung:</strong> Anwendungen verbinden sich über standardisierte Schnittstellen wie <strong>ODBC</strong> oder JDBC (Treiber + Verbindungsdaten: Server, Port, Datenbank, Benutzer). Das Konto der Anwendung bekommt nur die nötigen Rechte.</li><li><strong>Data Warehouse vs. Data Lake:</strong> Ein Data Warehouse sammelt aufbereitete, strukturierte Daten aus mehreren Quellen für Auswertungen (Schema vorher festgelegt). Ein Data Lake speichert Rohdaten jeder Art (auch unstrukturiert), das Schema entsteht erst beim Auswerten.</li></ul>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Leistung einer DB</strong></span></td><td><strong>Indexierung</strong> = Verzeichnis über Spalten → Suche schnell; Schreiben langsamer, mehr Speicher <span style="color:#7a8599">1×</span> · <strong>Locking</strong> = Sperren von Datensätzen/Tabellen bei gleichzeitigem Zugriff → keine Inkonsistenzen (Lost Update) <span style="color:#7a8599">1×</span> · <strong>DB langsam</strong> = fehlender Index, Sperren/Deadlocks, zu wenig RAM/I/O, ungünstige Abfragen <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Modell</strong></span></td><td><strong>Referenzielle Integrität</strong> = Fremdschlüssel zeigt nur auf vorhandene Primärschlüssel <span style="color:#7a8599">1×</span> · <strong>NoSQL-Typen</strong> = Dokument, Key-Value, Graph, spaltenorientiert <span style="color:#7a8599">1×</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN (SCHEMA VON OBEN)</div><p><strong>Ü6.1</strong> Gib Name und Ort aller Kunden aus Frankfurt aus, alphabetisch sortiert.</p>
+<p><strong>Ü6.2</strong> Wie viele Bestellungen gab es pro Kunde im Jahr 2026? Ausgabe: Name, Anzahl.</p>
+<p><strong>Ü6.3</strong> Erhöhe den Preis aller Artikel, deren Bezeichnung mit „SSD“ beginnt, um 10 %.</p>
+<p><strong>Ü6.4</strong> Lege die Tabelle Position an (zusammengesetzter PK, zwei FKs, Menge ganzzahlig und Pflicht).</p>
+<p><strong>Ü6.5</strong> Welche Artikel wurden noch nie bestellt?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 6</h3>
+<p><span style="color:#9a6200"><strong>Ü6.1</strong></span></p>
+<pre class="formel">SELECT Name, Ort FROM Kunde WHERE Ort = &#x27;Frankfurt&#x27; ORDER BY Name ASC;</pre>
+<p><span style="color:#9a6200"><strong>Ü6.2</strong></span></p>
+<pre class="formel">SELECT k.Name, COUNT(b.BestellID) AS Anzahl
+FROM Kunde k JOIN Bestellung b ON k.KundeID = b.KundeID
+WHERE b.Datum BETWEEN &#x27;01.01.2026&#x27; AND &#x27;31.12.2026&#x27;
+GROUP BY k.Name;</pre>
+<p><span style="color:#9a6200"><strong>Ü6.3</strong></span></p>
+<pre class="formel">UPDATE Artikel SET Preis = Preis * 1.10 WHERE Bezeichnung LIKE &#x27;SSD%&#x27;;</pre>
+<p><span style="color:#9a6200"><strong>Ü6.4</strong></span></p>
+<pre class="formel">CREATE TABLE Position (
+  BestellID INT NOT NULL,
+  ArtikelID INT NOT NULL,
+  Menge     INT NOT NULL,
+  PRIMARY KEY (BestellID, ArtikelID),
+  FOREIGN KEY (BestellID) REFERENCES Bestellung(BestellID),
+  FOREIGN KEY (ArtikelID) REFERENCES Artikel(ArtikelID)
+);</pre>
+<p><span style="color:#9a6200"><strong>Ü6.5</strong></span></p>
+<pre class="formel">SELECT a.Bezeichnung FROM Artikel a
+LEFT JOIN Position p ON a.ArtikelID = p.ArtikelID
+WHERE p.ArtikelID IS NULL;
+-- Alternative: WHERE ArtikelID NOT IN (SELECT ArtikelID FROM Position)</pre>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">← 5 IT-Sicherheit &amp; Datenschutz</a><a class="next" href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

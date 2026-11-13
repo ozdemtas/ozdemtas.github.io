@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DHCP, DNS &amp; weitere Dienste – Kapitel 13 | FISI AP2 Lernskript</title>
+<meta name="description" content="DHCP (UDP 67 Server / 68 Client): DORA = Discover → Offer → Request → Acknowledge. Über Routergrenzen nur mit DHCP-Relay. DNS (Port 53) übersetzt Namen …">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DHCP, DNS &amp; weitere Dienste – Kapitel 13 | FISI AP2 Lernskript">
+<meta property="og:description" content="DHCP (UDP 67 Server / 68 Client): DORA = Discover → Offer → Request → Acknowledge. Über Routergrenzen nur mit DHCP-Relay. DNS (Port 53) übersetzt Namen …">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 13: DHCP, DNS & weitere Dienste", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a class="active" href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-2-netzwerke.html">Teil 2 · Netzwerke</a> / 13 DHCP, DNS &amp; weitere Dienste</div>
+<h1><span class="num">13</span>DHCP, DNS &amp; weitere Dienste</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip-lila">auch in GA 1</span><span class="chip">Lernzeit ca. 100 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li><strong>DHCP</strong> (UDP 67 Server / 68 Client): <strong>DORA</strong> = Discover → Offer → Request → Acknowledge. Über Routergrenzen nur mit <strong>DHCP-Relay</strong>.</li><li><strong>DNS</strong> (Port 53) übersetzt Namen in IP-Adressen. Client fragt <strong>rekursiv</strong>, der DNS-Server löst <strong>iterativ</strong> auf (Root → TLD → autoritativer Server).</li><li>Records: <strong>A</strong> (IPv4) · <strong>AAAA</strong> (IPv6) · <strong>CNAME</strong> (Alias) · <strong>MX</strong> (Mailserver → Hostname) · <strong>NS</strong> · <strong>SOA</strong> · <strong>PTR</strong> (Reverse) · <strong>TXT</strong> (SPF, DKIM, DMARC) · <strong>SRV</strong> (Dienste, z. B. AD).</li><li>Ping auf IP klappt, auf Namen nicht → <strong>DNS-Problem</strong>.</li></ul></div>
+<h2 id="dhcp">DHCP</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Schritt</strong></th><th><strong>Richtung</strong></th><th><strong>Inhalt</strong></th></tr></thead><tbody><tr><td><strong>D</strong>iscover</td><td>Client → Broadcast</td><td>„Gibt es einen DHCP-Server?“ (Quelle 0.0.0.0, Ziel 255.255.255.255)</td></tr><tr><td><strong>O</strong>ffer</td><td>Server → Client</td><td>Angebot: IP-Adresse, Maske, Gateway, DNS, Lease-Dauer</td></tr><tr><td><strong>R</strong>equest</td><td>Client → Broadcast</td><td>„Ich nehme das Angebot von Server X“ (andere Server wissen Bescheid)</td></tr><tr><td><strong>A</strong>cknowledge</td><td>Server → Client</td><td>Bestätigung, Adresse ist verbindlich</td></tr></tbody></table></div>
+<ul><li><strong>Lease:</strong> Die Adresse ist geliehen. Nach 50 % der Zeit verlängert der Client beim selben Server.</li><li><strong>Bereich (Scope)</strong> mit Ausschlüssen (statische Server/Drucker) und <strong>Optionen</strong>: Router/Gateway (Option 3), DNS-Server (6), Domänenname (15).</li><li><strong>Reservierung:</strong> feste IP für eine bestimmte MAC-Adresse (Drucker, APs) – zentral verwaltet statt manuell.</li><li><strong>DHCP-Relay (IP-Helper):</strong> Broadcasts enden am Router. Der Router leitet DHCP-Anfragen aus einem VLAN per Unicast an den zentralen DHCP-Server weiter.</li><li><strong>Kein DHCP erreichbar</strong> → Windows vergibt sich eine APIPA-Adresse 169.254.x.x.</li><li><strong>DHCP-Snooping</strong> am Switch blockiert fremde („rogue“) DHCP-Server.</li></ul>
+<h3>IPv6-Adressvergabe</h3>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Verfahren</strong></th><th><strong>Adresse von</strong></th><th><strong>DNS-Server von</strong></th></tr></thead><tbody><tr><td>SLAAC</td><td>Client selbst aus RA-Präfix</td><td>RA (Option RDNSS) oder stateless DHCPv6</td></tr><tr><td>DHCPv6 stateless</td><td>SLAAC</td><td>DHCPv6-Server</td></tr><tr><td>DHCPv6 stateful</td><td>DHCPv6-Server (zentral verwaltet)</td><td>DHCPv6-Server</td></tr></tbody></table></div>
+<p>Der Router signalisiert per Flags im Router Advertisement: <strong>M-Flag</strong> (Managed) = Adresse per DHCPv6, <strong>O-Flag</strong> (Other) = Zusatzinfos per DHCPv6. Das Default-Gateway kommt bei IPv6 <strong>immer</strong> aus dem Router Advertisement (Link-Local-Adresse des Routers), nie aus DHCPv6.</p>
+<h2 id="dns">DNS</h2>
+<p><strong>Hierarchie:</strong> Root (.) → Top-Level-Domain (.de, .com) → Second-Level-Domain (beispiel.de) → Subdomain/Host (www). Ein <strong>FQDN</strong> ist der vollständige Name bis zur Wurzel: <code>www.beispiel.de.</code></p>
+<ol><li>Client prüft Cache und <code>hosts</code> -Datei, dann fragt er seinen konfigurierten DNS-Server (<strong>rekursive Anfrage</strong>: „Liefere mir die fertige Antwort“).</li><li>Der DNS-Server (Resolver) fragt, falls nicht im Cache, <strong>iterativ</strong>: Root-Server → Verweis auf .de-Server → Verweis auf den autoritativen Server von beispiel.de → Antwort.</li><li>Der Resolver speichert die Antwort für die Dauer der <strong>TTL</strong> im Cache und gibt sie an den Client.</li></ol>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Record</strong></th><th><strong>Funktion</strong></th><th><strong>Beispiel</strong></th></tr></thead><tbody><tr><td>A</td><td>Name → IPv4</td><td><code>www IN A 203.0.113.10</code></td></tr><tr><td>AAAA</td><td>Name → IPv6</td><td><code>www IN AAAA 2001:db8::10</code></td></tr><tr><td>CNAME</td><td>Alias → anderer Name</td><td><code>shop IN CNAME www.beispiel.de.</code></td></tr><tr><td>MX</td><td>Mailserver der Domain, mit Priorität (kleiner = bevorzugt); zeigt auf einen <strong>Hostnamen</strong></td><td><code>@ IN MX 10 mail.beispiel.de.</code></td></tr><tr><td>NS</td><td>autoritative Nameserver der Zone</td><td><code>@ IN NS ns1.beispiel.de.</code></td></tr><tr><td>SOA</td><td>Verwaltungsdaten der Zone (primärer NS, Admin-Kontakt, Seriennummer, Timer)</td><td>genau einer pro Zone</td></tr><tr><td>PTR</td><td>IP → Name (Reverse Lookup, Zone in-addr.arpa)</td><td><code>10.113.0.203.in-addr.arpa. PTR</code> <code>www.beispiel.de.</code></td></tr><tr><td>TXT</td><td>Text, z. B. SPF, DKIM-Schlüssel, DMARC, Domain-Verifizierung</td><td><code>@ IN TXT &quot;v=spf1 mx -all&quot;</code></td></tr><tr><td>SRV</td><td>Dienst mit Port (z. B. Domain Controller, SIP)</td><td><code>_ldap._tcp.firma.local</code></td></tr></tbody></table></div>
+<ul><li><strong>Primärer / sekundärer DNS-Server:</strong> Die Zone wird per <strong>Zonentransfer</strong> (TCP 53) vom primären auf den sekundären Server kopiert → Redundanz.</li><li><strong>Lastverteilung:</strong> mehrere A-Records für einen Namen (Round Robin).</li><li><strong>DNSSEC:</strong> signiert DNS-Antworten kryptografisch → <strong>Authentizität und Integrität</strong> (Schutz vor DNS-Spoofing/Cache Poisoning). Verschlüsselt aber nichts!</li><li><strong>DoT</strong> (DNS over TLS, Port 853) und <strong>DoH</strong> (DNS over HTTPS, 443) verschlüsseln die Anfrage → Vertraulichkeit.</li></ul>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: NSLOOKUP AUSWERTEN</div><pre>C:\&gt; nslookup www.beispiel.de
+Server:   dns1.firma.local
+Address:  192.168.1.10</pre>
+<pre>Nicht autorisierende Antwort:
+Name:     www.beispiel.de
+Addresses: 2001:db8::10
+           203.0.113.10</pre>
+<p><strong>Auswertung:</strong> Der verwendete DNS-Server ist 192.168.1.10. „Nicht autorisierend“ = die Antwort stammt aus dem Cache bzw. von einem anderen Server, nicht vom zuständigen Nameserver der Zone. Es gibt einen AAAA- und einen A-Record. Bei <code>DNS request timed out</code> ist der DNS-Server nicht erreichbar (Dienst aus, falsche IP, Firewall, fehlende Route).</p></div>
+<div class="box box-fallen"><div class="box-label">FALLEN</div><ul><li>Rekursiv ↔ iterativ vertauschen. Merkhilfe: <strong>Rekursiv = Rundum-Service</strong> für den Client, <strong>iterativ = Schritt für</strong> <strong>Schritt</strong> mit Verweisen.</li><li>Der MX-Record zeigt <strong>nie</strong> direkt auf eine IP-Adresse und nicht auf einen CNAME.</li><li>DNSSEC ≠ Verschlüsselung.</li></ul></div>
+<h2 id="weitere-dienste-im-betrieb">Weitere Dienste im Betrieb</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Dienst</strong></th><th><strong>Aufgabe / worauf achten</strong></th></tr></thead><tbody><tr><td><strong>NTP</strong> (UDP 123)</td><td>einheitliche Uhrzeit. Ohne korrekte Zeit scheitern Kerberos-Anmeldung (max. 5 min Abweichung), Zertifikatsprüfung und die Auswertung von Logs.</td></tr><tr><td><strong>Webserver</strong> (Apache, nginx, IIS)</td><td>HTTPS mit gültigem Zertifikat, HTTP → HTTPS umleiten, in DMZ oder hinter Reverse Proxy, Updates, Logs</td></tr><tr><td><strong>Groupware</strong> (Exchange, Microsoft 365, Nextcloud)</td><td>Mail, Kalender, Kontakte, Dateien gemeinsam; Verfügbarkeit, Backup, Berechtigungen</td></tr><tr><td><strong>Datenbankserver</strong></td><td>nur aus dem Anwendungsnetz erreichbar, eigene Service-Konten, regelmäßige konsistente Sicherung</td></tr><tr><td><strong>Echtzeitkommunikation</strong> (VoIP, Video)</td><td>QoS, geringe Latenz und Jitter (Kapitel 18)</td></tr></tbody></table></div>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>DNS</strong></span></td><td><strong>Split-horizon DNS</strong> = gleicher Name, andere Antwort je nach Fragendem: intern private IP, extern öffentliche IP <span style="color:#7a8599">1×</span> · <strong>Forwarder</strong> = Weiterleitung an Provider-DNS: Cache, weniger eigene Anfragen <span style="color:#7a8599">1×</span> · <strong>Öffentliche DNS verbieten</strong> = interne Namen nicht auflösbar, Filter und Protokollierung würden umgangen <span style="color:#7a8599">1×</span> · <strong>DNS-Spoofing</strong> = gefälschte Antwort leitet auf falsche Seite → Schutz DNSSEC (Signatur: Authentizität + Integrität) <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>DHCP &amp; ARP</strong></span></td><td><strong>Discover als Broadcast</strong> = Client kennt weder eigene IP noch Server <span style="color:#7a8599">1×</span> · <strong>Falsche Parameter</strong> = zweiter (Rogue-)DHCP-Server im Netz oder statisch eingetragen <span style="color:#7a8599">1×</span> · <strong>ARP-Poisoning</strong> = gefälschte ARP-Antworten lenken Verkehr über den Angreifer (Man-in-the-Middle); Schutz: Dynamic ARP Inspection, Port-Security <span style="color:#7a8599">1×</span> · <strong>Gratuitous ARP</strong> = Client kündigt nach DHCP seine IP an → Doppelvergabe wird erkannt, ARP-Tabellen aktualisiert <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Monitoring</strong></span></td><td><strong>SNMP get</strong> = Manager fragt regelmäßig ab (Polling: Verzögerung, Last) <span style="color:#7a8599">1×</span> · <strong>SNMP trap</strong> = Gerät meldet Ereignisse sofort selbst <span style="color:#7a8599">1×</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü13.1</strong> Welcher Record ist nötig? a) Mails an @firma.de sollen bei mail.firma.de ankommen · b) intranet.firma.de soll auf server03.firma.de verweisen · c) Ein Mailserver prüft, ob zur IP 203.0.113.25 der Name mail.firma.de gehört · d) Nur der Server 203.0.113.25 darf Mails für firma.de versenden.</p>
+<p><strong>Ü13.2</strong> Ein neuer Standort (VLAN 40) soll den zentralen DHCP-Server im Rechenzentrum nutzen. Was muss konfiguriert werden?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 13</h3>
+<p><span style="color:#9a6200"><strong>Ü13.1</strong></span> a) MX (plus A-Record für mail.firma.de) · b) CNAME · c) PTR (Reverse Lookup) · d) TXT mit SPF: <code>v=spf1</code> <code>ip4:203.0.113.25 -all</code></p>
+<p><span style="color:#9a6200"><strong>Ü13.2</strong></span> Auf dem Gateway von VLAN 40 ein DHCP-Relay (IP-Helper) mit der Adresse des DHCP-Servers; auf dem DHCP-Server einen Bereich für das Netz von VLAN 40 mit Optionen (Gateway, DNS); Firewall muss UDP 67/68 zwischen Relay und Server erlauben.</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-12-routing-nat.html">← 12 Routing &amp; NAT</a><a class="next" href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

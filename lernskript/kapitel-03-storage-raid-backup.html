@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storage, RAID &amp; Backup – Kapitel 3 | FISI AP2 Lernskript</title>
+<meta name="description" content="Netto-Kapazität: RAID 5 = (n−1)×C · RAID 6 = (n−2)×C · RAID 10 = (n/2)×C · RAID 15 = (n/2 − 1)×C. Hot-Spare vorher abziehen! RAID ersetzt kein Backup (s…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-03-storage-raid-backup.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Storage, RAID &amp; Backup – Kapitel 3 | FISI AP2 Lernskript">
+<meta property="og:description" content="Netto-Kapazität: RAID 5 = (n−1)×C · RAID 6 = (n−2)×C · RAID 10 = (n/2)×C · RAID 15 = (n/2 − 1)×C. Hot-Spare vorher abziehen! RAID ersetzt kein Backup (s…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-03-storage-raid-backup.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 3: Storage, RAID & Backup", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-03-storage-raid-backup.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a class="active" href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-1-konzeption-administration.html">Teil 1 · Konzeption &amp; Administration</a> / 3 Storage, RAID &amp; Backup</div>
+<h1><span class="num">3</span>Storage, RAID &amp; Backup</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip">6–10 Punkte, fast immer mit Rechnung</span><span class="chip">Lernzeit ca. 120 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li>Netto-Kapazität: <strong>RAID 5 = (n−1)×C · RAID 6 = (n−2)×C · RAID 10 = (n/2)×C · RAID 15 = (n/2 − 1)×C</strong>. Hot-Spare vorher abziehen!</li><li><strong>RAID ersetzt kein Backup</strong> (schützt nicht vor Löschen, Ransomware, Brand).</li><li>Voll / differenziell (seit letzter <strong>Voll</strong>sicherung) / inkrementell (seit letzter <strong>beliebiger</strong> Sicherung).</li><li><strong>RPO</strong> = maximal tolerierter Datenverlust (Zeitraum) · <strong>RTO</strong> = maximal tolerierte Wiederherstellungsdauer.</li><li><strong>3-2-1-Regel:</strong> 3 Kopien, 2 Medientypen, 1 außer Haus. Dazu Air Gap/unveränderbare Backups gegen Ransomware.</li></ul></div>
+<h2 id="speicherarchitekturen-das-nas-san">Speicherarchitekturen: DAS, NAS, SAN</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Typ</strong></th><th><strong>Funktionsweise</strong></th><th><strong>Zugriff</strong></th><th><strong>Protokolle</strong></th></tr></thead><tbody><tr><td><strong>DAS</strong> Direct Attached Storage</td><td>Platten direkt im/am Server</td><td>Block</td><td>SATA, SAS, NVMe</td></tr><tr><td><strong>NAS</strong> Network Attached Storage</td><td>Dateiserver im LAN, eigenes Dateisystem</td><td>Datei</td><td>SMB (TCP 445), NFS (TCP 2049)</td></tr><tr><td><strong>SAN</strong> Storage Area Network</td><td>eigenes Speichernetz, Server sieht „lokale“ Platten (LUNs)</td><td>Block</td><td>Fibre Channel, iSCSI (TCP 3260)</td></tr></tbody></table></div>
+<p>Faustregel: <strong>NAS = Dateien teilen, SAN = Blockspeicher für Server/VMs/Datenbanken</strong>. Object Storage (S3) speichert Objekte mit Metadaten über HTTP-API, typisch in der Cloud und für Backups.</p>
+<h2 id="raid-level">RAID-Level</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Level</strong></th><th><strong>Prinzip</strong></th><th><strong>min. Platten</strong></th><th><strong>verkraftet</strong></th><th><strong>Netto (n Platten à C)</strong></th></tr></thead><tbody><tr><td>JBOD</td><td>Platten aneinandergehängt</td><td>1</td><td>0</td><td>Summe aller Platten</td></tr><tr><td>RAID 0</td><td>Striping (Daten verteilt)</td><td>2</td><td>0</td><td>n × C</td></tr><tr><td>RAID 1</td><td>Spiegelung</td><td>2</td><td>1 (von 2)</td><td>C (bei 2 Platten)</td></tr><tr><td>RAID 5</td><td>Striping + 1 verteilte Parität</td><td>3</td><td>1</td><td>(n − 1) × C</td></tr><tr><td>RAID 6</td><td>Striping + 2 Paritäten</td><td>4</td><td>2</td><td>(n − 2) × C</td></tr><tr><td>RAID 10</td><td>Stripe über Spiegelpaare (1+0)</td><td>4</td><td>1 pro Paar</td><td>(n / 2) × C</td></tr><tr><td>RAID 15</td><td>Spiegelung + Parität (1+5)</td><td>6</td><td>mind. 3 beliebige</td><td>(n / 2 − 1) × C</td></tr></tbody></table></div>
+<ul><li><strong>Hot-Spare:</strong> eingebaute Reserveplatte ohne Daten. Fällt eine Platte aus, startet der Rebuild sofort automatisch. Sie zählt <strong>nicht</strong> zur Nettokapazität.</li><li><strong>Rebuild:</strong> Wiederherstellen der Redundanz. Während des Rebuilds ist das RAID langsamer und (bei RAID 5) ungeschützt. Deshalb bei großen Platten RAID 6 bevorzugen.</li><li><strong>Performance:</strong> RAID 10 ist bei Schreiblast (Datenbanken, VMs) am schnellsten. RAID 5/6 schreiben langsamer wegen der Paritätsberechnung.</li></ul>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: RAID-KAPAZITÄT</div><p><em>Ein Server hat 8 Festplatten à 4 TiB. Eine davon ist als Hot-Spare konfiguriert, die übrigen bilden ein RAID 6. Nettokapazität?</em></p>
+<ol><li>Hot-Spare abziehen: 8 − 1 = 7 Platten im RAID</li><li>RAID 6: (7 − 2) × 4 TiB = <strong>20 TiB</strong></li><li>Ausfallsicherheit: 2 Platten gleichzeitig + Hot-Spare springt sofort ein.</li></ol></div>
+<h2 id="backup-verfahren">Backup-Verfahren</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Verfahren</strong></th><th><strong>Was wird gesichert?</strong></th><th><strong>Sicherungsdauer / Platz</strong></th><th><strong>Wiederherstellung braucht</strong></th></tr></thead><tbody><tr><td><strong>Vollsicherung</strong></td><td>alle Daten</td><td>am längsten / am meisten</td><td>nur die letzte Vollsicherung (schnellste Wiederherstellung)</td></tr><tr><td><strong>Differenziell</strong></td><td>alle Änderungen seit der letzten <strong>Voll</strong>sicherung</td><td>wächst täglich an</td><td>Vollsicherung + <strong>letzte</strong> differenzielle</td></tr><tr><td><strong>Inkrementell</strong></td><td>Änderungen seit der letzten Sicherung <strong>jeglicher Art</strong></td><td>am kürzesten / am wenigsten</td><td>Vollsicherung + <strong>alle</strong> Inkremente seitdem (langsamste Wiederherstellung)</td></tr></tbody></table></div>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: WELCHE SICHERUNGEN BRAUCHT MAN?</div><p><em>Vollsicherung jeden Sonntag, werktags abends eine Teilsicherung. Am Donnerstag um 10 Uhr fällt der Server aus.</em></p>
+<ul><li><strong>Inkrementell:</strong> Voll (So) + Inkrement Mo + Di + Mi = 4 Sicherungen</li><li><strong>Differenziell:</strong> Voll (So) + Differenz Mi = 2 Sicherungen</li><li>Datenverlust in beiden Fällen: alles seit Mittwochabend (RPO ≈ 1 Tag).</li></ul></div>
+<h3>Zielgrößen: RPO und RTO</h3>
+<figure class="diagram"><img src="img/abb-kapitel-03-storage-raid-backup-1.png" alt="Diagramm: ←RPO: Datenverlust → ←RTO: Ausfallzeit → letztes Backup Ausfall System läuft wieder" width="418" loading="lazy"></figure>
+<ul><li><strong>RPO (Recovery Point Objective):</strong> Wie viele Daten dürfen maximal verloren gehen? Bestimmt das <strong>Sicherungsintervall</strong>. RPO 1 h → mindestens stündlich sichern bzw. replizieren.</li><li><strong>RTO (Recovery Time Objective):</strong> Wie lange darf die Wiederherstellung maximal dauern? Bestimmt <strong>Verfahren und</strong> <strong>Technik</strong> (Vollsicherung, schnelle Medien, Standby-System).</li></ul>
+<h3>Strategien und Begriffe</h3>
+<ul><li><strong>3-2-1-Regel</strong> (erweitert <strong>3-2-1-1-0</strong>): 3 Kopien, 2 verschiedene Medien, 1 außer Haus, 1 offline/unveränderbar, 0 Fehler beim Wiederherstellungstest.</li><li><strong>Großvater-Vater-Sohn (GVS):</strong> Rotationsschema. Söhne = Tagessicherungen (z. B. Mo–Do), Väter = Wochensicherungen (Fr), Großväter = Monatssicherungen. Klassisch 4 + 4 + 12 = 20 Medien für ein Jahr Rückgriff (Varianten je nach Aufgabenstellung).</li><li><strong>Air Gap:</strong> Backupmedium physisch vom Netz getrennt (z. B. ausgelagertes LTO-Band) → Ransomware kommt nicht heran.</li><li><strong>Immutable Backup / WORM:</strong> Sicherung kann für eine festgelegte Zeit nicht verändert oder gelöscht werden.</li><li><strong>Deduplizierung:</strong> identische Datenblöcke werden nur einmal gespeichert (oft Faktor 10–30 Ersparnis bei Backups vieler ähnlicher VMs).</li><li><strong>LTO-Band:</strong> günstig pro TB, lange haltbar, transportabel, Air Gap möglich. Nachteil: sequenzieller, langsamer Zugriff.</li><li><strong>Restore-Test:</strong> Ein Backup gilt erst als funktionierend, wenn die Wiederherstellung getestet wurde.</li></ul>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Begriff</strong></th><th><strong>Zweck</strong></th><th><strong>Merkmal</strong></th></tr></thead><tbody><tr><td>Backup</td><td>Wiederherstellung nach Datenverlust</td><td>kurz- bis mittelfristig, mehrere Versionen</td></tr><tr><td>Archivierung</td><td>langfristige Aufbewahrung (z. B. 10 Jahre nach HGB/AO)</td><td>revisionssicher, unveränderbar; Daten werden oft aus dem aktiven System entfernt</td></tr><tr><td>Snapshot</td><td>schneller Rücksprung vor Änderungen</td><td>gleicher Storage, kein Backup</td></tr><tr><td>Replikation</td><td>Hochverfügbarkeit, zweiter Standort</td><td>überträgt auch Fehler und Löschungen sofort → kein Backup</td></tr></tbody></table></div>
+<h2 id="speicherverwaltung-und-revisionssichere-archivierung">Speicherverwaltung und revisionssichere Archivierung</h2>
+<ul><li><strong>Thick Provisioning:</strong> Speicher wird beim Anlegen (z. B. einer 500-GiB-VM-Disk) sofort komplett reserviert – planbar, aber Platz liegt brach. <strong>Thin Provisioning:</strong> belegt wird nur, was geschrieben ist; erlaubt Überbuchung. Risiko: Ist der physische Speicher voll, stehen alle VMs → Füllstand überwachen, Schwellenwerte alarmieren.</li><li><strong>Quotas:</strong> Speichergrenze pro Benutzer, Gruppe oder Ordner; <strong>Soft Limit</strong> = Warnung, <strong>Hard Limit</strong> = Schreiben wird verweigert.</li><li><strong>Datei- vs. blockbasierte Sicherung:</strong> dateibasiert = einzelne Dateien/Ordner, gezielter Restore einzelner Dateien; blockbasiert = ganze Datenträger bzw. Images, schnell, ideal für komplette Systeme und VMs.</li><li><strong>Medien schnell → langsam (D2D2T / D2D2C):</strong> erst auf Disk sichern (schneller Restore), danach auf Band oder in die Cloud (lange Aufbewahrung, Offsite). Medienrotation nach Generationenprinzip oder <strong>FIFO</strong> (das älteste Medium wird überschrieben).</li><li><strong>Veränderlich vs. unveränderlich:</strong> Unveränderliche Sicherungen (WORM/Immutable, s. o.) kann bis Fristende niemand löschen oder verschlüsseln – auch Ransomware nicht.</li><li><strong>Synchronisation ist kein Backup:</strong> OneDrive, Nextcloud oder <code>rsync --delete</code> übertragen auch Löschungen und Verschlüsselung sofort; ein Backup hat getrennte, versionierte Stände.</li><li><strong>Lagerung:</strong> Sicherungsmedien nie im selben Raum/Brandabschnitt wie die Server, besser in einem anderen Gebäude.</li><li><strong>Backup- und Wiederherstellungsdauer</strong> = Datenmenge (nach Komprimierung) ÷ effektive Datenrate (→ R2 in Kap. 23).</li></ul>
+<p><strong>Revisionssichere Archivierung (GoBD):</strong> geschäftsrelevante Daten vollständig, unveränderbar, nachvollziehbar und jederzeit lesbar aufbewahren. Aufbewahrungsfristen (HGB/AO): Bücher, Inventare und Jahresabschlüsse <strong>10 Jahre</strong>, Buchungsbelege (z. B. Rechnungen) <strong>8 Jahre</strong> (seit 2025), Handels- und Geschäftsbriefe <strong>6 Jahre</strong>. Personenbezogene Daten danach löschen (DSGVO, Löschkonzept).</p>
+<div class="box box-fallen"><div class="box-label">FALLEN</div><ul><li>Differenziell und inkrementell verwechseln. Merksatz: <strong>D</strong>ifferenziell = seit <strong>D</strong>em Vollbackup.</li><li>Hot-Spare in die Nettokapazität einrechnen.</li><li>TB (Hersteller, 10¹²) und TiB (Betriebssystem, 2⁴⁰) mischen. Eine „4-TB-Platte“ zeigt im OS ca. 3,64 TiB.</li><li>„RAID ist ein Backup“ → immer falsch.</li></ul></div>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Dateisystem</strong></span></td><td><strong>Zuordnungseinheit</strong> = Clustergröße: <strong>klein</strong> → wenig Verschnitt bei vielen kleinen Dateien (Office, Mail); <strong>groß</strong> → schneller bei großen Dateien (Video, Backups, VM-Images) <span style="color:#7a8599">2×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Platz sparen</strong></span></td><td><strong>Deduplizierung</strong> = identische Blöcke nur einmal speichern (viele gleiche VMs, Backups) <span style="color:#7a8599">2×</span> · <strong>Komprimierung</strong> = Daten platzsparend kodieren (Logs, Text gut; JPEG/Video kaum) <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Band</strong></span></td><td><strong>LTFS</strong> = Band wie Laufwerk mit Ordnern nutzbar, herstellerunabhängig lesbar <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: LTO</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Backup-Details</strong></span></td><td><strong>Archivbit</strong> = Markierung „seit letzter Sicherung geändert“: Voll und inkrementell setzen es zurück, differenziell nicht <span style="color:#7a8599">1×</span> · <strong>GVS</strong> = Sohn = täglich, Vater = wöchentlich, Großvater = monatlich <span style="color:#7a8599">1×</span> · <strong>Sicherung vs.</strong> <strong>Archivierung</strong> = Sicherung = Kopie zur Wiederherstellung, wird überschrieben · Archivierung = langfristig, unveränderbar, Original wird ausgelagert <span style="color:#7a8599">2×</span> · <strong>Organisatorisch</strong> = Backup-Plan mit Verantwortlichen, Restore-Tests, Lagerung außer Haus/Tresor, Dokumentation <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>RAID-Spezial</strong></span></td><td><strong>JBOD</strong> = Platten nur aneinandergehängt: keine Redundanz, kein Tempo-Gewinn, ein Ausfall = Datenverlust <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: RAID 6 vs. 5, Hot-Spare, revisionssicher</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü3.1</strong> Nettokapazität: a) RAID 5 aus 6 × 2 TiB · b) RAID 10 aus 8 × 1,92 TiB · c) RAID 15 aus 10 × 4 TiB · d) 12 Platten à 8 TiB, davon 2 Hot-Spares, Rest RAID 6.</p>
+<p><strong>Ü3.2</strong> Ein SAN ist mit 4 TiB belegt. Pro Jahr kommen 650 GiB hinzu. In 5 Jahren darf das SAN höchstens zu 70 % belegt sein. Welche nutzbare Kapazität (in TiB) wird benötigt?</p>
+<p><strong>Ü3.3</strong> Die Geschäftsführung fordert: maximal 2 Stunden Datenverlust, System nach spätestens 4 Stunden wieder online. Benenne die zwei Kennzahlen und leite je eine Maßnahme ab.</p></div>
+<h3 class="loesungen">Lösungen Kapitel 3</h3>
+<p><span style="color:#9a6200"><strong>Ü3.1</strong></span> a) (6−1)×2 = <strong>10 TiB</strong> · b) 8/2 × 1,92 = <strong>7,68 TiB</strong> · c) (10/2 − 1) × 4 = <strong>16 TiB</strong> · d) 12 − 2 = 10 Platten → (10−2) × 8 = <strong>64 TiB</strong></p>
+<p><span style="color:#9a6200"><strong>Ü3.2</strong></span> Bedarf: 4 TiB = 4.096 GiB + 5 × 650 GiB = 7.346 GiB. Das sind 70 % → 7.346 / 0,7 = 10.494,3 GiB ÷ 1.024 = <strong>ca. 10,25 TiB</strong> (in der Praxis nächste Ausbaustufe wählen).</p>
+<p><span style="color:#9a6200"><strong>Ü3.3</strong></span> RPO = 2 h → mindestens alle 2 Stunden sichern (inkrementelle Sicherung auf getrenntes Medium). RTO = 4 h → schnelle Wiederherstellung sicherstellen: Backup auf Disk statt Band, dokumentierter und getesteter Restore-Ablauf, ggf. Standby-System.</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">← 2 Virtualisierung, Container &amp; Cloud</a><a class="next" href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

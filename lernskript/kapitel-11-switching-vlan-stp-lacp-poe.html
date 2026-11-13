@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switching: VLAN, STP, LACP, PoE – Kapitel 11 | FISI AP2 Lernskript</title>
+<meta name="description" content="Ein Switch lernt MAC-Adressen pro Port (MAC-Tabelle). Jeder Port = eigene Kollisionsdomäne, alle Ports eines VLANs = eine Broadcastdomäne. VLAN = logisc…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Switching: VLAN, STP, LACP, PoE – Kapitel 11 | FISI AP2 Lernskript">
+<meta property="og:description" content="Ein Switch lernt MAC-Adressen pro Port (MAC-Tabelle). Jeder Port = eigene Kollisionsdomäne, alle Ports eines VLANs = eine Broadcastdomäne. VLAN = logisc…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 11: Switching: VLAN, STP, LACP, PoE", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a class="active" href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-2-netzwerke.html">Teil 2 · Netzwerke</a> / 11 Switching: VLAN, STP, LACP, PoE</div>
+<h1><span class="num">11</span>Switching: VLAN, STP, LACP, PoE</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip">Switchport-Konfiguration ist Standardaufgabe</span><span class="chip">Lernzeit ca. 100 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li>Ein Switch lernt MAC-Adressen pro Port (MAC-Tabelle). Jeder Port = eigene Kollisionsdomäne, alle Ports eines VLANs = eine Broadcastdomäne.</li><li><strong>VLAN</strong> = logische Trennung in Broadcastdomänen. <strong>Untagged/Access</strong> für Endgeräte, <strong>Tagged/Trunk</strong> (IEEE 802.1Q) zwischen Switches/zum Router.</li><li>Zwischen VLANs braucht man einen <strong>Router oder L3-Switch</strong> (Router-on-a-Stick mit Subinterfaces).</li><li><strong>STP</strong> verhindert Schleifen durch Blockieren redundanter Pfade. <strong>LACP</strong> bündelt Leitungen (mehr Bandbreite + Redundanz).</li></ul></div>
+<h2 id="wie-ein-switch-arbeitet">Wie ein Switch arbeitet</h2>
+<p>Der Switch liest die <strong>Quell-MAC</strong> eines Frames und merkt sich den Port (Lernen). Anhand der <strong>Ziel-MAC</strong> leitet er gezielt weiter. Ist die Ziel-MAC unbekannt oder ein Broadcast (ff:ff:ff:ff:ff:ff), flutet er den Frame an alle Ports im selben VLAN. Ein Router trennt Broadcastdomänen, ein Switch nicht (ohne VLANs).</p>
+<h2 id="vlan-virtual-lan">VLAN (Virtual LAN)</h2>
+<p><strong>Warum VLANs? Sicherheit</strong> (Verwaltung, Produktion, Gäste, VoIP, Server logisch getrennt; Verkehr zwischen ihnen läuft über Router/Firewall und kann gefiltert werden) · <strong>Performance</strong> (kleinere Broadcastdomänen) · <strong>Flexibilität</strong> (Zuordnung unabhängig vom Standort) · <strong>QoS</strong> (eigenes Voice-VLAN).</p>
+<ul><li><strong>Portbasiert (statisch):</strong> VLAN fest pro Switchport. Häufigste Variante.</li><li><strong>Dynamisch:</strong> Zuordnung nach MAC-Adresse oder nach Anmeldung per <strong>IEEE 802.1X</strong> (RADIUS weist das VLAN zu).</li></ul>
+<h3>IEEE 802.1Q-Tag</h3>
+<p>Auf Trunk-Verbindungen wird in den Ethernet-Frame ein <strong>4 Byte (32 Bit)</strong> großes Tag eingefügt: TPID (0x8100, 16 Bit) · Priorität <strong>PCP</strong> (3 Bit, für QoS nach 802.1p) · DEI (1 Bit) · <strong>VLAN-ID</strong> (12 Bit → IDs 1–4094 nutzbar).</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Portmodus</strong></th><th><strong>Frames</strong></th><th><strong>Einsatz</strong></th></tr></thead><tbody><tr><td><strong>Untagged</strong> /Access</td><td>ohne Tag, genau ein VLAN; der Switch entfernt das Tag beim Senden</td><td>PCs, Drucker, Server ohne VLAN-Konfiguration</td></tr><tr><td><strong>Tagged</strong> / Trunk</td><td>mit Tag, mehrere VLANs über eine Leitung</td><td>Switch ↔ Switch, Switch ↔ Router, Switch ↔ Hypervisor/AP</td></tr><tr><td>Native VLAN</td><td>auf einem Trunk untagged übertragenes VLAN (Standard oft VLAN 1)</td><td>aus Sicherheitsgründen auf eine ungenutzte ID ändern (Schutz vor VLAN-Hopping)</td></tr></tbody></table></div>
+<p><strong>IP-Telefon mit PC dahinter:</strong> Switchport sendet Daten-VLAN untagged (für den PC) und Voice-VLAN tagged (für das Telefon).</p>
+<h2 id="routing-zwischen-vlans">Routing zwischen VLANs</h2>
+<ul><li><strong>Router-on-a-Stick:</strong> eine physische Leitung (Trunk) zum Router, darauf <strong>Subinterfaces</strong> je VLAN, z. B. <code>eth1.10</code> mit 192.168.10.1/24 (dot1q 10) und <code>eth1.20</code> mit 192.168.20.1/24 (dot1q 20). Das Subinterface ist das Gateway des VLANs.</li><li><strong>Layer-3-Switch (Core-Switch):</strong> routet selbst zwischen VLANs über virtuelle Schnittstellen (SVI, „interface vlan 10“). Schneller, in Netzplänen oft das Standardgateway der VLANs.</li></ul>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: SWITCHPORTS KONFIGURIEREN</div><p><em>Switch SW1: Port 1–10 Verwaltung (VLAN 10), Port 11–20 Produktion (VLAN 20), Port 21 IP-Telefon mit PC (Voice</em> <em>VLAN 30, PC in VLAN 10), Port 24 Uplink zum Router. Tragen Sie die Konfiguration ein.</em></p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Port</strong></th><th><strong>VLAN 10</strong></th><th><strong>VLAN 20</strong></th><th><strong>VLAN 30</strong></th></tr></thead><tbody><tr><td>1–10</td><td>U</td><td>–</td><td>–</td></tr><tr><td>11–20</td><td>–</td><td>U</td><td>–</td></tr><tr><td>21</td><td>U</td><td>–</td><td>T</td></tr><tr><td>24 (Uplink)</td><td>T</td><td>T</td><td>T</td></tr></tbody></table></div>
+<p>U = untagged, T = tagged. Ein Port kann nur in <strong>einem</strong> VLAN untagged sein, aber in vielen tagged.</p></div>
+<h2 id="spanning-tree-protocol-stp">Spanning Tree Protocol (STP)</h2>
+<p>Redundante Verbindungen zwischen Switches erzeugen ohne Schutz <strong>Schleifen</strong>: Broadcasts kreisen endlos (<strong>Broadcast-Sturm</strong>), MAC-Tabellen werden instabil, das Netz steht. STP (IEEE 802.1D) bildet einen schleifenfreien Baum:</p>
+<ol><li>Wahl der <strong>Root Bridge</strong>: Switch mit der niedrigsten Bridge-ID (Priorität + MAC). Tipp: Core-Switch per Priorität bewusst zur Root machen.</li><li>Jeder Switch bestimmt seinen günstigsten Weg (Pfadkosten) zur Root (Root Port).</li><li>Redundante Ports werden <strong>blockiert</strong> und bei Ausfall des aktiven Pfads automatisch aktiviert.</li></ol>
+<p>Klassisches STP braucht bis zu 30–50 s zum Umschalten; <strong>RSTP</strong> (802.1w) schafft es in wenigen Sekunden, <strong>MSTP</strong> (802.1s) erlaubt verschiedene Bäume pro VLAN-Gruppe. <strong>Fehlerbild:</strong> Ein Port ist „blockiert“, obwohl Kabel in Ordnung → meist STP (gewollt oder falsch konfiguriert).</p>
+<h2 id="link-aggregation-lacp-und-poe">Link Aggregation (LACP) und PoE</h2>
+<ul><li><strong>Link Aggregation</strong> (IEEE 802.3ad/802.1AX, Protokoll <strong>LACP</strong>): mehrere physische Leitungen werden zu einer logischen gebündelt (<strong>Port-Channel</strong>, Bond, Trunk bei manchen Herstellern). Vorteile: mehr Gesamtbandbreite und Ausfallsicherheit. STP sieht das Bündel als eine Leitung und blockiert nichts. Hinweis: Eine einzelne Verbindung nutzt meist nur eine Leitung (Verteilung per Hash).</li><li><strong>PoE</strong> (Power over Ethernet) versorgt Access Points, Telefone, Kameras über das Netzwerkkabel:</li></ul>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Standard</strong></th><th><strong>Name</strong></th><th><strong>Leistung am Switch-Port</strong></th></tr></thead><tbody><tr><td>IEEE 802.3af</td><td>PoE</td><td>15,4 W</td></tr><tr><td>IEEE 802.3at</td><td>PoE+</td><td>30 W</td></tr><tr><td>IEEE 802.3bt</td><td>PoE++ (Typ 3 / Typ 4)</td><td>60 W / 90 W</td></tr></tbody></table></div>
+<p>Prüfungsrelevant: das <strong>PoE-Budget</strong> des Switches (Summe aller Verbraucher darf die Gesamtleistung nicht überschreiten).</p>
+<p><strong>Weitere Schutzfunktionen am Switch:</strong> Port Security (MAC-Begrenzung), 802.1X (Anmeldung am Port), DHCP-Snooping (nur vertrauenswürdige DHCP-Server), ungenutzte Ports deaktivieren.</p>
+<p><strong>Zugriff auf Netzkomponenten absichern:</strong> Verwaltung nur per SSH oder HTTPS (nicht Telnet/HTTP), über ein eigenes Management-VLAN, Anmeldung zentral per RADIUS oder TACACS+, Standardkonten und -passwörter ändern, Firmware aktuell halten, Konfiguration sichern.</p>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Routing zw. VLANs</strong></span></td><td><strong>Router-on-a-Stick</strong> = ein Router-Port, je VLAN ein Subinterface mit <code>encapsulation dot1Q &lt;VLAN-ID&gt;</code> <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: Access/Trunk, Native VLAN, VLAN statisch/802.1X</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Port-Security</strong></span></td><td><strong>Prinzip</strong> = nur erlaubte MAC-Adressen am Port <span style="color:#7a8599">1×</span> · <strong>configured</strong> = MAC fest eingetragen <span style="color:#7a8599">1×</span> · <strong>sticky</strong> = die zuerst gelernte MAC wird gespeichert <span style="color:#7a8599">1×</span> · <strong>Violation-Modes</strong> = protect = verwerfen, restrict = verwerfen + Meldung, shutdown = Port abschalten <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Analyse &amp; Fehler</strong></span></td><td><strong>SPAN / Monitoring-Port</strong> = kopiert den Verkehr anderer Ports zum Analyse-PC <span style="color:#7a8599">1×</span> · <strong>Port extrem aktiv</strong> = Schleife/Broadcast-Sturm (kein STP), defekte Netzwerkkarte, Malware, großer Transfer <span style="color:#7a8599">1×</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü11.1</strong> Ein PC im VLAN 20 bekommt keine IP-Adresse. Der DHCP-Server steht im VLAN 99. Nenne drei mögliche Ursachen.</p>
+<p><strong>Ü11.2</strong> Ein Switch hat ein PoE-Budget von 370 W. Angeschlossen: 8 Access Points à 25 W und 20 Telefone à 6,5 W. Reicht das? Wie viele Kameras à 12,95 W passen noch?</p>
+<p><strong>Ü11.3</strong> Warum ist das Standard-Native-VLAN 1 ein Sicherheitsrisiko?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 11</h3>
+<p><span style="color:#9a6200"><strong>Ü11.1</strong></span> 1. Switchport des PCs nicht (untagged) in VLAN 20 · 2. VLAN 20 auf dem Uplink/Trunk nicht tagged erlaubt · 3. Kein DHCP-Relay (ip helper) auf dem Gateway/Subinterface von VLAN 20 – DHCP-Broadcasts gehen nicht über Routergrenzen · 4. Firewall zwischen den VLANs blockiert UDP 67/68 · 5. DHCP-Bereich für VLAN 20 fehlt oder ist erschöpft.</p>
+<p><span style="color:#9a6200"><strong>Ü11.2</strong></span> 8 × 25 = 200 W + 20 × 6,5 = 130 W → 330 W ≤ 370 W, reicht. Rest 40 W ÷ 12,95 W = 3,09 → <strong>3 Kameras</strong>.</p>
+<p><span style="color:#9a6200"><strong>Ü11.3</strong></span> Ungetaggter Verkehr landet im Native VLAN. Ist das VLAN 1 (in dem oft auch Management und unkonfigurierte Ports liegen), können Angreifer per „Double Tagging“ (VLAN-Hopping) Frames in fremde VLANs einschleusen. Lösung: Native VLAN auf eine ungenutzte ID ändern, VLAN 1 nicht verwenden.</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">← 10 IPv4, IPv6 &amp; Subnetting</a><a class="next" href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

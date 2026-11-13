@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firewall, DMZ &amp; VPN – Kapitel 17 | FISI AP2 Lernskript</title>
+<meta name="description" content="Paketfilter (stateless, jedes Paket einzeln) → SPI (stateful, kennt Verbindungen; Antworten automatisch erlaubt) → NGFW (Anwendungsebene, IPS, Benutzer,…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-17-firewall-dmz-vpn.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Firewall, DMZ &amp; VPN – Kapitel 17 | FISI AP2 Lernskript">
+<meta property="og:description" content="Paketfilter (stateless, jedes Paket einzeln) → SPI (stateful, kennt Verbindungen; Antworten automatisch erlaubt) → NGFW (Anwendungsebene, IPS, Benutzer,…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-17-firewall-dmz-vpn.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 17: Firewall, DMZ & VPN", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-17-firewall-dmz-vpn.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a class="active" href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-2-netzwerke.html">Teil 2 · Netzwerke</a> / 17 Firewall, DMZ &amp; VPN</div>
+<h1><span class="num">17</span>Firewall, DMZ &amp; VPN</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip-lila">auch in GA 1</span><span class="chip">Regeltabellen bringen viele Punkte</span><span class="chip">Lernzeit ca. 150 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li><strong>Paketfilter</strong> (stateless, jedes Paket einzeln) → <strong>SPI</strong> (stateful, kennt Verbindungen; Antworten automatisch erlaubt) → <strong>NGFW</strong> (Anwendungsebene, IPS, Benutzer, SSL-Inspection).</li><li>Regeln werden <strong>von oben nach unten</strong> geprüft, die erste passende gilt. Am Ende: <strong>alles verbieten</strong> (Default Deny).</li><li><strong>DMZ</strong> = eigenes Netz für öffentlich erreichbare Server; aus dem Internet nie direkt ins LAN.</li><li><strong>VPN:</strong> Site-to-Site (Standorte, dauerhaft) vs. End-to-Site/Remote Access (Homeoffice). Techniken: IPsec, SSL/TLS-VPN, WireGuard.</li></ul></div>
+<h2 id="firewall-arten">Firewall-Arten</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Typ</strong></th><th><strong>Prüft</strong></th><th><strong>Stärken / Schwächen</strong></th></tr></thead><tbody><tr><td>Paketfilter (stateless)</td><td>Header jedes Pakets: Quell-/Ziel-IP, Port, Protokoll</td><td>schnell; kennt keine Zusammenhänge → Rückweg muss extra erlaubt werden</td></tr><tr><td><strong>Stateful Packet</strong> <strong>Inspection</strong></td><td>zusätzlich den Verbindungsstatus (Zustandstabelle)</td><td>Antwortpakete einer erlaubten Verbindung passieren automatisch; Standard heute</td></tr><tr><td><strong>Next Generation</strong> <strong>Firewall</strong></td><td>Inhalt bis Schicht 7: Deep Packet Inspection, Anwendungserkennung, IPS, Benutzeridentität, Malware-Scan, Sandbox, SSL/TLS-Inspection</td><td>sehr gründlich; teuer, rechenintensiv, Datenschutzfragen</td></tr><tr><td>Proxy /Application Gateway</td><td>vermittelt Verbindungen stellvertretend (z. B. Webproxy mit URL-Filter)</td><td>Clients haben keinen direkten Kontakt nach außen</td></tr><tr><td>WAF (Web Application Firewall)</td><td>schützt Webanwendungen (SQL-Injection, XSS)</td><td>vor Webservern in der DMZ</td></tr></tbody></table></div>
+<p><strong>Proxy:</strong> Ein <strong>Forward Proxy</strong> steht vor den Clients und ruft Webseiten stellvertretend ab (URL-Filter, Virenscan, Caching, Protokollierung, Clients brauchen keinen direkten Internetzugang). Ein <strong>Reverse Proxy</strong> steht vor den Servern (meist in der DMZ), nimmt Anfragen aus dem Internet an und leitet sie an interne Webserver weiter (TLS-Terminierung, Lastverteilung, interne Server bleiben verborgen).</p>
+<p><strong>IDS vs. IPS:</strong> Ein Intrusion <strong>Detection</strong> System erkennt Angriffe und alarmiert. Ein Intrusion <strong>Prevention</strong> System blockiert sie zusätzlich aktiv.</p>
+<h2 id="dmz-demilitarisierte-zone">DMZ – Demilitarisierte Zone</h2>
+<pre class="formel">Internet ── [Firewall] ──┬── LAN  (Clients, interne Server)        192.168.1.0/24
+                         └── DMZ  (Webserver, Mail-Relay, Reverse Proxy)  172.16.1.0/24</pre>
+<ul><li>Varianten: eine Firewall mit drei Schnittstellen (WAN, LAN, DMZ) oder zwei Firewalls hintereinander (äußere + innere, idealerweise verschiedene Hersteller).</li><li>Grundregeln: Internet → DMZ nur benötigte Dienste · DMZ → LAN grundsätzlich verboten (nur einzelne nötige Verbindungen, z. B. Mail-Relay → interner Mailserver) · LAN → DMZ für Verwaltung/Nutzung · Internet → LAN verboten.</li><li>Zweck: Wird ein DMZ-Server kompromittiert, kommt der Angreifer nicht direkt ins interne Netz.</li></ul>
+<h2 id="firewall-regeln-erstellen">Firewall-Regeln erstellen</h2>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: REGELWERK EINER SPI-FIREWALL</div><p><em>LAN 192.168.1.0/24, DMZ 172.16.1.0/24 mit Webserver 172.16.1.10 und Mailserver 172.16.1.20. Anforderungen:</em> <em>Webserver per HTTPS aus dem Internet erreichbar; Mailserver empfängt Mails aus dem Internet; LAN-Clients rufen</em> <em>Mails verschlüsselt ab und versenden über den Mailserver; LAN-Clients surfen im Internet (inkl. DNS); nur der Admin-PC 192.168.1.5 darf per SSH auf die DMZ; alles andere wird verworfen.</em></p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Nr.</strong></th><th><strong>Quelle</strong></th><th><strong>Ziel</strong></th><th><strong>Protokoll</strong></th><th><strong>Zielport</strong></th><th><strong>Aktion</strong></th></tr></thead><tbody><tr><td>1</td><td>any (WAN)</td><td>172.16.1.10</td><td>TCP</td><td>443</td><td>allow</td></tr><tr><td>2</td><td>any (WAN)</td><td>172.16.1.20</td><td>TCP</td><td>25</td><td>allow</td></tr><tr><td>3</td><td>172.16.1.20</td><td>any (WAN)</td><td>TCP</td><td>25</td><td>allow</td></tr><tr><td>4</td><td>192.168.1.0/24</td><td>172.16.1.20</td><td>TCP</td><td>993, 587</td><td>allow</td></tr><tr><td>5</td><td>192.168.1.0/24</td><td>any (WAN)</td><td>TCP</td><td>80, 443</td><td>allow</td></tr><tr><td>6</td><td>192.168.1.0/24</td><td>DNS-Server</td><td>UDP/TCP</td><td>53</td><td>allow</td></tr><tr><td>7</td><td>192.168.1.5</td><td>172.16.1.0/24</td><td>TCP</td><td>22</td><td>allow</td></tr><tr><td>8</td><td>any</td><td>any</td><td>any</td><td>any</td><td><strong>deny</strong></td></tr></tbody></table></div>
+<p>Rückverkehr muss bei SPI nicht extra freigegeben werden. Regel 3 ist nötig, damit der Mailserver selbst Mails ins Internet zustellen kann. Der Quellport der Clients ist zufällig (dynamisch) und wird daher als „any“ gesetzt.</p></div>
+<div class="box box-fallen"><div class="box-label">FALLEN BEI REGELTABELLEN</div><ul><li>Eine allgemeine deny-Regel <strong>vor</strong> einer speziellen allow-Regel macht diese wirkungslos (Reihenfolge!).</li><li>Quell- und Zielport verwechseln: Der Dienstport (443, 25) ist der <strong>Ziel</strong>port.</li><li>DNS vergessen: Ohne Namensauflösung funktioniert „Surfen“ nicht.</li><li>„any → any allow“ am Anfang = Firewall wirkungslos.</li></ul></div>
+<h2 id="ssl-tls-inspection">SSL/TLS-Inspection</h2>
+<p>Die NGFW bricht HTTPS-Verbindungen auf (kontrollierter Man-in-the-Middle): Sie baut die Verbindung zum Webserver selbst auf, prüft den entschlüsselten Inhalt auf Malware und verschlüsselt ihn mit einem <strong>eigenen, von der Firewall-CA</strong> <strong>ausgestellten Zertifikat</strong> neu zum Client. Deshalb muss das <strong>CA-Zertifikat der Firewall auf allen Clients</strong> als vertrauenswürdig verteilt sein, sonst erscheint <code>SEC_ERROR_UNKNOWN_ISSUER</code> .</p>
+<ul><li><strong>Vorteile:</strong> Malware in verschlüsseltem Verkehr wird erkannt (heute ist der Großteil des Verkehrs verschlüsselt), Data-Loss-Prevention möglich.</li><li><strong>Nachteile:</strong> hohe Rechenlast, Ende-zu-Ende-Verschlüsselung wird aufgebrochen, Datenschutz/Betriebsrat (private Nutzung, Onlinebanking, Gesundheitsseiten ausnehmen), manche Anwendungen mit Certificate Pinning funktionieren nicht mehr.</li></ul>
+<h2 id="vpn-virtual-private-network">VPN – Virtual Private Network</h2>
+<p>Ein VPN baut über ein unsicheres Netz (Internet, öffentliches WLAN) einen verschlüsselten Tunnel und sichert <strong>Vertraulichkeit, Integrität und Authentizität</strong>.</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Art</strong></th><th><strong>Verbindet</strong></th><th><strong>Typisch</strong></th></tr></thead><tbody><tr><td><strong>Site-to-Site</strong> (Branch Office)</td><td>zwei oder mehr feste Standorte, dauerhaft zwischen den Gateways</td><td>IPsec zwischen Firewalls; für Clients unsichtbar</td></tr><tr><td><strong>End-to-Site</strong> (Remote Access)</td><td>einzelnes Endgerät mit dem Firmennetz</td><td>VPN-Client auf dem Laptop (IPsec/IKEv2, SSL-VPN, WireGuard)</td></tr><tr><td>End-to-End</td><td>zwei Endgeräte direkt</td><td>selten, z. B. Administrationszugang</td></tr></tbody></table></div>
+<h3>IPsec (Protokoll-Familie)</h3>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Bestandteil</strong></th><th><strong>Aufgabe</strong></th><th><strong>Port / Protokoll</strong></th></tr></thead><tbody><tr><td><strong>IKE</strong> (v2)</td><td>Aushandlung der Verfahren, Authentifizierung (PSK oder Zertifikat), Schlüsselaustausch (Diffie-Hellman)</td><td>UDP 500, bei NAT UDP 4500 (NAT-Traversal)</td></tr><tr><td><strong>ESP</strong></td><td>Verschlüsselung + Integrität + Authentizität der Nutzdaten</td><td>IP-Protokoll 50</td></tr><tr><td><strong>AH</strong></td><td>nur Integrität + Authentizität, <strong>keine Verschlüsselung</strong>; nicht NAT-tauglich</td><td>IP-Protokoll 51</td></tr></tbody></table></div>
+<ul><li><strong>Tunnelmodus:</strong> Das gesamte ursprüngliche IP-Paket wird verschlüsselt und bekommt einen neuen IP-Header (Gateway zu Gateway) → Site-to-Site, Standard.</li><li><strong>Transportmodus:</strong> nur die Nutzdaten werden geschützt, der Original-IP-Header bleibt → Host zu Host.</li></ul>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Technik</strong></th><th><strong>Eigenschaften</strong></th></tr></thead><tbody><tr><td>IPsec</td><td>Standard für Site-to-Site, sehr verbreitet, komplexer; kann an Hotspots scheitern, wenn UDP 500/4500 gesperrt ist</td></tr><tr><td>SSL/TLS-VPN (z. B. OpenVPN, Hersteller-Clients)</td><td>Standard 1194, oft über TCP 443 → funktioniert auch hinter restriktiven Firewalls</td></tr><tr><td>WireGuard</td><td>modern, schlank, schnell, UDP (Standard 51820)</td></tr></tbody></table></div>
+<ul><li><strong>Split Tunneling:</strong> nur Firmenverkehr durch den Tunnel, Internet direkt → entlastet die Zentrale, aber weniger Kontrolle. <strong>Full Tunnel:</strong> alles durch die Firma (Sicherheitsrichtlinien greifen überall).</li><li><strong>Authentifizierung:</strong> Benutzername/Passwort (Wissen), Zertifikat oder Smartcard (Besitz), am besten <strong>MFA</strong> (Passwort + OTP aus Authenticator-App).</li></ul>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Fehlerbild</strong></th><th><strong>Mögliche Ursache</strong></th></tr></thead><tbody><tr><td>Internet geht, VPN baut sich nicht auf</td><td>falsche Zugangsdaten/abgelaufenes Zertifikat, Ports am Hotspot/in Firewall blockiert (UDP 500/4500), Uhrzeit falsch</td></tr><tr><td>Tunnel steht, interne Server nicht erreichbar</td><td>fehlende Route (auf Client oder Gegenseite), Firewall-Regel fehlt, Adressüberschneidung (Heimnetz 192.168.1.0/24 = Firmennetz)</td></tr><tr><td>Namen werden nicht aufgelöst, IPs gehen</td><td>interner DNS-Server wird im VPN nicht zugewiesen</td></tr></tbody></table></div>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Firewall-Arten</strong></span></td><td><strong>Application-Level-Gateway</strong> = Proxy-Firewall: prüft Inhalte je Protokoll (z. B. HTTP) <span style="color:#7a8599">1×</span> · <strong>Grenzen</strong> = kein Schutz vor Innentätern, Malware per USB/Mail-Anhang, Phishing, verschlüsseltem Verkehr ohne Inspection <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>VPN</strong></span></td><td><strong>Schutzziele</strong> = Vertraulichkeit, Integrität, Authentizität <span style="color:#7a8599">1×</span> · <strong>Fehler</strong> = Zertifikat/PSK falsch oder abgelaufen, UDP 500/4500 blockiert, überlappende Subnetze <span style="color:#7a8599">2×</span> · <strong>Split-Tunneling</strong> = nur Firmenverkehr durch den Tunnel, Rest direkt ins Internet (umgeht Proxy) → Full Tunnel erzwingen <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: Site-to-</span><span style="color:#7a8599">Site, Client-to-Site</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü17.1</strong> Ergänze eine Regel: Der Webserver in der DMZ (172.16.1.10) muss auf den Datenbankserver im LAN (192.168.1.50, MySQL/MariaDB) zugreifen. Wo in der Tabelle muss sie stehen?</p>
+<p><strong>Ü17.2</strong> Eine Filiale soll dauerhaft mit der Zentrale verbunden werden, 30 Mitarbeiter im Homeoffice ebenfalls. Welche VPN-Arten? Begründe.</p>
+<p><strong>Ü17.3</strong> Nach Einführung der SSL-Inspection melden Nutzer Zertifikatsfehler auf allen HTTPS-Seiten. Ursache und Lösung?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 17</h3>
+<p><span style="color:#9a6200"><strong>Ü17.1</strong></span> Quelle 172.16.1.10 · Ziel 192.168.1.50 · TCP · 3306 · allow – <strong>vor</strong> der abschließenden deny-Regel. Besser noch: Datenbank ebenfalls in ein eigenes, abgeschottetes Netz legen.</p>
+<p><span style="color:#9a6200"><strong>Ü17.2</strong></span> Filiale: Site-to-Site (IPsec zwischen den Firewalls, dauerhaft, keine Clients nötig). Homeoffice: End-to-Site/Remote-Access mit VPN-Client und MFA, da einzelne, wechselnde Endgeräte.</p>
+<p><span style="color:#9a6200"><strong>Ü17.3</strong></span> Die Firewall signiert die Seiten mit ihrer eigenen CA, die den Clients unbekannt ist (<code> SEC_ERROR_UNKNOWN_ISSUER</code> ). Lösung: CA-Zertifikat der Firewall per GPO/MDM in den Zertifikatsspeicher aller Clients verteilen.</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-16-wlan.html">← 16 WLAN</a><a class="next" href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

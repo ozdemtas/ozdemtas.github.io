@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programmierung, Skripte &amp; Schnittstellen – Kapitel 7 | FISI AP2 Lernskript</title>
+<meta name="description" content="Arrays beginnen bei Index 0. Letzter Index = Länge − 1. Schleife: i &lt; array.Length , nie &lt;= . Die Prüfung fragt fast immer: Code ergänzen, Fehler finden…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Programmierung, Skripte &amp; Schnittstellen – Kapitel 7 | FISI AP2 Lernskript">
+<meta property="og:description" content="Arrays beginnen bei Index 0. Letzter Index = Länge − 1. Schleife: i &lt; array.Length , nie &lt;= . Die Prüfung fragt fast immer: Code ergänzen, Fehler finden…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 7: Programmierung, Skripte & Schnittstellen", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a class="active" href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-1-konzeption-administration.html">Teil 1 · Konzeption &amp; Administration</a> / 7 Programmierung, Skripte &amp; Schnittstellen</div>
+<h1><span class="num">7</span>Programmierung, Skripte &amp; Schnittstellen</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip">15–17 Punkte · größte Einzelaufgabe</span><span class="chip">Lernzeit ca. 2 × 150 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li>Arrays beginnen bei <strong>Index 0</strong>. Letzter Index = Länge − 1. Schleife: <code>i &lt; array.Length</code> , nie <code>&lt;=</code> .</li><li>Die Prüfung fragt fast immer: <strong>Code ergänzen</strong>, <strong>Fehler finden</strong>, <strong>Trace-Tabelle ausfüllen</strong>.</li><li>Die sechs Grundmuster: Summe/Mittelwert · Maximum/Minimum · Zählen mit Bedingung · Suchen · Tauschen · neues Array befüllen.</li><li><code>/</code> bei Ganzzahlen = ganzzahlige Division (7 / 2 = 3). <code>%</code> = Rest (7 % 2 = 1).</li><li>Maximum mit dem <strong>ersten Element</strong> initialisieren, nicht mit 0.</li><li>Skripte (PowerShell, Bash, Python) folgen derselben Logik; dazu APIs und Datenformate (JSON, XML).</li></ul></div>
+<h2 id="pseudocode-syntax-so-wie-sie-die-ihk-verwendet">Pseudocode-Syntax (so, wie sie die IHK verwendet)</h2>
+<p>Die IHK nutzt eine an Java/C# angelehnte Schreibweise. Kleine Abweichungen sind erlaubt, solange die Logik eindeutig ist. Präge dir diese Formen ein, dann brauchst du keinen Belegsatz:</p>
+<pre class="formel">// Variablen und Datentypen
+int anzahl = 0                    // Ganzzahl
+double summe = 0.0                // Kommazahl
+string name = &quot;Server01&quot;          // Text
+bool gefunden = false             // Wahrheitswert
+// Arrays
+int[] werte = new int[5]          // 5 Felder: Index 0 bis 4
+int[] temp  = {21, 25, 19, 30}    // direkt befüllt
+werte[0] = 12                     // erstes Element setzen
+werte.Length                      // Anzahl der Elemente (hier 5)
+// Verzweigung
+if (wert &gt; 80 &amp;&amp; aktiv == true) {       // &amp;&amp; = UND,  || = ODER,  ! = NICHT
+    ausgabe(&quot;Warnung&quot;)
+} else if (wert &gt; 60) {
+    ausgabe(&quot;Hinweis&quot;)
+} else {
+    ausgabe(&quot;OK&quot;)
+}
+// Zählschleife: Anzahl der Durchläufe bekannt
+for (int i = 0; i &lt; werte.Length; i++) { … }
+// Kopfgesteuert: prüft vorher, läuft evtl. 0-mal
+while (i &lt; werte.Length &amp;&amp; !gefunden) { … }
+// Fußgesteuert: läuft mindestens 1-mal
+do { … } while (eingabe &lt; 0)
+// Methode mit Rückgabewert
+double berechneMittel(int[] a) { … return ergebnis }</pre>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Operator</strong></th><th><strong>Bedeutung</strong></th><th><strong>Beispiel</strong></th></tr></thead><tbody><tr><td><code>=</code> / <code>==</code></td><td>Zuweisung / Vergleich</td><td><code>x = 5</code> setzt, <code>x == 5</code> prüft</td></tr><tr><td><code>!=</code></td><td>ungleich</td><td><code>status != &quot;OK&quot;</code></td></tr><tr><td><code>/</code></td><td>Division (bei int ganzzahlig)</td><td><code>17 / 5 = 3</code></td></tr><tr><td><code>%</code></td><td>Modulo (Rest)</td><td><code>17 % 5 = 2</code> , gerade Zahl: <code>x % 2 == 0</code></td></tr><tr><td><code>i++</code> / <code>i += 2</code></td><td>um 1 / um 2 erhöhen</td><td></td></tr></tbody></table></div>
+<h2 id="die-sechs-grundmuster">Die sechs Grundmuster</h2>
+<h3>Muster 1: Summe und Mittelwert</h3>
+<pre class="formel">int summe = 0
+for (int i = 0; i &lt; werte.Length; i++) {
+    summe = summe + werte[i]
+}
+double mittel = summe / werte.Length       // Achtung: ggf. in double umwandeln</pre>
+<h3>Muster 2: Maximum (und Position)</h3>
+<pre class="formel">int max = werte[0]                  // NICHT 0! (falsch, wenn alle Werte negativ)
+int pos = 0
+for (int i = 1; i &lt; werte.Length; i++) {  // ab 1, Index 0 ist schon in max
+    if (werte[i] &gt; max) {
+        max = werte[i]
+        pos = i
+    }
+}</pre>
+<h3>Muster 3: Zählen mit Bedingung (Schwellenwert)</h3>
+<pre class="formel">int zaehler = 0
+for (int i = 0; i &lt; cpuLast.Length; i++) {
+    if (cpuLast[i] &gt; 80) {
+        zaehler++
+    }
+}
+if (zaehler &gt; 3) { ausgabe(&quot;CPU-Last kritisch: &quot; + zaehler + &quot; Überschreitungen&quot;) }</pre>
+<h3>Muster 4: Suchen (mit vorzeitigem Abbruch)</h3>
+<pre class="formel">int i = 0
+bool gefunden = false
+while (i &lt; ips.Length &amp;&amp; !gefunden) {
+    if (ips[i] == gesuchteIP) { gefunden = true }
+    else { i++ }
+}
+// gefunden == true → Treffer an Index i</pre>
+<h3>Muster 5: Tauschen</h3>
+<pre class="formel">// Tauschen braucht eine Hilfsvariable
+int temp = a[j]
+a[j] = a[j + 1]
+a[j + 1] = temp</pre>
+<h3>Muster 6: Neues Array befüllen (z. B. Glättung)</h3>
+<pre class="formel">// Mittelwerte aus je drei aufeinanderfolgenden Messwerten (gleitender Mittelwert)
+double[] glatt = new double[mess.Length - 2]
+for (int i = 0; i &lt; mess.Length - 2; i++) {
+    glatt[i] = (mess[i] + mess[i + 1] + mess[i + 2]) / 3.0
+}</pre>
+<h2 id="trace-tabellen-code-schritt-fuer-schritt-durchspielen">Trace-Tabellen: Code Schritt für Schritt durchspielen</h2>
+<p>Für jede Schleifenrunde eine Zeile. Du trägst die Werte der Variablen <strong>nach</strong> dem Durchlauf ein. So findest du auch Fehler.</p>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: TRACE</div><pre>int[] a = {4, 9, 2, 9, 7}
+int max = a[0]; int anz = 1
+for (int i = 1; i &lt; a.Length; i++) {
+    if (a[i] &gt; max)       { max = a[i]; anz = 1 }
+    else if (a[i] == max) { anz++ }
+}</pre>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>i</strong></th><th><strong>a[i]</strong></th><th><strong>max</strong></th><th><strong>anz</strong></th></tr></thead><tbody><tr><td>Start</td><td>–</td><td>4</td><td>1</td></tr><tr><td>1</td><td>9</td><td>9</td><td>1</td></tr><tr><td>2</td><td>2</td><td>9</td><td>1</td></tr><tr><td>3</td><td>9</td><td>9</td><td>2</td></tr><tr><td>4</td><td>7</td><td>9</td><td>2</td></tr></tbody></table></div>
+<p><strong>Ergebnis:</strong> Das Maximum 9 kommt 2-mal vor.</p></div>
+<h2 id="fehler-finden">Fehler finden</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Fehlerart</strong></th><th><strong>Merkmal</strong></th><th><strong>Beispiel</strong></th></tr></thead><tbody><tr><td><strong>Syntaxfehler</strong></td><td>Verstoß gegen Sprachregeln, wird beim Kompilieren erkannt, Programm startet nicht</td><td>fehlende Klammer, Tippfehler im Befehl</td></tr><tr><td><strong>Laufzeitfehler</strong> (Exception)</td><td>Programm startet, bricht bei bestimmten Daten ab</td><td>IndexOutOfRange, Division durch 0, Datei fehlt, falscher Datentyp bei Eingabe</td></tr><tr><td><strong>Logikfehler</strong> (semantisch)</td><td>Programm läuft, Ergebnis falsch</td><td><code>max = 0</code> , <code>&gt;</code> statt <code>&gt;=</code> , Zähler nicht zurückgesetzt</td></tr></tbody></table></div>
+<p><strong>Checkliste für Fehlersuche-Aufgaben:</strong></p>
+<p class="check"><span style="color:#1f4e8c">☐ </span>Startwert der Schleife: 0 oder 1? Wird Index 0 übersprungen?</p>
+<p class="check"><span style="color:#1f4e8c">☐ </span>Endbedingung: <code>&lt;</code> statt <code>&lt;=</code> ? Bei Zugriff auf <code>[i+1]</code> : <code>&lt; Length - 1</code> ?</p>
+<p class="check"><span style="color:#1f4e8c">☐ </span>Initialisierung: Summe/Zähler = 0 <strong>vor</strong> der Schleife? Maximum = erstes Element?</p>
+<p class="check"><span style="color:#1f4e8c">☐ </span>Werden Variablen in einer äußeren Schleife korrekt zurückgesetzt?</p>
+<p class="check"><span style="color:#1f4e8c">☐ </span>Vergleichsoperator richtig (<code> &gt;</code> /<code> &gt;=</code> , <code>==</code> statt <code>=</code> )?</p>
+<p class="check"><span style="color:#1f4e8c">☐ </span>Ganzzahldivision beim Mittelwert? Division durch 0 möglich (leeres Array)?</p>
+<p class="check"><span style="color:#1f4e8c">☐ </span>Wird die richtige Variable ausgegeben bzw. zurückgegeben?</p>
+<h2 id="skripte-wiederkehrende-ablaeufe-automatisieren">Skripte: wiederkehrende Abläufe automatisieren</h2>
+<p>Der FISI-Katalog verlangt ausdrücklich, Systemabläufe mit <strong>PowerShell, Bash oder Python</strong> zu automatisieren und zu überwachen. In der Prüfung heißt das meist: ein kurzes Skript lesen, erklären, ergänzen oder einen Fehler finden. Die Logik ist dieselbe wie beim Pseudocode.</p>
+<h3>PowerShell (Windows): Warnung bei wenig freiem Speicher</h3>
+<pre class="formel">$grenze = 10                                          # Prozent
+Get-Volume | Where-Object { $_.DriveLetter } | ForEach-Object {
+    $frei = [math]::Round($_.SizeRemaining / $_.Size * 100, 1)
+    if ($frei -lt $grenze) {                          # -lt = kleiner als
+        Write-Output &quot;WARNUNG: Laufwerk $($_.DriveLetter): nur $frei % frei&quot;
+    }
+}</pre>
+<p><span style="color:#56627a">PowerShell-Vergleiche: </span><span style="color:#56627a"><code>-eq</code></span><span style="color:#56627a"> gleich · </span><span style="color:#56627a"><code>-ne</code></span><span style="color:#56627a"> ungleich · </span><span style="color:#56627a"><code>-lt</code></span><span style="color:#56627a"> /</span><span style="color:#56627a"><code> -le</code></span><span style="color:#56627a"> kleiner (gleich) · </span><span style="color:#56627a"><code>-gt</code></span><span style="color:#56627a"> /</span><span style="color:#56627a"><code> -ge</code></span><span style="color:#56627a"> größer (gleich). Variablen beginnen mit </span><span style="color:#56627a"><code>$</code></span><span style="color:#56627a"> ,</span> <span style="color:#56627a">die Pipeline </span><span style="color:#56627a"><code>|</code></span><span style="color:#56627a"> reicht Objekte weiter.</span></p>
+<h3>Bash (Linux): tägliches Backup mit Aufräumen</h3>
+<pre class="formel">#!/bin/bash
+# Sichert /etc als Archiv und löscht Sicherungen, die älter als 7 Tage sind
+ZIEL=&quot;/backup&quot;
+DATUM=$(date +%F)                                   # z. B. 2026-11-25
+tar -czf &quot;$ZIEL/etc-$DATUM.tar.gz&quot; /etc
+find &quot;$ZIEL&quot; -name &quot;etc-*.tar.gz&quot; -mtime +7 -delete</pre>
+<p>Zeitgesteuert per <strong>cron</strong> (<code> crontab -e</code> ): <code>0 2 * * * /usr/local/bin/backup.sh</code> = täglich um 2:00 Uhr. Die fünf Felder: Minute · Stunde · Tag · Monat · Wochentag. Unter Windows übernimmt das die <strong>Aufgabenplanung</strong>. Das Skript muss ausführbar sein (<code> chmod +x</code> ).</p>
+<h3>Python: Erreichbarkeit mehrerer Hosts prüfen</h3>
+<pre class="formel">import subprocess
+hosts = [&quot;10.0.0.1&quot;, &quot;10.0.0.10&quot;, &quot;8.8.8.8&quot;]
+for h in hosts:
+    ok = subprocess.run([&quot;ping&quot;, &quot;-c&quot;, &quot;1&quot;, h], capture_output=True).returncode == 0
+    print(h, &quot;erreichbar&quot; if ok else &quot;NICHT erreichbar&quot;)</pre>
+<p><strong>Gute Skripte:</strong> Kommentare, Variablen statt fest eingetragener Werte, Fehlerbehandlung, Protokollierung (Logdatei), keine Passwörter im Klartext, vorher in der Testumgebung ausführen.</p>
+<h2 id="schnittstellen-und-datenformate">Schnittstellen und Datenformate</h2>
+<ul><li><strong>API</strong> (Application Programming Interface): definierte Schnittstelle, über die Programme miteinander kommunizieren. Heute meist <strong>REST</strong> über HTTPS mit JSON: <code>GET</code> (lesen), <code>POST</code> (anlegen), <code>PUT</code> /<code> PATCH</code> (ändern), <code>DELETE</code> (löschen). Absicherung per API-Key/Token und TLS. Beispiele: Redfish (Serververwaltung, Kapitel 1), Proxmox-API.</li></ul>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Format</strong></th><th><strong>Beispiel (derselbe Datensatz)</strong></th><th><strong>Eigenschaften</strong></th></tr></thead><tbody><tr><td>JSON</td><td><code>{&quot;host&quot;: &quot;web01&quot;, &quot;ram&quot;: 32, &quot;aktiv&quot;: true}</code></td><td>schlank, Datentypen, Standard bei REST-APIs</td></tr><tr><td>XML</td><td><code>&lt;server&gt;&lt;host&gt;web01&lt;/host&gt;&lt;ram&gt;32&lt;/ram&gt;&lt;/server&gt;</code></td><td>ausführlicher, mit Schema prüfbar (XSD), verbreitet in älteren Systemen</td></tr><tr><td>CSV</td><td><code>host;ram;aktiv</code> ↵ <code>web01;32;true</code></td><td>einfach, tabellarisch, keine Verschachtelung/Typen</td></tr></tbody></table></div>
+<h3>Programmiersprache auswählen</h3>
+<p><strong>Kompiliert</strong> (C, C++, Go: schnell, plattformabhängige ausführbare Datei) · <strong>Interpretiert</strong> (Python, PowerShell, Bash: kein Übersetzungsschritt, ideal für Automatisierung) · <strong>Bytecode/Laufzeitumgebung</strong> (Java, C#: portabel). Kriterien laut Katalog: Aufwand, Know-how im Team, verfügbare Frameworks/Bibliotheken, Performance und Speicherverbrauch, Portabilität, Entwicklungsumgebung (IDE).</p>
+<h3>Kompatibilität: Zeichensätze</h3>
+<p><strong>ASCII</strong> (7 Bit, 128 Zeichen, keine Umlaute) · <strong>ISO-8859-1/Latin-1</strong> (8 Bit, westeuropäische Umlaute) · <strong>Unicode/UTF-8</strong> (1–4 Byte pro Zeichen, alle Schriftzeichen, heutiger Standard). Typischer Fehler: Eine UTF-8-Datei wird als Latin-1 gelesen → aus „ä“ wird „Ã¤“. Lösung: Kodierung auf beiden Seiten einheitlich festlegen. Zeilenenden unterscheiden sich ebenfalls: Windows CRLF, Linux LF (Skripte von Windows laufen unter Linux dann evtl. nicht).</p>
+<p><strong>Kompatibilität:</strong> typische Probleme beim Datenaustausch und Betrieb sind Dezimaltrennzeichen und Datumsformat (CSV-Import), Zeichensätze, 32- oder 64-Bit-Versionen und fehlende bzw. falsche Versionen von Bibliotheken und Laufzeitumgebungen. <strong>OpenData</strong> = frei nutzbare öffentliche Datensätze (z. B. Wetter-, Verkehrs- oder Geodaten), meist per REST-API als JSON oder CSV abrufbar.</p>
+<h2 id="objektorientierung-grundbegriffe">Objektorientierung (Grundbegriffe)</h2>
+<ul><li><strong>Klasse:</strong> Bauplan (z. B. <code>Server</code> ) mit <strong>Attributen</strong> (Hostname, RAM) und <strong>Methoden</strong> (starten(), neustarten()).</li><li><strong>Objekt:</strong> konkrete Instanz einer Klasse (<code> Server web01 = new Server(&quot;web01&quot;)</code> ).</li><li><strong>Kapselung:</strong> Attribute sind <code>private</code> ; Zugriff nur über öffentliche Methoden (Getter/Setter), die Eingaben prüfen können. Schützt vor ungültigen Werten.</li><li><strong>Vererbung:</strong> Unterklasse übernimmt Attribute und Methoden der Oberklasse und erweitert sie (<code> Datenbankserver</code> erbt von <code>Server</code> ).</li></ul>
+<p><strong>Vorteile von Pseudocode:</strong> unabhängig von einer Programmiersprache, konzentriert auf die Logik, auch für Nicht-Programmierer lesbar. <strong>Testverfahren:</strong> siehe Kapitel 8.</p>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Fehlerarten</strong></span></td><td><strong>Syntaxfehler</strong> = Regelverstoß, Programm startet nicht (fehlende Klammer) <span style="color:#7a8599">1×</span> · <strong>Semantik-/Logikfehler</strong> = läuft, liefert falsches Ergebnis (&lt; statt &lt;=) <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: Exception</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Daten</strong></span></td><td><strong>int (32 Bit)</strong> = −2.147.483.648 bis 2.147.483.647; Summen können überlaufen → long <span style="color:#7a8599">1×</span> · <strong>Array</strong> = + schneller Zugriff per Index · − feste Größe, nur ein Datentyp <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Sonstiges</strong></span></td><td><strong>Bubblesort</strong> = <code>for i = 0 to n−2: for j = 0 to n−2−i: if a[j] &gt; a[j+1]: tausche</code> (Nachbarn vergleichen, Größtes wandert nach hinten) <span style="color:#7a8599">1×</span> · <strong>Programm beenden</strong> = Abbruchbedingung/Flag, break, Strg+C, Prozess beenden <span style="color:#7a8599">1×</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN – ERST SELBST LÖSEN!</div><p><strong>Ü7.1 (Trace)</strong><code> int[] z = {3, 8, 5, 12}; int s = 0; for (int i = 0; i &lt; z.Length; i++) { if (z[i]</code> <code>% 2 == 0) { s = s + z[i] } }</code> . Trace-Tabelle für i, z[i], s. Welcher Wert steht am Ende in s?</p>
+<p><strong>Ü7.2 (Fehler)</strong> Finde alle drei Fehler:</p>
+<pre>// Berechnet den Durchschnitt aller Werte über 50
+int summe
+int anzahl = 0
+for (int i = 1; i &lt;= werte.Length; i++) {
+    if (werte[i] &gt; 50) {
+        summe = summe + werte[i]
+        anzahl++
+    }
+}
+double schnitt = summe / anzahl</pre>
+<p><strong>Ü7.3 (Ergänzen)</strong> Ein Array <code>temp</code> enthält 24 stündliche Serverraum-Temperaturen. Schreibe Pseudocode, der die höchste Temperatur und die Stunde (Index) ausgibt und „Alarm“ meldet, wenn mehr als 3 Werte über 27 °C liegen.</p>
+<p><strong>Ü7.4 (Modulo)</strong> Die Seriennummer <code>int sn = 48213</code> . Gib mit <code>/</code> und <code>%</code> a) die letzte Ziffer, b) die Tausenderstelle (8) und c) die Quersumme per Schleife aus.</p>
+<p><strong>Ü7.5 (Zweitgrößter Wert)</strong> Ergänze den Code so, dass <code>max2</code> den zweitgrößten Wert enthält (Werte alle verschieden, mindestens 2 Elemente).</p>
+<pre>int max = a[0]; int max2 = a[1]
+if (max2 &gt; max) { ___ }             // (1)
+for (int i = 2; i &lt; a.Length; i++) {
+    if (a[i] &gt; max) { ___ }         // (2)
+    else if (___) { max2 = a[i] }   // (3)
+}</pre>
+<p><strong>Ü7.6 (Neues Array)</strong> Aus <code>int[] preise</code> (netto) soll ein Array <code>brutto</code> gleicher Länge mit 19 % MwSt. entstehen. Schreibe den Code.</p>
+<p><strong>Ü7.7 (Schleifenart)</strong> Welche Schleife wählst du a) für eine Passworteingabe, die so lange wiederholt wird, bis sie gültig ist, b) für das Durchlaufen aller 100 Messwerte? Begründe.</p>
+<p><strong>Ü7.8 (Skript)</strong> Im Bash-Backup-Skript oben soll die Sicherung jeden Sonntag um 23:30 laufen und 30 Tage aufbewahrt werden. Was änderst du? Warum sollte das Ergebnis protokolliert werden?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 7</h3>
+<p><span style="color:#9a6200"><strong>Ü7.1</strong></span> i=0: z=3 ungerade, s=0 · i=1: z=8 gerade, s=8 · i=2: z=5, s=8 · i=3: z=12, s=20. <strong>s = 20</strong> (Summe der geraden Zahlen).</p>
+<p><span style="color:#9a6200"><strong>Ü7.2</strong></span> 1. <code>summe</code> nicht initialisiert → <code>int summe = 0</code> . 2. Schleife startet bei 1 und läuft bis <code>&lt;=</code> : Index 0 wird übersprungen und am Ende IndexOutOfRange → <code>for (int i = 0; i &lt; werte.Length; i++)</code> . 3. Ganzzahldivision und Division durch 0, wenn kein Wert &gt; 50 → <code>if (anzahl &gt; 0) { schnitt = (double) summe / anzahl }</code> .</p>
+<p><span style="color:#9a6200"><strong>Ü7.3</strong></span></p>
+<pre class="formel">double max = temp[0]; int stunde = 0; int ueber = 0
+for (int i = 0; i &lt; temp.Length; i++) {
+    if (temp[i] &gt; max) { max = temp[i]; stunde = i }
+    if (temp[i] &gt; 27)  { ueber++ }
+}
+ausgabe(&quot;Maximum &quot; + max + &quot; °C um Stunde &quot; + stunde)
+if (ueber &gt; 3) { ausgabe(&quot;Alarm&quot;) }</pre>
+<p><span style="color:#9a6200"><strong>Ü7.4</strong></span> a) <code>sn % 10</code> = 3 · b) <code>(sn / 1000) % 10</code> = 48 % 10 = 8 · c) <code>int qs = 0; int x = sn; while (x &gt; 0) { qs = qs + x % 10; x = x / 10 }</code> → 4+8+2+1+3 = <strong>18</strong>.</p>
+<p><span style="color:#9a6200"><strong>Ü7.5</strong></span> (1) <code>int t = max; max = max2; max2 = t</code> · (2) <code>max2 = max; max = a[i]</code> (alter Maximalwert rutscht auf Platz 2!) · (3) <code>a[i] &gt; max2</code></p>
+<p><span style="color:#9a6200"><strong>Ü7.6</strong></span></p>
+<pre class="formel">double[] brutto = new double[preise.Length]
+for (int i = 0; i &lt; preise.Length; i++) {
+    brutto[i] = preise[i] * 1.19
+}</pre>
+<p><span style="color:#9a6200"><strong>Ü7.7</strong></span> a) <strong>do-while</strong>: Die Eingabe muss mindestens einmal erfolgen, geprüft wird danach. b) <strong>for</strong>: Die Anzahl der Durchläufe (100) ist vorher bekannt.</p>
+<p><span style="color:#9a6200"><strong>Ü7.8</strong></span> Crontab: <code>30 23 * * 0 /usr/local/bin/backup.sh</code> (Wochentag 0 = Sonntag). Im Skript <code>-mtime +7</code> → <code>-mtime</code> <code>+30</code> . Protokollieren (z. B. <code>&gt;&gt; /var/log/backup.log 2&gt;&amp;1</code> ), damit fehlgeschlagene Sicherungen auffallen und das Monitoring alarmieren kann.</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-06-datenbanken-sql.html">← 6 Datenbanken &amp; SQL</a><a class="next" href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

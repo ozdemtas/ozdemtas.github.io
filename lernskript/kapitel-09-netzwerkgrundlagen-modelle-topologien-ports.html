@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netzwerkgrundlagen: Modelle, Topologien &amp; Ports – Kapitel 9 | FISI AP2 Lernskript</title>
+<meta name="description" content="OSI-Modell mit 7 Schichten; Merksatz von unten: „Please Do Not Throw Sausage Pizza Away“. Switch = Schicht 2 (MAC-Adressen), Router = Schicht 3 (IP-Adre…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netzwerkgrundlagen: Modelle, Topologien &amp; Ports – Kapitel 9 | FISI AP2 Lernskript">
+<meta property="og:description" content="OSI-Modell mit 7 Schichten; Merksatz von unten: „Please Do Not Throw Sausage Pizza Away“. Switch = Schicht 2 (MAC-Adressen), Router = Schicht 3 (IP-Adre…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 9: Netzwerkgrundlagen: Modelle, Topologien & Ports", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a class="active" href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-2-netzwerke.html">Teil 2 · Netzwerke</a> / 9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</div>
+<h1><span class="num">9</span>Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</h1>
+
+<div class="chips"><span class="chip">Relevanz ★★</span><span class="chip">Grundlage für alle weiteren Kapitel</span><span class="chip">Lernzeit ca. 75 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li><strong>OSI-Modell</strong> mit 7 Schichten; Merksatz von unten: „<strong>P</strong>lease <strong>D</strong>o <strong>N</strong>ot <strong>T</strong>hrow <strong>S</strong>ausage <strong>P</strong>izza <strong>A</strong>way“.</li><li>Switch = Schicht 2 (MAC-Adressen), Router = Schicht 3 (IP-Adressen), Firewall mit Port-Regeln = Schicht 4, NGFW/Proxy = bis Schicht 7.</li><li><strong>TCP</strong> = verbindungsorientiert, zuverlässig (3-Wege-Handshake). <strong>UDP</strong> = verbindungslos, schnell (VoIP, DNS, DHCP, Streaming).</li><li>Topologie im LAN: <strong>Stern</strong>/Baum; Verkabelung: Primär (Gelände, LWL) · Sekundär (Gebäude) · Tertiär (Etage, Kupfer max. 100 m).</li><li>Wichtigste Ports auswendig: 22 SSH · 25 SMTP · 53 DNS · 67/68 DHCP · 80 HTTP · 443 HTTPS · 587 Submission · 993 IMAPS · 3389 RDP (Liste → Anhang A).</li></ul></div>
+<h2 id="osi-und-tcp-ip-modell">OSI- und TCP/IP-Modell</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Nr.</strong></th><th><strong>OSI-Schicht</strong></th><th><strong>TCP/IP</strong></th><th><strong>Einheit (PDU)</strong></th><th><strong>Adressen / Protokolle</strong></th><th><strong>Geräte</strong></th></tr></thead><tbody><tr><td>7</td><td>Anwendung (Application)</td><td>Anwendung</td><td>Daten</td><td>HTTP(S), DNS, SMTP, IMAP, SSH, FTP, DHCP, SNMP</td><td>Proxy, NGFW, Gateway</td></tr><tr><td>6</td><td>Darstellung (Presentation)</td><td></td><td></td><td></td><td></td></tr><tr><td>5</td><td>Sitzung (Session)</td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td>Transport</td><td>Transport</td><td>Segment /Datagramm</td><td>TCP, UDP · <strong>Ports</strong></td><td>Firewall (Paketfilter)</td></tr><tr><td>3</td><td>Vermittlung (Network)</td><td>Internet</td><td>Paket</td><td>IPv4, IPv6, ICMP · <strong>IP-Adressen</strong></td><td>Router, L3-Switch</td></tr><tr><td>2</td><td>Sicherung (Data Link)</td><td>Netzzugang</td><td>Frame (Rahmen)</td><td>Ethernet, WLAN 802.11, ARP*, VLAN 802.1Q · <strong>MAC-Adressen</strong></td><td>Switch, Bridge, Access Point</td></tr><tr><td>1</td><td>Bitübertragung (Physical)</td><td></td><td>Bit</td><td>Kabel, Stecker, Funk, Signale</td><td>Hub, Repeater, Medienkonverter</td></tr></tbody></table></div>
+<p><span style="color:#56627a">* ARP arbeitet zwischen Schicht 2 und 3 (löst IP in MAC auf); in Prüfungen meist Schicht 2 zugeordnet.</span></p>
+<p><strong>Kapselung:</strong> Beim Senden gibt jede Schicht ihren Header dazu (Daten → Segment → Paket → Frame → Bits), beim Empfänger wird in umgekehrter Reihenfolge entpackt. Eine <strong>MAC-Adresse</strong> hat 48 Bit (z. B. <code>00:1A:2B:3C:4D:5E</code> ); die ersten 24 Bit (OUI) kennzeichnen den Hersteller.</p>
+<h2 id="tcp-und-udp">TCP und UDP</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Merkmal</strong></th><th><strong>TCP</strong></th><th><strong>UDP</strong></th></tr></thead><tbody><tr><td>Verbindung</td><td>verbindungsorientiert (Handshake)</td><td>verbindungslos</td></tr><tr><td>Zuverlässigkeit</td><td>Bestätigungen (ACK), Wiederholung, Reihenfolge, Flusskontrolle</td><td>keine Garantie, kein Nachsenden</td></tr><tr><td>Overhead /Tempo</td><td>höher / langsamer</td><td>gering / schneller, geringe Latenz</td></tr><tr><td>Einsatz</td><td>HTTP(S), SSH, SMTP, IMAP, Datenbank, MQTT</td><td>DNS-Abfragen, DHCP, VoIP (RTP), Video-Streaming, SNMP, Syslog, NTP</td></tr></tbody></table></div>
+<p><strong>3-Wege-Handshake (TCP):</strong> Client → <code>SYN</code> → Server · Server → <code>SYN-ACK</code> → Client · Client → <code>ACK</code> → Server. Danach fließen Daten. Abbau mit <code>FIN</code> /<code> ACK</code> .</p>
+<p><strong>Ports</strong> adressieren die Anwendung auf dem Host: <strong>0–1023</strong> Well-known Ports (Serverdienste) · <strong>1024–49151</strong> Registered Ports · <strong>49152–65535</strong> dynamische Ports (Quellports der Clients). IP-Adresse + Port + Protokoll = <strong>Socket</strong> (z. B. 192.0.2.10:443/TCP).</p>
+<div class="box box-fallen"><div class="box-label">FALLE</div><p>DNS nutzt <strong>UDP 53</strong> für normale Anfragen, aber <strong>TCP 53</strong> für Zonentransfers und große Antworten. In Firewall-Regeln daher oft beides freigeben.</p></div>
+<h2 id="netzwerkkonzepte-ausdehnung-topologie-architektur">Netzwerkkonzepte: Ausdehnung, Topologie, Architektur</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Netz</strong></th><th><strong>Ausdehnung</strong></th><th><strong>Beispiel</strong></th></tr></thead><tbody><tr><td>PAN (Personal Area Network)</td><td>wenige Meter</td><td>Bluetooth-Headset, Smartwatch</td></tr><tr><td>LAN (Local Area Network)</td><td>Gebäude/Gelände</td><td>Firmennetz, WLAN</td></tr><tr><td>MAN (Metropolitan Area Network)</td><td>Stadt/Region</td><td>Glasfaserring eines Stadtwerks</td></tr><tr><td>WAN (Wide Area Network)</td><td>Länder, Kontinente</td><td>Standortvernetzung über Provider</td></tr><tr><td>GAN (Global Area Network)</td><td>weltweit</td><td>Internet, Satellitennetze</td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Topologie</strong></th><th><strong>Aufbau</strong></th><th><strong>Vor- und Nachteile</strong></th></tr></thead><tbody><tr><td><strong>Stern</strong></td><td>alle Geräte an einem zentralen Switch</td><td>Standard im LAN; einfach erweiterbar, Kabeldefekt betrifft nur ein Gerät; zentraler Switch = Single Point of Failure</td></tr><tr><td>Erweiterter Stern /Baum</td><td>Core-Switch → Verteiler-Switches → Endgeräte</td><td>hierarchisch, gut strukturierbar (Campus-Netze)</td></tr><tr><td><strong>Vermascht</strong> (Mesh)</td><td>mehrere Wege zwischen Knoten; voll vermascht = jeder mit jedem</td><td>hohe Ausfallsicherheit (WAN, Core, WLAN-Mesh); teuer, STP bzw. Routing nötig</td></tr><tr><td>Bus</td><td>alle an einer gemeinsamen Leitung</td><td>veraltet; ein Defekt legt alles lahm</td></tr><tr><td>Ring</td><td>jeder mit zwei Nachbarn verbunden</td><td>heute v. a. als redundanter Glasfaserring</td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><thead><tr><th></th><th><strong>Client-Server</strong></th><th><strong>Peer-to-Peer</strong></th></tr></thead><tbody><tr><td>Prinzip</td><td>zentrale Server stellen Dienste bereit, Clients nutzen sie</td><td>alle Rechner gleichberechtigt, geben sich gegenseitig frei</td></tr><tr><td>Vorteile</td><td>zentrale Verwaltung, Sicherheit, Backup, skalierbar</td><td>günstig, keine Serverhardware, schnell eingerichtet</td></tr><tr><td>Nachteile</td><td>Serverkosten, Server = kritischer Punkt</td><td>unübersichtlich ab ca. 10 Geräten, keine zentrale Rechte- und Datensicherung</td></tr><tr><td>Einsatz</td><td>Unternehmen (AD, Fileserver, Mail)</td><td>Kleinstbüro, Heimnetz</td></tr></tbody></table></div>
+<h2 id="netzwerkkomponenten-und-verkabelung">Netzwerkkomponenten und Verkabelung</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Komponente</strong></th><th><strong>Schicht</strong></th><th><strong>Funktion</strong></th></tr></thead><tbody><tr><td>Repeater / Hub</td><td>1</td><td>verstärkt bzw. verteilt Signale an alle Ports (veraltet)</td></tr><tr><td>Medienkonverter</td><td>1</td><td>wandelt z. B. Kupfer ↔ Glasfaser</td></tr><tr><td>Switch (L2)</td><td>2</td><td>leitet Frames anhand der MAC-Adresse gezielt weiter, VLANs</td></tr><tr><td>Access Point</td><td>2</td><td>verbindet WLAN-Clients mit dem LAN</td></tr><tr><td>Router / L3-Switch</td><td>3</td><td>verbindet Netze, leitet Pakete anhand der IP-Adresse weiter</td></tr><tr><td>Firewall</td><td>3–7</td><td>filtert Verkehr nach Regeln (Kapitel 17)</td></tr><tr><td>Proxy / Gateway</td><td>7</td><td>vermittelt Anwendungsverkehr stellvertretend</td></tr></tbody></table></div>
+<p><strong>Strukturierte Verkabelung</strong> (EN 50173) teilt die Gebäudeverkabelung in drei Bereiche:</p>
+<ul><li><strong>Primärbereich</strong> (Campus/Gelände): zwischen Gebäuden, meist Singlemode-LWL.</li><li><strong>Sekundärbereich</strong> (Gebäude/Steigbereich): zwischen Gebäude- und Etagenverteiler, meist Multimode-LWL.</li><li><strong>Tertiärbereich</strong> (Etage/horizontal): vom Etagenverteiler zur Anschlussdose, Kupfer (Cat 6A/Cat 7), max. 90 m fest verlegt + Patchkabel = 100 m.</li></ul>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Medium</strong></th><th><strong>Reichweite</strong> <strong>(typisch)</strong></th><th><strong>Datenrate</strong></th><th><strong>Hinweis</strong></th></tr></thead><tbody><tr><td>Kupfer Cat 5e / Cat 6A</td><td>100 m</td><td>1 Gbit/s / 10 Gbit/s</td><td>günstig, PoE, störanfällig (EMV)</td></tr><tr><td>LWL Multimode (OM3/OM4)</td><td>einige 100 m</td><td>10–100 Gbit/s</td><td>Gebäude, Rechenzentrum</td></tr><tr><td>LWL Singlemode (OS2)</td><td>bis viele km</td><td>10–400 Gbit/s</td><td>Campus, WAN; unempfindlich gegen Störungen, abhörsicherer</td></tr><tr><td>Bluetooth</td><td>ca. 10 m (Klasse 2)</td><td>wenige Mbit/s</td><td>2,4 GHz, Peripherie/PAN; im Unternehmen deaktivieren, wenn nicht nötig (Angriffsfläche)</td></tr></tbody></table></div>
+<p><strong>Prüfverfahren gegen Übertragungsfehler:</strong> Ein <strong>Paritätsbit</strong> ergänzt die Daten so, dass die Anzahl der Einsen gerade (even) bzw. ungerade (odd) ist. Beispiel gerade Parität: <code>1011001</code> hat 4 Einsen → Paritätsbit 0. Erkennt einzelne Bitfehler, korrigiert sie aber nicht. Ethernet nutzt eine Prüfsumme (CRC/FCS) am Frame-Ende.</p>
+<p><strong>Bridge:</strong> verbindet zwei Netzsegmente auf Schicht 2 und leitet anhand der MAC-Adressen weiter; ein Switch ist im Prinzip eine Bridge mit vielen Ports. <strong>CIFS</strong> ist der alte Name von SMB (Windows-Dateifreigaben).</p>
+<h2 id="wan-anbindungen">WAN-Anbindungen</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>WAN-Anbindung</strong></th><th><strong>Merkmal</strong></th></tr></thead><tbody><tr><td><strong>DSL / VDSL</strong></td><td>über Telefon-Kupferleitung, meist asymmetrisch (Download &gt; Upload)</td></tr><tr><td><strong>FTTH</strong> (Glasfaser bis ins Haus)</td><td>sehr hohe Bandbreite; im Privatkundennetz meist passiv geteilt (GPON)</td></tr><tr><td><strong>Kabel</strong> (DOCSIS)</td><td>über das TV-Koaxialnetz, Bandbreite im Segment geteilt</td></tr><tr><td><strong>Standleitung / Business-Glasfaser</strong></td><td>symmetrisch, garantierte Bandbreite und Entstörzeit per SLA, feste IP-Adressen</td></tr><tr><td><strong>MPLS</strong></td><td>Providernetz, das Standorte verbindet; garantierte Qualität (QoS), aber teuer</td></tr><tr><td><strong>SD-WAN</strong></td><td>softwaregesteuertes WAN: nutzt mehrere günstige Leitungen (Internet, 5G) parallel, zentral verwaltet, wählt pro Anwendung die beste Leitung, verschlüsselt (VPN)</td></tr><tr><td><strong>Mobilfunk (LTE/5G)</strong></td><td>schnell verfügbar, Backup-Leitung bei Ausfall der Hauptleitung</td></tr></tbody></table></div>
+<p>Für Ausfallsicherheit zwei Leitungen <strong>verschiedener Provider und Medien</strong> (z. B. Glasfaser + 5G) mit automatischem Failover.</p>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Module &amp; Kabel</strong></span></td><td><strong>SFP</strong> = steckbares Transceiver-Modul für Switch-Ports (Glasfaser oder Kupfer), 1 Gbit/s; SFP+ = 10 Gbit/s, SFP28 = 25 Gbit/s, QSFP = 40/100 Gbit/s <span style="color:#7a8599">2×</span> · <strong>SFP geht nicht</strong> = Hersteller-Kompatibilität, falscher Fasertyp/Wellenlänge (Multi- vs. Singlemode), Geschwindigkeit <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: Glasfaser vs. Kupfer</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Anschluss</strong></span></td><td><strong>Letzte Meile</strong> = Leitung vom Verteiler des Providers bis zum Kunden <span style="color:#7a8599">1×</span> · <strong>Shared Medium</strong> = Bandbreite wird mit anderen Kunden geteilt (Kabel/Koax, GPON) → abends langsamer <span style="color:#7a8599">2×</span> · <strong>GPON</strong> = passives Glasfasernetz, ein Splitter versorgt mehrere Kunden <span style="color:#7a8599">1×</span> · <strong>ADSL</strong> = asymmetrisch: Upload deutlich kleiner als Download <span style="color:#7a8599">1×</span> · <strong>Redundanz</strong> = zwei Anbindungen über verschiedene Provider/Medien <span style="color:#7a8599">2×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Übertragung</strong></span></td><td><strong>Uni-/Multi-/Broadcast</strong> = an einen / an eine Gruppe / an alle <span style="color:#7a8599">1×</span> · <strong>Broadcast auf Layer 2</strong> = Ziel-MAC FF:FF:FF:FF:FF:FF <span style="color:#7a8599">1×</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü9.1</strong> Ordne der OSI-Schicht zu: a) Switch · b) Router · c) Portnummer · d) MAC-Adresse · e) HTTPS · f) Patchkabel.</p>
+<p><strong>Ü9.2</strong> Warum nutzt VoIP UDP und nicht TCP?</p>
+<p><strong>Ü9.3</strong> Ein Firmengelände hat drei Gebäude (je 400 m Abstand) mit je vier Etagen. Welche Medien setzt du im Primär-, Sekundär- und Tertiärbereich ein? Welche Topologie ergibt sich?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 9</h3>
+<p><span style="color:#9a6200"><strong>Ü9.1</strong></span> a) 2 · b) 3 · c) 4 · d) 2 · e) 7 · f) 1</p>
+<p><span style="color:#9a6200"><strong>Ü9.2</strong></span> Sprache ist zeitkritisch. Ein verspätet nachgesendetes Paket nützt nichts mehr, TCP-Wiederholungen würden nur Verzögerung und Jitter erzeugen. UDP hat weniger Overhead und geringere Latenz; kleine Verluste sind hörbar tolerierbar.</p>
+<p><span style="color:#9a6200"><strong>Ü9.3</strong></span> Primär (zwischen Gebäuden, 400 m): Singlemode-LWL (Multimode wäre bei 10 Gbit/s und mehr grenzwertig). Sekundär (Gebäudeverteiler → Etagenverteiler): Multimode-LWL. Tertiär (Etagenverteiler → Arbeitsplatz): Kupfer Cat 6A, max. 90 m + Patchkabel. Topologie: erweiterter Stern/Baum (Core → Gebäude → Etage → Endgerät), für Ausfallsicherheit redundante Uplinks zwischen den Gebäuden.</p>
+<nav class="pager"><a class="prev" href="/lernskript/teil-2-netzwerke.html">← Teil 2 · Netzwerke</a><a class="next" href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

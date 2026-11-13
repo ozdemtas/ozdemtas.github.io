@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WLAN – Kapitel 16 | FISI AP2 Lernskript</title>
+<meta name="description" content="Standards: Wi-Fi 4 (802.11n), Wi-Fi 5 (ac, 5 GHz), Wi-Fi 6/6E (ax, 6E mit 6 GHz), Wi-Fi 7 (be). 2,4 GHz: große Reichweite, wenige überlappungsfreie Kanä…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-16-wlan.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WLAN – Kapitel 16 | FISI AP2 Lernskript">
+<meta property="og:description" content="Standards: Wi-Fi 4 (802.11n), Wi-Fi 5 (ac, 5 GHz), Wi-Fi 6/6E (ax, 6E mit 6 GHz), Wi-Fi 7 (be). 2,4 GHz: große Reichweite, wenige überlappungsfreie Kanä…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-16-wlan.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 16: WLAN", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-16-wlan.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a class="active" href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-2-netzwerke.html">Teil 2 · Netzwerke</a> / 16 WLAN</div>
+<h1><span class="num">16</span>WLAN</h1>
+
+<div class="chips"><span class="chip">Relevanz ★★</span><span class="chip">Scan-Auswertung, PSK vs. Enterprise</span><span class="chip">Lernzeit ca. 75 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li>Standards: Wi-Fi 4 (802.11n), Wi-Fi 5 (ac, 5 GHz), <strong>Wi-Fi 6/6E</strong> (ax, 6E mit 6 GHz), <strong>Wi-Fi 7</strong> (be).</li><li>2,4 GHz: große Reichweite, wenige überlappungsfreie Kanäle (<strong>1, 6, 11</strong>). 5/6 GHz: mehr Kanäle und Durchsatz, weniger Reichweite.</li><li><strong>WPA2/WPA3-Personal</strong> = ein gemeinsamer Schlüssel (PSK/SAE). <strong>Enterprise</strong> = individuelle Anmeldung über <strong>802.1X + RADIUS</strong>.</li><li>Gäste in eigene SSID + eigenes VLAN + Captive Portal; kein Zugriff aufs interne Netz.</li></ul></div>
+<h2 id="standards-und-frequenzen">Standards und Frequenzen</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Standard</strong></th><th><strong>Name</strong></th><th><strong>Frequenz</strong></th><th><strong>max. Brutto-Datenrate (theoretisch)</strong></th></tr></thead><tbody><tr><td>802.11n</td><td>Wi-Fi 4</td><td>2,4 + 5 GHz</td><td>600 Mbit/s</td></tr><tr><td>802.11ac</td><td>Wi-Fi 5</td><td>5 GHz</td><td>ca. 6,9 Gbit/s</td></tr><tr><td>802.11ax</td><td>Wi-Fi 6 / 6E</td><td>2,4 + 5 GHz / + 6 GHz</td><td>ca. 9,6 Gbit/s</td></tr><tr><td>802.11be</td><td>Wi-Fi 7</td><td>2,4 + 5 + 6 GHz</td><td>ca. 46 Gbit/s</td></tr></tbody></table></div>
+<p>Die realen Werte liegen deutlich darunter (geteiltes Medium, Halbduplex, Abstand, Störungen). Breitere Kanäle (20 → 40 → 80 → 160 MHz) erhöhen den Durchsatz, sind aber störanfälliger und lassen weniger überlappungsfreie Kanäle übrig.</p>
+<h2 id="komponenten">Komponenten</h2>
+<ul><li><strong>Access Point (AP):</strong> verbindet WLAN-Clients mit dem LAN, meist per <strong>PoE</strong> versorgt, per Trunk mit mehreren SSIDs/VLANs angebunden.</li><li><strong>WLAN-Controller:</strong> zentrale Verwaltung vieler APs (Konfiguration, Kanal- und Leistungsplanung, Roaming).</li><li><strong>RADIUS-Server</strong> (UDP 1812/1813): AAA – Authentication, Authorization, Accounting; prüft z. B. gegen Active Directory und kann VLANs zuweisen.</li></ul>
+<h2 id="sicherheit">Sicherheit</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Verfahren</strong></th><th><strong>Bewertung</strong></th></tr></thead><tbody><tr><td>Offen / WEP / WPA (TKIP)</td><td>unsicher, nicht verwenden</td></tr><tr><td>WPA2-Personal (PSK, AES-CCMP)</td><td>ausreichend mit langem Passwort; anfällig für Offline-Wörterbuchangriffe</td></tr><tr><td>WPA3-Personal (SAE)</td><td>Schutz gegen Offline-Wörterbuchangriffe, Forward Secrecy</td></tr><tr><td>WPA2/WPA3-Enterprise (802.1X)</td><td>Standard im Unternehmen: jeder Nutzer/jedes Gerät mit eigenen Zugangsdaten oder Zertifikat</td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><thead><tr><th></th><th><strong>Personal (PSK)</strong></th><th><strong>Enterprise (802.1X/RADIUS)</strong></th></tr></thead><tbody><tr><td>Vorteile</td><td>einfach einzurichten, keine Serverinfrastruktur</td><td>individuelle Anmeldung, zentrale Rechteverwaltung, Protokollierung, Sperren einzelner Nutzer, dynamische VLAN-Zuweisung</td></tr><tr><td>Nachteile</td><td>ein Schlüssel für alle; verlässt ein Mitarbeiter die Firma, muss er überall geändert werden; keine Zuordnung zu Personen</td><td>höherer Einrichtungs- und Wartungsaufwand (RADIUS, ggf. Zertifikate/PKI)</td></tr></tbody></table></div>
+<p><strong>802.1X-Rollen: Supplicant</strong> (Client) → <strong>Authenticator</strong> (Access Point oder Switch) → <strong>Authentication Server</strong> (RADIUS). Bis zur erfolgreichen Anmeldung lässt der Authenticator nur EAP-Pakete durch. Sicherste Variante: <strong>EAP-TLS</strong> mit Zertifikaten auf beiden Seiten.</p>
+<p><strong>Versteckte SSID</strong> ist <strong>keine</strong> Sicherheitsmaßnahme: Sie verbirgt das Netz nur vor Gelegenheitsnutzern und ist mit einfachen Tools sichtbar.</p>
+<p><strong>Gast-WLAN:</strong> eigene SSID, eigenes VLAN und IP-Netz, Firewall erlaubt nur Internet (DNS, HTTP/S), <strong>Client Isolation</strong>, Captive Portal mit zeitlich begrenzten Vouchern, Bandbreitenbegrenzung, Nutzungsbedingungen.</p>
+<h2 id="wlan-scan-auswerten">WLAN-Scan auswerten</h2>
+<pre class="formel">SSID          BSSID              CHANNEL  BW     SIGNAL   SECURITY
+FIRMA         a4:3b:12:00:01:10  6        20MHz  -52 dBm  WPA2-Enterprise
+FIRMA         a4:3b:12:00:02:10  6        20MHz  -71 dBm  WPA2-Enterprise
+FIRMA-5G      a4:3b:12:00:01:20  36       80MHz  -58 dBm  WPA3-Enterprise
+Nachbar-Cafe  10:6f:3f:aa:bb:cc  7        40MHz  -63 dBm  WPA2-Personal
+&lt;hidden&gt;      e8:48:b8:11:22:33  11       20MHz  -80 dBm  WPA2-Personal</pre>
+<ul><li><strong>SSID</strong> = Netzname · <strong>BSSID</strong> = MAC-Adresse der Funkschnittstelle eines APs (gleiche SSID, verschiedene BSSIDs = mehrere APs).</li><li><strong>Signal (dBm):</strong> −30 bis −50 sehr gut · −60 gut · −67 Minimum für VoIP/Video · −70 bis −80 schwach · unter −85 kaum nutzbar. Je näher an 0, desto besser.</li><li><strong>Probleme im Beispiel:</strong> Beide Firmen-APs funken auf Kanal 6 (Gleichkanalstörung). Das Café auf Kanal 7 mit 40 MHz überlappt mit Kanal 6 (Nachbarkanalstörung). Lösung: APs auf 1, 6, 11 verteilen, Clients ins 5-GHz-Band lenken (Band Steering), Sendeleistung anpassen.</li></ul>
+<p><strong>Weitere Störquellen:</strong> Mikrowellen und Bluetooth (2,4 GHz), Stahlbeton, Metall, Wasser (auch Menschen). <strong>IoT-Falle:</strong> Viele ältere Sensoren können nur 2,4 GHz – wird eine SSID nur noch auf 5 GHz ausgestrahlt, verlieren sie die Verbindung. Vor Umstellungen: <strong>Ausleuchtung (Site Survey)</strong> durchführen.</p>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>WLAN-Scan</strong></span></td><td><strong>Performance</strong> = 2,4 GHz: nur Kanäle 1/6/11 überlappungsfrei → viele Netze auf gleichen Kanälen stören sich <span style="color:#7a8599">1×</span> · <strong>&lt;hidden&gt;</strong> = SSID-Broadcast aus; kein echter Schutz <span style="color:#7a8599">2×</span> · <span style="color:#7a8599">außerdem im Text: SSID, BSSID, Channel,</span> <span style="color:#7a8599">Signal (dBm)</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Gäste</strong></span></td><td><strong>Voucher</strong> = Zugangscode mit Captive Portal: Zeit, Volumen, Bandbreite, Geräteanzahl begrenzen, AGB bestätigen <span style="color:#7a8599">2×</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü16.1</strong> Ein Mitarbeiter mit WLAN-Zugang wurde gekündigt. Das WLAN nutzt WPA2-Personal. Problem und bessere Lösung?</p>
+<p><strong>Ü16.2</strong> Drei APs in einer Halle sollen im 2,4-GHz-Band überlappungsfrei arbeiten. Welche Kanäle?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 16</h3>
+<p><span style="color:#9a6200"><strong>Ü16.1</strong></span> Er kennt weiterhin den gemeinsamen Schlüssel. Das Passwort muss auf allen Geräten geändert werden. Besser: WPA2/3-Enterprise mit 802.1X/RADIUS – das AD-Konto wird gesperrt, der Zugang ist sofort weg.</p>
+<p><span style="color:#9a6200"><strong>Ü16.2</strong></span> 1, 6 und 11 (bei 20 MHz Kanalbreite).</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">← 15 E-Mail: Protokolle &amp; Sicherheit</a><a class="next" href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

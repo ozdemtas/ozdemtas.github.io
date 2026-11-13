@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Server-Hardware, Energie &amp; USV – Kapitel 1 | FISI AP2 Lernskript</title>
+<meta name="description" content="Server-Hardware wird nach Einsatzzweck ausgewählt (Datenbank, Virtualisierungshost, Fileserver). Typisch für Server: ECC-RAM, redundante Netzteile, Hot-…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-01-server-hardware-energie-usv.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Server-Hardware, Energie &amp; USV – Kapitel 1 | FISI AP2 Lernskript">
+<meta property="og:description" content="Server-Hardware wird nach Einsatzzweck ausgewählt (Datenbank, Virtualisierungshost, Fileserver). Typisch für Server: ECC-RAM, redundante Netzteile, Hot-…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-01-server-hardware-energie-usv.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 1: Server-Hardware, Energie & USV", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-01-server-hardware-energie-usv.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a class="active" href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-1-konzeption-administration.html">Teil 1 · Konzeption &amp; Administration</a> / 1 Server-Hardware, Energie &amp; USV</div>
+<h1><span class="num">1</span>Server-Hardware, Energie &amp; USV</h1>
+
+<div class="chips"><span class="chip">Relevanz ★★★</span><span class="chip">Rechenaufgaben: Strom, USV, Verfügbarkeit</span><span class="chip">Lernzeit ca. 90 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li>Server-Hardware wird nach <strong>Einsatzzweck</strong> ausgewählt (Datenbank, Virtualisierungshost, Fileserver).</li><li>Typisch für Server: <strong>ECC-RAM</strong>, <strong>redundante Netzteile</strong>, <strong>Hot-Swap</strong>, <strong>Fernwartung per BMC</strong> (IPMI, iDRAC, iLO, Redfish).</li><li><strong>USV-Klassen:</strong> VFD (Offline) &lt; VI (Line-Interactive) &lt; VFI (Online/Doppelwandler, 0 ms Umschaltzeit).</li><li><strong>Stromkosten</strong> = kW × Stunden × €/kWh. 24/7 = 8.760 h/Jahr.</li><li><strong>Verfügbarkeit</strong> = MTBF / (MTBF + MTTR). Erlaubte Ausfallzeit = Gesamtzeit × (1 − Verfügbarkeit).</li></ul></div>
+<h2 id="komponenten-und-worauf-es-ankommt">Komponenten und worauf es ankommt</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Komponente</strong></th><th><strong>Worauf achten</strong></th><th><strong>Warum</strong></th></tr></thead><tbody><tr><td>CPU</td><td>Anzahl Kerne, Takt, Cache, Virtualisierungsunterstützung (Intel VT-x / AMD-V), Sockelanzahl</td><td>Viele Kerne für VMs, hoher Takt für Einzel-Thread-Last (z. B. Datenbank)</td></tr><tr><td>RAM</td><td><strong>ECC</strong> (Error Correction Code), Kapazität, Takt, Kanäle</td><td>ECC erkennt und korrigiert Bitfehler → Stabilität</td></tr><tr><td>Speicher</td><td>NVMe-SSD (sehr schnell, PCIe) · SAS-SSD/HDD (Enterprise, Dual-Port) · SATA (günstig)</td><td>IOPS und Durchsatz passend zur Last</td></tr><tr><td>Netzteil</td><td>Redundant (1+1), Hot-Plug, Effizienz <strong>80 PLUS</strong> Platinum/Titanium</td><td>Kein Ausfall bei Netzteildefekt, weniger Verlustwärme</td></tr><tr><td>Netzwerk</td><td>Dual-Port 10/25/100 GbE, LWL oder Kupfer</td><td>Bandbreite und Redundanz (Bonding/LACP)</td></tr><tr><td>Fernwartung</td><td>BMC mit <strong>IPMI</strong>, Dell <strong>iDRAC</strong>, HPE <strong>iLO</strong>, Standard-API <strong>Redfish</strong> (REST über HTTPS)</td><td>Einschalten, Konsole (KVM), Sensoren – auch wenn das OS hängt</td></tr><tr><td>Bauform</td><td>19-Zoll-Rack, Höhe in HE/U: <strong>1 HE = 44,45 mm</strong></td><td>Platzplanung im Rack</td></tr></tbody></table></div>
+<h2 id="usv-unterbrechungsfreie-stromversorgung">USV – Unterbrechungsfreie Stromversorgung</h2>
+<p>Eine USV überbrückt Stromausfälle, bis Server geordnet heruntergefahren sind oder ein Notstromaggregat übernimmt. Die Klassen sind in der Norm <strong>IEC 62040-3</strong> (bzw. EN 62040-3) festgelegt:</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Klasse</strong></th><th><strong>Bauart</strong></th><th><strong>Schützt vor</strong></th><th><strong>Umschaltzeit</strong></th><th><strong>Einsatz</strong></th></tr></thead><tbody><tr><td><strong>VFD</strong> Voltage &amp; Frequency Dependent</td><td>Offline / Standby: Last hängt normal direkt am Netz</td><td>Stromausfall</td><td>ca. 4–10 ms</td><td>Arbeitsplatz-PC</td></tr><tr><td><strong>VI</strong> Voltage Independent</td><td>Line-Interactive: Regeltrafo gleicht Spannung aus (AVR)</td><td>+ Unter-/Überspannung</td><td>ca. 2–4 ms</td><td>kleine Server, Netzwerktechnik</td></tr><tr><td><strong>VFI</strong> Voltage &amp; Frequency Independent</td><td>Online / Doppelwandler: Gleichrichter → Akku → Wechselrichter, Last dauerhaft vom Netz entkoppelt</td><td>+ Frequenzschwankungen, Störungen</td><td><strong>0 ms</strong></td><td>Rechenzentrum, kritische Server</td></tr></tbody></table></div>
+<p><strong>VA und Watt:</strong> USVs werden oft in VA (Scheinleistung) angegeben. Die nutzbare Wirkleistung ist <strong>W = VA × Leistungsfaktor</strong> <strong>(cos φ)</strong>. Beispiel: 3.000 VA × 0,9 = 2.700 W.</p>
+<p><strong>USV-Management:</strong> Die USV meldet sich per USB/Netzwerk (SNMP) an einer Software (z. B. NUT, PowerChute), die bei kritischem Akkustand die Server kontrolliert herunterfährt.</p>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: USV UND NOTSTROMAGGREGAT</div><p><em>Die USV hält die aktuelle Last bei voller Ladung 20 Minuten. Das Notstromaggregat braucht nach dem Startbefehl 3</em> <em>Minuten bis zur Betriebsbereitschaft. Es sollen immer mindestens 10 % Restladung bleiben. Bei welchem Ladestand</em> <em>muss das Aggregat spätestens gestartet werden? (lineare Entladung)</em></p>
+<ol><li>20 min ≙ 100 % → 1 min ≙ 5 %</li><li>3 min Anlaufzeit ≙ 3 × 5 % = 15 %</li><li>Startbefehl spätestens bei 10 % + 15 % = <strong>25 % Ladestand</strong></li></ol></div>
+<h2 id="energie-und-stromkosten">Energie und Stromkosten</h2>
+<pre class="formel">Energie (kWh) = Leistung (kW) × Zeit (h)          24/7-Betrieb = 24 × 365 = 8.760 h
+Kosten (€)    = Energie (kWh) × Preis (€/kWh)      W → kW: durch 1.000 teilen</pre>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: STROMKOSTEN</div><p><em>3 Server mit je 350 W und ein Switch mit 150 W laufen 24/7. Preis 0,30 €/kWh. Jahreskosten?</em></p>
+<p>Gesamtleistung: 3 × 350 W + 150 W = 1.200 W = 1,2 kW → 1,2 kW × 8.760 h = 10.512 kWh → 10.512 × 0,30 € = <strong>3.153,60 € pro Jahr</strong>. Oft kommt noch eine monatliche Grundgebühr dazu (× 12 addieren).</p></div>
+<p><strong>PUE (Power Usage Effectiveness)</strong> misst die Energieeffizienz eines Rechenzentrums: PUE = Gesamtenergie des RZ ÷ Energie der IT. Ideal ist 1,0. Beispiel: 1.500 kW gesamt, 1.000 kW IT → PUE 1,5 (50 % Zusatzaufwand für Kühlung, USV-Verluste usw.). Green-IT-Maßnahmen: Virtualisierung/Konsolidierung, effiziente Netzteile, Warm-/Kaltgang-Einhausung, freie Kühlung.</p>
+<h2 id="zuverlaessigkeit-mtbf-mttf-mttr-und-afr">Zuverlässigkeit: MTBF, MTTF, MTTR und AFR</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Kennzahl</strong></th><th><strong>Bedeutung</strong></th><th><strong>gilt für</strong></th></tr></thead><tbody><tr><td><strong>MTBF</strong> – Mean Time Between Failures</td><td>durchschnittliche Betriebszeit zwischen zwei Ausfällen</td><td>reparierbare Systeme (Server)</td></tr><tr><td><strong>MTTF</strong> – Mean Time To Failure</td><td>erwartete Zeit bis zum (ersten und einzigen) Ausfall</td><td>nicht reparierbare Teile (SSD, Lüfter)</td></tr><tr><td><strong>MTTR</strong> – Mean Time To Repair</td><td>durchschnittliche Reparatur-/Wiederherstellungszeit</td><td>reparierbare Systeme</td></tr></tbody></table></div>
+<pre class="formel">Verfügbarkeit = MTBF / (MTBF + MTTR)          Beispiel: 2.000 h / (2.000 h + 4 h) = 99,80 %
+Erlaubte Ausfallzeit = Gesamtzeit × (1 − Verfügbarkeit)</pre>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Verfügbarkeit</strong></th><th><strong>Ausfall pro Jahr</strong></th><th><strong>Ausfall pro Monat (30 Tage)</strong></th></tr></thead><tbody><tr><td>99 %</td><td>87,6 h (3,65 Tage)</td><td>7,2 h</td></tr><tr><td>99,5 %</td><td>43,8 h</td><td>3,6 h</td></tr><tr><td>99,9 %</td><td>8,76 h</td><td>43,2 min</td></tr><tr><td>99,99 %</td><td>52,56 min</td><td>4,32 min</td></tr></tbody></table></div>
+<p><strong>AFR (Annualized Failure Rate)</strong> = erwartete jährliche Ausfallrate ≈ Betriebsstunden pro Jahr ÷ MTBF. Beispiel: 8.760 h ÷ 1.000.000 h ≈ 0,88 % → von 1.000 Platten fallen pro Jahr rund 9 aus. Daraus folgen Ersatzteil- und Hot-Spare-Planung.</p>
+<div class="box box-fallen"><div class="box-label">FALLEN</div><ul><li>MTBF ist <strong>keine</strong> garantierte Lebensdauer. Eine MTBF von 1 Mio. Stunden heißt nicht, dass die Platte 114 Jahre hält.</li><li>Bei Stromkosten W in kW umrechnen, sonst ist das Ergebnis um Faktor 1.000 falsch.</li><li>VA ≠ W: Ist die USV in VA angegeben, erst mit dem Leistungsfaktor in W umrechnen.</li></ul></div>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Lebensdauer</strong></span></td><td><strong>Badewannenkurve</strong> = 3 Phasen: <strong>Frühausfälle</strong> (Fertigungsfehler → neue Platten testen/einbrennen), <strong>Zufallsausfälle</strong> (Nutzungsphase, niedrige konstante Rate – hier gilt die MTBF), <strong>Verschleißausfälle</strong> (Alter → rechtzeitig tauschen) <span style="color:#7a8599">1×</span> · <strong>Mix-and-Match</strong> = Platten aus verschiedenen Chargen/Herstellern mischen, damit sie nicht gleichzeitig ausfallen <span style="color:#7a8599">1×</span> · <strong>MTBF eines Verbunds</strong> = MTBF einer Platte ÷ Anzahl Platten (Zeit bis zum ersten Plattenausfall) <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: MTTF, AFR</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Dimensionierung</strong></span></td><td><strong>RAID-Controller</strong> = Merkmale: Cache (+ Akku/BBU), Schnittstelle (SAS/SATA/NVMe), RAID-Level, Ports, Durchsatz <span style="color:#7a8599">1×</span> · <strong>Benchmark</strong> = fair nur unter gleichen Bedingungen: keine Fremdlast, Caches beachten, mehrere Durchläufe <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: Netzteil (+ Puffer), Bottleneck</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Start &amp; Härtung</strong></span></td><td><strong>UEFI/BIOS härten</strong> = Admin-Passwort, Secure Boot (nur signierte Bootloader), Bootreihenfolge fest / USB-Boot aus, ungenutzte Schnittstellen aus, TPM an <span style="color:#7a8599">2×</span> · <strong>GRUB</strong> = Bootmanager/Bootloader unter Linux: zeigt das Startmenü, lädt Kernel und initramfs; Fehler → Bootreihenfolge prüfen, Bootloader neu installieren (grub-install / update-grub) <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Kenngrößen</strong></span></td><td><strong>Reliability</strong> = Zuverlässigkeit: arbeitet fehlerfrei <span style="color:#7a8599">1×</span> · <strong>Availability</strong> = Verfügbarkeit: erreichbar in % der Zeit <span style="color:#7a8599">1×</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü1.1</strong> Ein Server läuft mit 480 W an 24 h × 365 Tagen. Strompreis 0,28 €/kWh plus 12 € Grundgebühr pro Monat. Jahreskosten?</p>
+<p><strong>Ü1.2</strong> Ein SLA garantiert 99,5 % Verfügbarkeit pro Jahr. Wie viele Stunden Ausfall sind erlaubt?</p>
+<p><strong>Ü1.3</strong> Nenne drei Vorteile einer VFI-USV gegenüber einer VFD-USV und einen Nachteil.</p></div>
+<h3 class="loesungen">Lösungen Kapitel 1</h3>
+<p><span style="color:#9a6200"><strong>Ü1.1</strong></span> 0,48 kW × 8.760 h = 4.204,8 kWh × 0,28 € = 1.177,34 € + 12 × 12 € = 144 € → <strong>1.321,34 €</strong></p>
+<p><span style="color:#9a6200"><strong>Ü1.2</strong></span> 8.760 h × 0,005 = <strong>43,8 h</strong></p>
+<p><span style="color:#9a6200"><strong>Ü1.3</strong></span> Vorteile: keine Umschaltzeit (0 ms), Schutz vor Spannungs- <em>und</em> Frequenzschwankungen, Last komplett vom Netz entkoppelt (saubere Sinusspannung). Nachteile: teurer, geringerer Wirkungsgrad durch Doppelwandlung (mehr Wärme).</p>
+<nav class="pager"><a class="prev" href="/lernskript/teil-1-konzeption-administration.html">← Teil 1 · Konzeption &amp; Administration</a><a class="next" href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Mail: Protokolle &amp; Sicherheit – Kapitel 15 | FISI AP2 Lernskript</title>
+<meta name="description" content="Versand: SMTP (Server↔Server Port 25, Client-Einlieferung 587 STARTTLS / 465 TLS). Abruf: IMAP 143/993 (Mails bleiben auf dem Server), POP3 110/995 (Dow…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="E-Mail: Protokolle &amp; Sicherheit – Kapitel 15 | FISI AP2 Lernskript">
+<meta property="og:description" content="Versand: SMTP (Server↔Server Port 25, Client-Einlieferung 587 STARTTLS / 465 TLS). Abruf: IMAP 143/993 (Mails bleiben auf dem Server), POP3 110/995 (Dow…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 15: E-Mail: Protokolle & Sicherheit", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a class="active" href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-2-netzwerke.html">Teil 2 · Netzwerke</a> / 15 E-Mail: Protokolle &amp; Sicherheit</div>
+<h1><span class="num">15</span>E-Mail: Protokolle &amp; Sicherheit</h1>
+
+<div class="chips"><span class="chip">Relevanz ★</span><span class="chip">mit Log-Auszug und DNS-Einträgen</span><span class="chip">Lernzeit ca. 75 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li>Versand: <strong>SMTP</strong> (Server↔Server Port 25, Client-Einlieferung 587 STARTTLS / 465 TLS). Abruf: <strong>IMAP</strong> 143/993 (Mails bleiben auf dem Server), <strong>POP3</strong> 110/995 (Download).</li><li><strong>SPF</strong> = welche Server dürfen senden · <strong>DKIM</strong> = Signatur der Mail · <strong>DMARC</strong> = Richtlinie, was bei Fehlschlag passiert + Berichte.</li><li><strong>S/MIME und PGP</strong> = Ende-zu-Ende-Verschlüsselung und -Signatur. TLS schützt nur den Transport.</li></ul></div>
+<h2 id="protokolle-und-ports">Protokolle und Ports</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Protokoll</strong></th><th><strong>Funktion</strong></th><th><strong>Port unverschlüsselt /STARTTLS</strong></th><th><strong>Port mit</strong> <strong>implizitem TLS</strong></th></tr></thead><tbody><tr><td>SMTP (Relay)</td><td>Transport <strong>zwischen Mailservern</strong></td><td>25 (STARTTLS optional)</td><td>–</td></tr><tr><td>SMTP Submission</td><td>Einlieferung vom Mailprogramm an den eigenen Server, mit Anmeldung</td><td>587 (STARTTLS)</td><td>465</td></tr><tr><td>IMAP</td><td>Abruf, Mails und Ordner bleiben auf dem Server (mehrere Geräte synchron)</td><td>143</td><td>993 (IMAPS)</td></tr><tr><td>POP3</td><td>Abruf, Mails werden meist heruntergeladen und gelöscht</td><td>110</td><td>995 (POP3S)</td></tr><tr><td>HTTPS</td><td>Webmail, Exchange/ActiveSync</td><td>(80)</td><td>443</td></tr></tbody></table></div>
+<p><strong>STARTTLS</strong> beginnt unverschlüsselt und schaltet dann auf TLS um. <strong>Implizites TLS</strong> ist von Anfang an verschlüsselt.</p>
+<p><strong>Weg einer E-Mail:</strong> Mailprogramm (MUA) → Submission 587 an den eigenen Mailserver (MTA) → DNS-Abfrage des MX-Records der Zieldomain → SMTP Port 25 zum Ziel-MTA → Ablage im Postfach (MDA) → Empfänger holt per IMAP ab.</p>
+<h2 id="schutz-gegen-spoofing-spf-dkim-dmarc">Schutz gegen Spoofing: SPF, DKIM, DMARC</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Verfahren</strong></th><th><strong>Funktionsweise</strong></th><th><strong>DNS-Eintrag (Beispiel)</strong></th></tr></thead><tbody><tr><td><strong>SPF</strong> Sender Policy Framework</td><td>Domain legt fest, welche IP-Adressen/Server Mails für sie versenden dürfen. Empfänger prüft die IP des einliefernden Servers.</td><td><code>firma.de. TXT &quot;v=spf1 mx</code> <code>ip4:203.0.113.25</code> <code>include:_spf.dienstleister.de -all&quot;</code> -all = alle anderen ablehnen, ~all = markieren</td></tr><tr><td><strong>DKIM</strong> DomainKeys Identified Mail</td><td>Der sendende Server signiert Header/Inhalt mit seinem privaten Schlüssel. Der Empfänger holt den öffentlichen Schlüssel aus dem DNS und prüft die Signatur → Integrität + Herkunft.</td><td><code>sel1._domainkey.firma.de. TXT &quot;v=DKIM1;</code> <code>k=rsa; p=MIIB…&quot;</code></td></tr><tr><td><strong>DMARC</strong></td><td>baut auf SPF und DKIM auf: Richtlinie für den Fehlerfall (none / quarantine / reject) und Berichte an den Domaininhaber.</td><td><code>_dmarc.firma.de. TXT &quot;v=DMARC1;</code> <code>p=reject; rua=mailto:dmarc@firma.de&quot;</code></td></tr></tbody></table></div>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: LOG-ANALYSE</div><pre>Nov 12 09:14:02 mx1 postfix/smtpd: NOQUEUE: reject: RCPT from unknown[198.51.100.7]:
+  554 5.7.1 &lt;info@shop-news.example&gt;: Sender address rejected: Matched map:
+BLOCKLIST_SENDER_DOMAIN
+Nov 12 09:20:44 mx1 opendkim: 4F1A2: DKIM verification failed (s=sel1, d=partner.example)
+Nov 12 09:31:10 mx1 postfix/smtpd: SPF fail - 203.0.113.99 is not allowed to send for
+newsletter.firma.de</pre>
+<ul><li>Zeile 1: Absenderdomain steht auf einer Sperrliste → Zustellung dauerhaft abgelehnt (5xx).</li><li>Zeile 2: DKIM-Signatur passt nicht zum öffentlichen Schlüssel im DNS (Mail verändert, falscher/fehlender DNS-Eintrag, Schlüssel gewechselt).</li><li>Zeile 3: Der Newsletter-Dienstleister (203.0.113.99) fehlt im SPF-Eintrag → IP bzw. <code>include:</code> des Dienstleisters ergänzen.</li></ul>
+<p><strong>SMTP-Statuscodes:</strong> 2xx = OK (250) · 4xx = vorübergehender Fehler, Server versucht es erneut (421, 450) · 5xx = dauerhafter Fehler (550 Postfach unbekannt, 554 abgelehnt, 5.7.1 = Richtlinie/Relay verweigert).</p></div>
+<h2 id="ende-zu-ende-s-mime-und-pgp">Ende-zu-Ende: S/MIME und PGP</h2>
+<div class="table-wrap"><table class=""><thead><tr><th></th><th><strong>S/MIME</strong></th><th><strong>PGP / OpenPGP</strong></th></tr></thead><tbody><tr><td>Vertrauensmodell</td><td>X.509-Zertifikate einer <strong>CA</strong> (hierarchisch)</td><td><strong>Web of Trust</strong> (Nutzer beglaubigen sich gegenseitig)</td></tr><tr><td>Verbreitung</td><td>Unternehmen, in Outlook/Apple Mail integriert</td><td>eher Privat/Technik, Add-ons</td></tr><tr><td>Verfahren</td><td>hybrid: Signieren mit eigenem privaten Schlüssel, Verschlüsseln mit öffentlichem Schlüssel des Empfängers</td><td></td></tr></tbody></table></div>
+<h2 id="mailinfrastruktur-absichern">Mailinfrastruktur absichern</h2>
+<ul><li>Mailserver bzw. Mail-Relay/Spam-Gateway in der <strong>DMZ</strong>, Postfachserver im internen Netz.</li><li>Spamfilter-Regeln: Sperrlisten (Blocklists), SPF/DKIM/DMARC-Prüfung, auffällige Empfängerzahl (z. B. &gt; 50), Greylisting.</li><li><strong>Sandbox:</strong> unbekannte Anhänge in isolierter Umgebung ausführen und Verhalten analysieren.</li><li>Kein <strong>Open Relay</strong>: Der Server darf nur für eigene Domains bzw. angemeldete Nutzer weiterleiten.</li><li>Rechtlich: Inhalte dürfen Administratoren nur unter engen Voraussetzungen einsehen (→ Kapitel 5).</li></ul>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü15.1</strong> Ein Außendienstler nutzt Laptop und Smartphone. IMAP oder POP3? Welche Ports gibst du in der Firewall frei?</p>
+<p><strong>Ü15.2</strong> Die Firma lässt Newsletter über einen Dienstleister versenden. Viele landen im Spam. Welche zwei DNS-Maßnahmen helfen?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 15</h3>
+<p><span style="color:#9a6200"><strong>Ü15.1</strong></span> IMAP, weil Mails auf dem Server bleiben und alle Geräte synchron sind. Ports: 993 (IMAPS) und 587 bzw. 465 (Submission). Unverschlüsselte Ports (143, 110) nicht freigeben.</p>
+<p><span style="color:#9a6200"><strong>Ü15.2</strong></span> SPF-TXT-Record um den Dienstleister erweitern (<code> include:</code> oder IP), DKIM-Schlüssel des Dienstleisters im DNS hinterlegen (Selector), dazu einen DMARC-Eintrag.</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-14-kryptografie-pki-tls.html">← 14 Kryptografie, PKI &amp; TLS</a><a class="next" href="/lernskript/kapitel-16-wlan.html">16 WLAN →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

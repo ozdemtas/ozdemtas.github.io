@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPv4, IPv6 &amp; Subnetting – Kapitel 10 | FISI AP2 Lernskript</title>
+<meta name="description" content="Nutzbare Hosts = 2h − 2 (h = Host-Bits = 32 − Präfix). Netz-ID = erste, Broadcast = letzte Adresse. Blockgröße = 256 − Wert der Maske im „interessanten“…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IPv4, IPv6 &amp; Subnetting – Kapitel 10 | FISI AP2 Lernskript">
+<meta property="og:description" content="Nutzbare Hosts = 2h − 2 (h = Host-Bits = 32 − Präfix). Netz-ID = erste, Broadcast = letzte Adresse. Blockgröße = 256 − Wert der Maske im „interessanten“…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 10: IPv4, IPv6 & Subnetting", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-10-ipv4-ipv6-subnetting.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a class="active" href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-2-netzwerke.html">Teil 2 · Netzwerke</a> / 10 IPv4, IPv6 &amp; Subnetting</div>
+<h1><span class="num">10</span>IPv4, IPv6 &amp; Subnetting</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip">10–14 Punkte gemeinsam mit Routing</span><span class="chip">Lernzeit ca. 2 × 150 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li>Nutzbare Hosts = <strong>2</strong><sup><strong>h</strong></sup><strong> − 2</strong> (h = Host-Bits = 32 − Präfix). Netz-ID = erste, Broadcast = letzte Adresse.</li><li><strong>Blockgröße</strong> = 256 − Wert der Maske im „interessanten“ Oktett. Netze beginnen bei Vielfachen der Blockgröße.</li><li>Anzahl Subnetze = <strong>2</strong><sup><strong>geliehene Bits</strong></sup>. IPv4 und IPv6 gleich.</li><li>IPv6: 128 Bit, 8 Blöcke à 16 Bit hex. Standard-Subnetz <strong>/64</strong>. Von /56 auf /64 = 2<sup>8</sup> = 256 Subnetze.</li><li>Private IPv4: 10.0.0.0/8 · 172.16.0.0/12 · 192.168.0.0/16. APIPA: 169.254.0.0/16. Link-Local IPv6: fe80::/10.</li></ul></div>
+<h2 id="ipv4-grundlagen">IPv4-Grundlagen</h2>
+<p>Eine IPv4-Adresse hat 32 Bit, geschrieben als vier Oktette in Dezimal (192.168.10.25). Die <strong>Subnetzmaske</strong> trennt Netz- und Hostanteil: Einsen = Netzanteil, Nullen = Hostanteil. Schreibweisen: 255.255.255.0 = <strong>/24</strong> (CIDR: Anzahl der Einsen).</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Binär im Oktett</strong></th><th><strong>10000000</strong></th><th><strong>11000000</strong></th><th><strong>11100000</strong></th><th><strong>11110000</strong></th><th><strong>11111000</strong></th><th><strong>11111100</strong></th><th><strong>11111110</strong></th><th><strong>11111111</strong></th></tr></thead><tbody><tr><td>Dezimal</td><td>128</td><td>192</td><td>224</td><td>240</td><td>248</td><td>252</td><td>254</td><td>255</td></tr><tr><td>Blockgröße</td><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>CIDR</strong></th><th><strong>Maske</strong></th><th><strong>Adressen</strong></th><th><strong>nutzbare Hosts</strong></th><th><strong>CIDR</strong></th><th><strong>Maske</strong></th><th><strong>Adressen</strong></th><th><strong>nutzbare Hosts</strong></th></tr></thead><tbody><tr><td>/24</td><td>255.255.255.0</td><td>256</td><td>254</td><td>/28</td><td>255.255.255.240</td><td>16</td><td>14</td></tr><tr><td>/25</td><td>255.255.255.128</td><td>128</td><td>126</td><td>/29</td><td>255.255.255.248</td><td>8</td><td>6</td></tr><tr><td>/26</td><td>255.255.255.192</td><td>64</td><td>62</td><td>/30</td><td>255.255.255.252</td><td>4</td><td>2</td></tr><tr><td>/27</td><td>255.255.255.224</td><td>32</td><td>30</td><td>/31</td><td>255.255.255.254</td><td>2</td><td>2 (RFC 3021)</td></tr><tr><td>/23</td><td>255.255.254.0</td><td>512</td><td>510</td><td>/22</td><td>255.255.252.0</td><td>1.024</td><td>1.022</td></tr><tr><td>/20</td><td>255.255.240.0</td><td>4.096</td><td>4.094</td><td>/16</td><td>255.255.0.0</td><td>65.536</td><td>65.534</td></tr></tbody></table></div>
+<ul><li><strong>/30</strong>: klassisch für Punkt-zu-Punkt-Verbindungen zwischen Routern (2 nutzbare Adressen). <strong>/31</strong> (RFC 3021) spart Adressen: Beide Adressen sind nutzbar, es gibt keine Netz-ID/Broadcast.</li><li><strong>Gateway:</strong> meist erste (oder letzte) nutzbare Adresse im Netz, steht in der Aufgabe.</li></ul>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Besondere IPv4-Bereiche</strong></th><th><strong>Zweck</strong></th></tr></thead><tbody><tr><td>10.0.0.0/8 · 172.16.0.0/12 (bis 172.31.255.255) · 192.168.0.0/16</td><td>privat (RFC 1918), im Internet nicht geroutet → NAT nötig</td></tr><tr><td>127.0.0.0/8</td><td>Loopback (127.0.0.1 = localhost)</td></tr><tr><td>169.254.0.0/16</td><td>APIPA / Link-Local: Client hat keinen DHCP-Server erreicht</td></tr><tr><td>100.64.0.0/10</td><td>Carrier-Grade-NAT beim Provider</td></tr><tr><td>224.0.0.0/4 (224–239)</td><td>Multicast (ehem. Klasse D)</td></tr><tr><td>255.255.255.255</td><td>Broadcast im lokalen Netz</td></tr></tbody></table></div>
+<h2 id="methode-a-netz-id-broadcast-und-bereich-bestimmen">Methode A: Netz-ID, Broadcast und Bereich bestimmen</h2>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE</div><p><em>Gegeben ist der Host 172.16.45.200/20. Bestimmen Sie Maske, Netz-ID, Broadcast, ersten/letzten Host und Anzahl</em> <em>der Hosts.</em></p>
+<ol><li>/20 → 8 + 8 + <strong>4</strong> Einsen → drittes Oktett ist das interessante: 11110000 = <strong>240</strong> → Maske <strong>255.255.240.0</strong></li><li>Blockgröße = 256 − 240 = <strong>16</strong> → Netze im 3. Oktett: 0, 16, 32, <strong>48</strong> … 45 liegt im Block 32–47</li><li>Netz-ID = <strong>172.16.32.0</strong> · Broadcast = <strong>172.16.47.255</strong> (eins vor dem nächsten Netz 172.16.48.0)</li><li>Erster Host 172.16.32.1 · letzter Host 172.16.47.254</li><li>Host-Bits = 32 − 20 = 12 → 2<sup>12</sup> − 2 = <strong>4.094 Hosts</strong></li></ol></div>
+<h2 id="methode-b-netz-in-gleich-grosse-subnetze-teilen">Methode B: Netz in gleich große Subnetze teilen</h2>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE</div><p><em>Das Netz 192.168.10.0/24 soll in mindestens 6 gleich große Subnetze aufgeteilt werden.</em></p>
+<ol><li>Benötigte Bits: 2<sup>n</sup> ≥ 6 → n = 3 (2<sup>3</sup> = 8 Subnetze)</li><li>Neues Präfix: /24 + 3 = <strong>/27</strong> → Maske 255.255.255.224, Blockgröße 32, je 30 Hosts</li><li>Subnetze: .0, .32, .64, .96, .128, .160, .192, .224</li></ol>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Nr.</strong></th><th><strong>Netz-ID</strong></th><th><strong>erster Host</strong></th><th><strong>letzter Host</strong></th><th><strong>Broadcast</strong></th></tr></thead><tbody><tr><td>1</td><td>192.168.10.0/27</td><td>.1</td><td>.30</td><td>.31</td></tr><tr><td>2</td><td>192.168.10.32/27</td><td>.33</td><td>.62</td><td>.63</td></tr><tr><td>3</td><td>192.168.10.64/27</td><td>.65</td><td>.94</td><td>.95</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>8</td><td>192.168.10.224/27</td><td>.225</td><td>.254</td><td>.255</td></tr></tbody></table></div></div>
+<h2 id="methode-c-vlsm-subnetze-nach-hostbedarf">Methode C: VLSM – Subnetze nach Hostbedarf</h2>
+<p>Regel: <strong>Größtes Netz zuerst</strong> vergeben, dann absteigend. So entstehen keine Überschneidungen und keine Lücken.</p>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE</div><p><em>Aus 10.0.0.0/24 sollen Netze für Verwaltung (100 Hosts), Produktion (50 Hosts), Server (20 Hosts) und zwei Router-Verbindungen gebildet werden.</em></p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Bereich</strong></th><th><strong>Bedarf</strong></th><th><strong>Größe</strong></th><th><strong>Netz</strong></th><th><strong>Bereich nutzbar</strong></th><th><strong>Broadcast</strong></th></tr></thead><tbody><tr><td>Verwaltung</td><td>100</td><td>/25 (126)</td><td>10.0.0.0/25</td><td>.1 – .126</td><td>.127</td></tr><tr><td>Produktion</td><td>50</td><td>/26 (62)</td><td>10.0.0.128/26</td><td>.129 – .190</td><td>.191</td></tr><tr><td>Server</td><td>20</td><td>/27 (30)</td><td>10.0.0.192/27</td><td>.193 – .222</td><td>.223</td></tr><tr><td>Link 1</td><td>2</td><td>/30 (2)</td><td>10.0.0.224/30</td><td>.225 – .226</td><td>.227</td></tr><tr><td>Link 2</td><td>2</td><td>/30 (2)</td><td>10.0.0.228/30</td><td>.229 – .230</td><td>.231</td></tr></tbody></table></div>
+<p>Frei bleibt 10.0.0.232 – 10.0.0.255 für Erweiterungen. Tipp: Gateways nicht vergessen – sie verbrauchen je eine Host-Adresse!</p></div>
+<h2 id="ipv6-grundlagen">IPv6-Grundlagen</h2>
+<p>128 Bit, geschrieben als <strong>8 Blöcke à 16 Bit</strong> in Hexadezimal, getrennt durch Doppelpunkte. Es gibt <strong>keinen Broadcast</strong> (stattdessen Multicast) und kein ARP (stattdessen <strong>NDP</strong>, Neighbor Discovery Protocol über ICMPv6).</p>
+<p><strong>Kürzungsregeln:</strong></p>
+<ol><li>Führende Nullen in einem Block dürfen weg: <code>0db8</code> → <code>db8</code> , <code>0000</code> → <code>0</code></li><li><strong>Einmal</strong> pro Adresse darf eine zusammenhängende Folge von Null-Blöcken durch <code>::</code> ersetzt werden (die längste; bei Gleichstand die erste).</li></ol>
+<pre class="formel">2001:0db8:0000:0000:0a00:0000:0000:0001
+→ 2001:db8:0:0:a00:0:0:1      (führende Nullen weg)
+→ 2001:db8::a00:0:0:1         (:: nur einmal! Nicht 2001:db8::a00::1)</pre>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Adresstyp</strong></th><th><strong>Präfix</strong></th><th><strong>Zweck</strong></th></tr></thead><tbody><tr><td>Global Unicast (GUA)</td><td>2000::/3 (beginnt mit 2 oder 3)</td><td>weltweit routbar, „öffentlich“</td></tr><tr><td>Unique Local (ULA)</td><td>fc00::/7 (in der Praxis fd…)</td><td>intern, vergleichbar mit privaten IPv4-Netzen</td></tr><tr><td>Link-Local</td><td>fe80::/10</td><td>nur im eigenen Segment, jede Schnittstelle hat eine; wird z. B. als Gateway-Adresse genutzt</td></tr><tr><td>Multicast</td><td>ff00::/8</td><td>ff02::1 = alle Knoten, ff02::2 = alle Router</td></tr><tr><td>Loopback /unspezifiziert</td><td>::1 / ::</td><td>localhost / „keine Adresse“</td></tr></tbody></table></div>
+<p><strong>Aufbau einer GUA</strong> (typisch): <strong>48 Bit</strong> globales Präfix vom Provider · <strong>16 Bit</strong> Subnetz-ID (bei /48) · <strong>64 Bit</strong> Interface-ID. Provider vergeben an Unternehmen meist /48 oder /56, an Privatkunden /56 oder /64.</p>
+<p><strong>Adressvergabe: SLAAC</strong> – der Router sendet per <strong>Router Advertisement (RA)</strong> das Präfix, der Client bildet die Interface-ID selbst (zufällig/Privacy Extensions oder EUI-64 aus der MAC). <strong>DHCPv6 stateful</strong> vergibt Adressen zentral. <strong>DHCPv6 stateless</strong> liefert nur Zusatzinfos (DNS-Server), die Adresse kommt per SLAAC. Details → Kapitel 13.</p>
+<h3>Übergang IPv4 → IPv6</h3>
+<ul><li><strong>Dual Stack:</strong> Geräte und Router sprechen IPv4 und IPv6 parallel. Standardweg in Unternehmen; doppelte Konfiguration und doppelte Firewall-Regeln nötig.</li></ul>
+<ul><li><strong>Tunneling:</strong> IPv6-Pakete werden in IPv4-Pakete verpackt, um ein reines IPv4-Netz zu durchqueren (z. B. 6in4). Umgekehrt transportiert <strong>DS-Lite</strong> beim Provider IPv4 durch ein IPv6-Netz (Kunde hat dann keine eigene öffentliche IPv4 → Portfreigaben schwierig).</li><li><strong>Übersetzung (NAT64/DNS64):</strong> reine IPv6-Clients erreichen IPv4-Server über einen Übersetzer.</li></ul>
+<h2 id="ipv6-subnetting">IPv6-Subnetting</h2>
+<p>Formel wie bei IPv4: Anzahl Subnetze = 2<sup>(Ziel-Präfix − Ausgangs-Präfix)</sup>. Am einfachsten rechnet man an <strong>Nibble-Grenzen</strong> (Vielfache von 4 Bit = eine Hex-Ziffer).</p>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE</div><p><em>Das Unternehmen erhält 2001:db8:ab00::/56. Wie viele /64-Subnetze sind möglich? Nennen Sie das erste, zweite</em> <em>und letzte Subnetz.</em></p>
+<ol><li>Anzahl: 64 − 56 = 8 Bit → 2<sup>8</sup> = <strong>256 Subnetze</strong></li><li>Bits abzählen: Block 1–3 (<code> 2001:db8:ab00</code> ) = 3 × 16 = 48 Bit. Bis /56 fehlen 8 Bit = die <strong>ersten zwei Hex-Ziffern</strong> <strong>von Block 4</strong> → sie sind fest (<code> 00</code> ).</li><li>Die Subnetz-Bits für /64 sind die <strong>letzten zwei Hex-Ziffern von Block 4</strong> → sie werden von <code>00</code> bis <code>ff</code> hochgezählt.</li></ol>
+<pre>1.  2001:db8:ab00:0::/64      (Block 4 = 0000)
+2.  2001:db8:ab00:1::/64      (Block 4 = 0001)
+3.  2001:db8:ab00:2::/64
+…
+256. 2001:db8:ab00:ff::/64    (Block 4 = 00ff)</pre>
+<p>Beispiel /48 → /52: 4 Bit = eine Hex-Ziffer → 16 Subnetze: <code>2001:db8:1234:0000::/52</code> , <code>…:1000::/52</code> , <code>…:</code> <code>2000::/52</code> … <code>…:f000::/52</code> .</p></div>
+<div class="box box-fallen"><div class="box-label">FALLEN BEIM SUBNETTING</div><ul><li>Hosts: −2 nicht vergessen (Netz-ID und Broadcast). Bei „Adressen“ ohne −2 rechnen.</li><li>Gateway und Server mit fester IP zählen als Hosts mit.</li><li>IPv6-Präfix: erst Bits abzählen (4 Bit pro Hex-Ziffer, 16 pro Block), dann hochzählen.</li><li><code>::</code> nur einmal pro Adresse.</li><li>172.20.0.0 ist privat (172.16–172.31), 172.32.0.0 nicht.</li></ul></div>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Adressarten</strong></span></td><td><strong>Keine öffentliche IPv4</strong> = Provider nutzt CGNAT/DS-Lite → von außen erreichbar über IPv6, Tarif mit fester IPv4 oder VPN-Dienst <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: privat, APIPA</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>IPv6</strong></span></td><td><strong>EUI-64</strong> = Interface-ID aus der MAC: FFFE in die Mitte, 7. Bit umdrehen <span style="color:#7a8599">1×</span> · <strong>Dual-Stack</strong> = IPv4 und IPv6 parallel <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: DHCPv6 vs. SLAAC</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Rechnen</strong></span></td><td><strong>Anzahl Subnetze</strong> = 2^(neues Präfix − altes Präfix), z. B. /56 → /64: 2⁸ = 256 <span style="color:#7a8599">3×</span> · <strong>Erstes/letztes Netz</strong> = IPv6 gekürzt angeben <span style="color:#7a8599">3×</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü10.1</strong> Bestimme Netz-ID, Broadcast, Hostbereich und Anzahl Hosts: a) 192.168.5.77/26 · b) 10.10.13.9/21 · c) 172.30.200.130/25</p>
+<p><strong>Ü10.2</strong> Teile 172.16.8.0/22 in 4 gleich große Subnetze. Präfix, Maske, alle Netz-IDs.</p>
+<p><strong>Ü10.3</strong> VLSM aus 192.168.50.0/24: Vertrieb 60 Hosts, Technik 28 Hosts, Gäste 12 Hosts, WAN-Link 2 Hosts.</p>
+<p><strong>Ü10.4</strong> Kürze: a) <code>fe80:0000:0000:0000:0204:61ff:fe9d:f156</code> · b) <code>2001:0db8:0000:0001:0000:0000:0000:0010</code></p>
+<p><strong>Ü10.5</strong> Aus 2001:db8:4400::/48 werden /56-Netze für Standorte gebildet. Wie viele? Nenne die ersten drei.</p>
+<p><strong>Ü10.6</strong> Ein PC hat 169.254.33.7/16. Was sagt das aus?</p></div>
+<h3 class="loesungen">Lösungen Kapitel 10</h3>
+<p><span style="color:#9a6200"><strong>Ü10.1</strong></span> a) /26, Block 64 → Netz 192.168.5.64, Broadcast .127, Hosts .65–.126, 62 Hosts · b) /21 → 3. Oktett Maske 248, Block 8 → 13 liegt in 8–15: Netz 10.10.8.0, Broadcast 10.10.15.255, Hosts 10.10.8.1–10.10.15.254, 2.046 Hosts · c) /25, Block 128 → Netz 172.30.200.128, Broadcast .255, Hosts .129–.254, 126 Hosts</p>
+<p><span style="color:#9a6200"><strong>Ü10.2</strong></span> 2 Bit leihen → /24, Maske 255.255.255.0: 172.16.8.0/24, 172.16.9.0/24, 172.16.10.0/24, 172.16.11.0/24 (je 254 Hosts)</p>
+<p><span style="color:#9a6200"><strong>Ü10.3</strong></span> Vertrieb 60 → /26: 192.168.50.0/26 (.1–.62, BC .63) · Technik 28 → /27: .64/27 (.65–.94, BC .95) · Gäste 12 → /28: . 96/28 (.97–.110, BC .111) · WAN → /30: .112/30 (.113–.114, BC .115). Hinweis: Technik mit 28 Hosts + Gateway = 29 ≤ 30 passt noch.</p>
+<p><span style="color:#9a6200"><strong>Ü10.4</strong></span> a) <code>fe80::204:61ff:fe9d:f156</code> · b) <code>2001:db8:0:1::10</code></p>
+<p><span style="color:#9a6200"><strong>Ü10.5</strong></span> 56 − 48 = 8 Bit → 256 Standorte. Die 8 Bit sind die ersten zwei Hex-Ziffern von Block 4: <code>2001:db8:4400:0000::/56</code> (= <code>2001:db8:4400::/56</code> ), <code>2001:db8:4400:100::/56</code> , <code>2001:db8:4400:200::/56</code></p>
+<p><span style="color:#9a6200"><strong>Ü10.6</strong></span> APIPA-Adresse: Der PC hat keinen DHCP-Server erreicht. Prüfen: Kabel/Link, VLAN-Zuordnung des Switchports, DHCP-Dienst, DHCP-Relay am Router.</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">← 9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a><a class="next" href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

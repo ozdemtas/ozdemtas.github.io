@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Betriebssysteme, Administration &amp; IT-Service-Management – Kapitel 4 | FISI AP2 Lernskript</title>
+<meta name="description" content="Linux-Rechte: r = 4, w = 2, x = 1 für Owner/Group/Other. chmod 750 = rwx r-x ---. Active Directory: Domäne, OUs, Gruppenrichtlinien (GPO), Anmeldung per…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Betriebssysteme, Administration &amp; IT-Service-Management – Kapitel 4 | FISI AP2 Lernskript">
+<meta property="og:description" content="Linux-Rechte: r = 4, w = 2, x = 1 für Owner/Group/Other. chmod 750 = rwx r-x ---. Active Directory: Domäne, OUs, Gruppenrichtlinien (GPO), Anmeldung per…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 4: Betriebssysteme, Administration & IT-Service-Management", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a class="active" href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-1-konzeption-administration.html">Teil 1 · Konzeption &amp; Administration</a> / 4 Betriebssysteme, Administration &amp; IT-Service-Management</div>
+<h1><span class="num">4</span>Betriebssysteme, Administration &amp; IT-Service-Management</h1>
+
+<div class="chips"><span class="chip">Relevanz ★★★</span><span class="chip-lila">auch in GA 2</span><span class="chip">Lernzeit ca. 120 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li><strong>Linux-Rechte:</strong> r = 4, w = 2, x = 1 für Owner/Group/Other. <code>chmod 750</code> = rwx r-x ---.</li><li><strong>Active Directory:</strong> Domäne, OUs, Gruppenrichtlinien (GPO), Anmeldung per Kerberos, braucht DNS.</li><li><strong>AGDLP:</strong> Accounts → Globale Gruppen → Domänenlokale Gruppen → Permissions.</li><li><strong>Freigabe- + NTFS-Rechte:</strong> Es gilt die restriktivere Kombination.</li><li><strong>CAL:</strong> User-CAL, wenn Personen viele Geräte nutzen. Device-CAL, wenn viele Personen sich Geräte teilen (Schichtbetrieb).</li><li><strong>ITIL:</strong> Incident (Störung schnell beheben) ≠ Problem (Ursache finden) ≠ Change (geplante Änderung). Support in 1st/2nd/3rd Level, Leistung im <strong>SLA</strong> festgelegt.</li></ul></div>
+<h2 id="linux-dateirechte">Linux: Dateirechte</h2>
+<pre class="formel">$ ls -l
+-rwxr-x---  1 admin   admins  4096  Nov 25 08:00  backup.sh
+│└┬┘└┬┘└┬┘     └─ Owner └─ Gruppe
+│ │  │  └─ Other: ---  = 0
+│ │  └─ Group: r-x    = 4+0+1 = 5
+│ └─ Owner: rwx       = 4+2+1 = 7          → chmod 750 backup.sh
+└─ Dateityp: - Datei · d Verzeichnis · l symbolischer Link</pre>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Recht</strong></th><th><strong>bei Datei</strong></th><th><strong>bei Verzeichnis</strong></th></tr></thead><tbody><tr><td>r (4)</td><td>Inhalt lesen</td><td>Inhalt auflisten (ls)</td></tr><tr><td>w (2)</td><td>Inhalt ändern</td><td>Dateien anlegen, umbenennen, <strong>löschen</strong></td></tr><tr><td>x (1)</td><td>ausführen</td><td>hineinwechseln (cd)</td></tr></tbody></table></div>
+<ul><li><strong>Symbolisch:</strong><code> chmod u+x datei</code> (Owner darf ausführen), <code>chmod g-w datei</code> , <code>chmod o= datei</code> (Other: keine Rechte), <code>chmod a+r datei</code> (alle lesen).</li><li><strong>Eigentümer ändern:</strong><code> chown benutzer:gruppe datei</code> , rekursiv mit <code>-R</code> .</li><li><strong>Wichtige Dateien:</strong><code> /etc/passwd</code> (Benutzer), <code>/etc/shadow</code> (Passwort-Hashes, nur root), <code>/etc/group</code> , Logs in <code>/var/log</code> , Konfiguration in <code>/etc</code> .</li></ul>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE</div><p><em>Die Datei </em><code>bericht.txt</code><em> hat die Rechte </em><code>-rw-r-----</code><em> , Besitzer </em><code>anna</code><em> , Gruppe </em><code>vertrieb</code><em> . Benutzer </em><code>ben</code><em> (Gruppe</em> <em>vertrieb) will sie bearbeiten und erhält „Keine Berechtigung“. Ursache und Lösung?</em></p>
+<p>Oktal 640: Gruppe hat nur Leserecht (r--). Lösung: <code>chmod 660 bericht.txt</code> bzw. <code>chmod g+w bericht.txt</code> . Nur so viel Recht wie nötig vergeben (Least Privilege), also nicht 777.</p></div>
+<h2 id="wichtige-linux-befehle">Wichtige Linux-Befehle</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Befehl</strong></th><th><strong>Zweck</strong></th><th><strong>Befehl</strong></th><th><strong>Zweck</strong></th></tr></thead><tbody><tr><td><code>ls -la</code></td><td>alle Dateien mit Rechten</td><td><code>ip a</code> / <code>ip r</code></td><td>IP-Adressen / Routen</td></tr><tr><td><code>cd, pwd, cp, mv, rm, mkdir</code></td><td>Dateiverwaltung</td><td><code>ping -c 4 ziel</code></td><td>Erreichbarkeit (4 Pakete)</td></tr><tr><td><code>cat, less, tail -f</code></td><td>Dateien/Logs lesen</td><td><code>ss -tulpn</code></td><td>offene Ports + Prozesse</td></tr><tr><td><code>grep &quot;error&quot; datei</code></td><td>Text suchen</td><td><code>traceroute ziel</code></td><td>Pfad der Pakete</td></tr><tr><td><code>sudo</code></td><td>Befehl als root</td><td><code>dig / nslookup</code></td><td>DNS-Abfrage</td></tr><tr><td><code>systemctl status|start|enable dienst</code></td><td>Dienste verwalten</td><td><code>df -h</code> / <code>free -h</code></td><td>Plattenplatz / RAM</td></tr><tr><td><code>journalctl -u dienst</code></td><td>Logs eines Dienstes</td><td><code>top</code> / <code>htop</code></td><td>Prozesse, Last</td></tr><tr><td><code>apt update &amp;&amp; apt upgrade</code></td><td>Pakete aktualisieren (Debian)</td><td><code>ssh user@host</code></td><td>Fernzugriff (Port 22)</td></tr></tbody></table></div>
+<p><strong>Platzhalter:</strong><code> *</code> = beliebig viele Zeichen (auch keins), <code>?</code> = genau ein Zeichen. <code>cp *.log /backup/</code> kopiert alle .log-Dateien.</p>
+<h2 id="windows-server-und-active-directory">Windows Server und Active Directory</h2>
+<ul><li><strong>Domäne:</strong> zentrale Verwaltung von Benutzern, Computern, Richtlinien. Der <strong>Domain Controller (DC)</strong> hält die AD-Datenbank; mindestens zwei DCs für Ausfallsicherheit.</li><li><strong>Struktur:</strong> Gesamtstruktur (Forest) → Strukturen (Trees) → Domänen → <strong>Organisationseinheiten (OUs)</strong> zum Gliedern und zum Anwenden von GPOs.</li><li><strong>DNS ist Voraussetzung:</strong> Clients finden DCs über SRV-Records. Falsch eingetragener DNS-Server beim Client = Domänenbeitritt scheitert.</li><li><strong>Protokolle:</strong> Kerberos (Port 88, Ticket-basierte Anmeldung), LDAP (389) / LDAPS (636) für Verzeichnisabfragen.</li><li><strong>Gruppenrichtlinien (GPO)</strong> werden in der Reihenfolge <strong>LSDOU</strong> angewendet: Lokal → Standort (Site) → Domäne → OU. Die zuletzt angewendete (OU) gewinnt bei Konflikten.</li></ul>
+<h3>Gruppen und AGDLP</h3>
+<p>Rechte nie direkt an Benutzer vergeben. Stattdessen: Benutzer (<strong>A</strong>ccounts) kommen in <strong>G</strong>lobale Gruppen nach Rolle (z. B. „GG_Vertrieb“), diese in <strong>D</strong>omänen<strong>l</strong>okale Gruppen nach Ressource (z. B. „DL_Share_Vertrieb_Ändern“), und nur diese bekommen die <strong>P</strong>ermissions. Vorteil: Neue Mitarbeiter in eine Gruppe aufnehmen, fertig. Übersichtlich und prüfbar.</p>
+<h3>Freigabe- und NTFS-Berechtigungen</h3>
+<ul><li>Innerhalb einer Ebene addieren sich Rechte aus mehreren Gruppen (kumulativ). Ausnahme: <strong>explizites Verweigern</strong> <strong>gewinnt</strong>.</li><li>Zugriff übers Netz: Es gilt die <strong>restriktivere</strong> von Freigabe- und NTFS-Berechtigung. Beispiel: Freigabe „Lesen“, NTFS „Ändern“ → effektiv <strong>Lesen</strong>.</li><li>Best Practice: Freigabe „Vollzugriff für authentifizierte Benutzer“, fein steuern über NTFS.</li></ul>
+<h2 id="lizenzen">Lizenzen</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Lizenzart</strong></th><th><strong>Bedeutung</strong></th></tr></thead><tbody><tr><td><strong>User-CAL</strong></td><td>pro Benutzer, egal mit wie vielen Geräten. Sinnvoll, wenn Mitarbeiter PC + Laptop + Smartphone nutzen.</td></tr><tr><td><strong>Device-CAL</strong></td><td>pro Gerät, egal wie viele Benutzer. Sinnvoll bei Schichtbetrieb oder geteilten Terminals.</td></tr><tr><td>Server-Lizenz pro Kern</td><td>Windows Server: alle physischen Kerne lizenzieren, mindestens 8 Kerne pro CPU und 16 pro Server. Standard: 2 VMs, Datacenter: unbegrenzt viele VMs auf dem Host.</td></tr><tr><td>OEM / Retail /Volumen</td><td>an Gerät gebunden / frei übertragbar / Mengenlizenz für Unternehmen</td></tr><tr><td>Subscription</td><td>Miete mit laufenden Kosten, Updates inklusive (z. B. Microsoft 365)</td></tr><tr><td>Open Source</td><td>Quellcode offen. GPL (Copyleft: Weitergabe von Änderungen nur unter GPL) vs. MIT/BSD (freizügig)</td></tr></tbody></table></div>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: CAL-AUSWAHL</div><p><em>30 Produktionsmitarbeiter in 3 Schichten teilen sich 10 Terminals. 8 Mitarbeiter im Büro nutzen je PC, Laptop und</em> <em>Smartphone. Welche CALs, wie viele?</em></p>
+<p>Produktion: 10 <strong>Device-CALs</strong> (statt 30 User-CALs). Büro: 8 <strong>User-CALs</strong> (statt 24 Device-CALs). Gesamt 18 CALs. Mischen ist erlaubt.</p></div>
+<p><strong>Weitere Lizenzbegriffe:</strong> <strong>Pay-per-Use</strong> (Abrechnung nach Verbrauch, typisch Cloud) · <strong>Rahmenvertrag</strong> (Volumenvertrag mit festen Konditionen) · <strong>Lizenzserver</strong> (vergibt Netzwerk-/Floating-Lizenzen, begrenzt gleichzeitige Nutzer) · <strong>License</strong> <strong>Monitoring</strong> und <strong>Lizenz-Audit</strong> (der Hersteller prüft; Unterlizenzierung führt zu Nachzahlung).</p>
+<h2 id="patch-und-update-management">Patch- und Update-Management</h2>
+<ul><li><strong>Patch:</strong> gezielte Korrektur eines Fehlers oder einer Sicherheitslücke, meist kostenlos.</li><li><strong>Update:</strong> kleinere Verbesserungen und Fehlerbehebungen innerhalb der Hauptversion (z. B. 2.3 → 2.4).</li><li><strong>Upgrade:</strong> neue Hauptversion mit neuen Funktionen (z. B. 2.x → 3.0), oft kostenpflichtig.</li></ul>
+<p><strong>Ablauf:</strong> Inventarisieren → Patches bewerten (Kritikalität) → in Testumgebung prüfen → Backup/Snapshot → gestaffelt ausrollen (Testgruppe, dann alle) → Erfolg kontrollieren → dokumentieren. Werkzeuge: WSUS, Microsoft Intune, Ansible, Proxmox-Updates über Repository.</p>
+<p><strong>Softwareverteilung und Updates zentral:</strong> Windows: <strong>WSUS</strong> (Microsoft-Updates freigeben und verteilen), <strong>MECM/SCCM</strong> (Software, Updates und Betriebssysteme verteilen, Inventarisierung), <strong>Intune</strong> (Cloud). Linux: Paketmanager <strong>apt</strong> bzw. <strong>dnf</strong> aus <strong>Repositories</strong> (eigene, geprüfte Spiegel). Bewährt sind <strong>Staging-Stufen</strong>: Test → Pilotgruppe → Produktion. Auch BIOS/UEFI- und Firmware-Updates gehören in den Patchprozess. <strong>Lifecycle:</strong> Nach dem regulären Support gibt es oft nur noch <strong>Extended Support</strong> (nur Sicherheitsupdates, meist kostenpflichtig); danach End of Life → rechtzeitig migrieren.</p>
+<h2 id="systeme-einfuehren-migrationsstrategien">Systeme einführen: Migrationsstrategien</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Strategie</strong></th><th><strong>Vorgehen</strong></th><th><strong>Vorteile</strong></th><th><strong>Nachteile</strong></th></tr></thead><tbody><tr><td><strong>Stichtag</strong> (Big Bang)</td><td>an einem Termin komplett vom alten auf das neue System umstellen</td><td>schnell, keine doppelte Pflege, klarer Schnitt</td><td>hohes Risiko; Fehler treffen alle sofort; Rückweg schwierig</td></tr><tr><td><strong>Parallelbetrieb</strong></td><td>alt und neu laufen eine Zeit lang gleichzeitig, Ergebnisse werden verglichen</td><td>sehr sicher, Rückfall jederzeit möglich</td><td>doppelter Aufwand und doppelte Kosten</td></tr><tr><td><strong>Stufenweise</strong></td><td>Modul für Modul, Abteilung für Abteilung oder Standort für Standort</td><td>Risiko begrenzt, Erfahrungen fließen ein</td><td>lange Gesamtdauer, Schnittstellen alt/neu nötig</td></tr><tr><td><strong>Pilotbetrieb</strong></td><td>zuerst eine Testgruppe, danach Rollout an alle</td><td>Fehler früh und im kleinen Rahmen</td><td>Pilotgruppe evtl. nicht repräsentativ</td></tr></tbody></table></div>
+<p><strong>Ablauf:</strong> Ist-Aufnahme → Planung (Strategie, Zeitplan, <strong>Wartungsfenster</strong> mit den Fachabteilungen abstimmen, <strong>Stakeholder-Analyse</strong>: wer ist betroffen, wer entscheidet, wer muss informiert werden) → <strong>Backup</strong> des Altsystems → Datenmigration (exportieren, bereinigen, testweise importieren, prüfen) → Tests → Schulung → Umstellung → Abnahme (Abnahmeprotokoll) → Altsystem erst danach abschalten. Immer einen <strong>Rollback-Plan</strong> bereithalten. <strong>P2V</strong> (Physical to Virtual) = physischen Server in eine VM überführen.</p>
+<p><strong>Bei der Datenmigration beachten:</strong> Datenmenge (Dauer = Menge ÷ Datenrate), Kompatibilität der Dateisysteme (FAT32: max. 4 GiB pro Datei und keine Rechte; NTFS bzw. ext4 mit Rechten – über FAT32/exFAT kopiert gehen Berechtigungen verloren), Zeichensätze (UTF-8) und Datenklassifizierung (öffentlich, intern, vertraulich, streng vertraulich → bestimmt Transportweg und Verschlüsselung).</p>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE</div><p><em>Die Lohnabrechnung wird auf eine neue Software umgestellt. Fehler in der Abrechnung wären teuer. Welche</em> <em>Einführungsstrategie empfehlen Sie?</em></p>
+<p><strong>Lösung:</strong> <strong>Parallelbetrieb</strong> für mindestens einen Abrechnungsmonat: Beide Systeme rechnen, die Ergebnisse werden verglichen. Erst wenn sie übereinstimmen, wird das alte System abgeschaltet. Der Mehraufwand ist durch das hohe Fehlerrisiko gerechtfertigt.</p></div>
+<h2 id="monitoring">Monitoring</h2>
+<ul><li><strong>SNMP</strong> (UDP 161, Traps UDP 162): Abfrage von Netzwerkgeräten und Servern. Nur <strong>SNMPv3</strong> bietet Authentifizierung und Verschlüsselung.</li><li><strong>Syslog</strong> (UDP 514): zentrale Sammlung von Logmeldungen.</li><li>Werkzeuge: Zabbix, PRTG, Checkmk, Prometheus/Grafana. Schwellenwerte (z. B. CPU &gt; 90 % über 5 min) lösen Alarme aus.</li><li><strong>Bottleneck-Analyse:</strong> Der Engpass ist die Ressource, die am Limit ist (CPU ~100 %, RAM voll und viel Auslagerung, Datenträger-Warteschlange hoch, Netzwerk z. B. nur 100 Mbit/s statt 1 Gbit/s wegen falschem Kabel/Treiber).</li></ul>
+<p><strong>SNMP im Detail:</strong> Der <strong>Manager</strong> (Monitoring-Server) fragt <strong>Agents</strong> auf Switches, Routern, Servern und USVs ab; welche Werte es gibt, beschreibt die <strong>MIB</strong>, jeder Wert hat eine eindeutige <strong>OID</strong>. <strong>Polling</strong>: Der Manager fragt regelmäßig (GET, UDP 161). <strong>Trap</strong>: Der Agent meldet ein Ereignis von sich aus (UDP 162), z. B. „Port down“ oder „USV im Batteriebetrieb“. SNMPv1/v2c nutzen einen <strong>Community-String</strong> im Klartext (Standard „public“ ändern), <strong>SNMPv3</strong> bietet Benutzer, Authentifizierung und Verschlüsselung → im Unternehmen v3 verwenden.</p>
+<h2 id="it-service-management-und-notfallvorsorge">IT-Service-Management und Notfallvorsorge</h2>
+<p>Der Katalog verlangt, Monitoring-Ergebnisse zu interpretieren und daraus korrigierende Maßnahmen abzuleiten. Den Rahmen dafür liefert das IT-Service-Management nach <strong>ITIL</strong>.</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Begriff</strong></th><th><strong>Bedeutung</strong></th><th><strong>Beispiel</strong></th></tr></thead><tbody><tr><td><strong>Incident</strong></td><td>ungeplante Störung; Ziel: Dienst <strong>schnell wiederherstellen</strong></td><td>„Drucker im 2. OG druckt nicht“ → Ticket</td></tr><tr><td><strong>Problem</strong></td><td>die (unbekannte) <strong>Ursache</strong> eines oder mehrerer Incidents; Ziel: dauerhaft beseitigen</td><td>Warum fällt der Switch jede Woche aus?</td></tr><tr><td><strong>Change</strong></td><td>geplante, genehmigte Änderung (Change Advisory Board, Rollback-Plan)</td><td>Firmware-Update der Firewall am Wochenende</td></tr><tr><td>Service Request</td><td>Standardanfrage, keine Störung</td><td>neues Benutzerkonto, Passwort zurücksetzen</td></tr></tbody></table></div>
+<ul><li><strong>Ticketsystem:</strong> Jede Meldung wird erfasst, priorisiert (Dringlichkeit × Auswirkung), zugewiesen, dokumentiert und geschlossen. So sind Bearbeitung, Eskalation und SLA-Einhaltung nachvollziehbar.</li><li><strong>Support-Level: 1st Level</strong> (Service Desk: Annahme, Standardlösungen, Weiterleitung) → <strong>2nd Level</strong> (Fachspezialisten, Administratoren) → <strong>3rd Level</strong> (Hersteller, Entwickler). Eskalation funktional (an höheren Level) oder hierarchisch (an Vorgesetzte).</li><li><strong>SLA</strong> (Service Level Agreement): Vereinbarung mit dem Kunden über messbare Leistung, z. B. Verfügbarkeit 99,9 %, Reaktionszeit 1 h, Lösungszeit 4 h, Servicezeiten Mo–Fr 8–18 Uhr. Intern: <strong>OLA</strong> (zwischen IT-Abteilungen), extern: <strong>UC</strong> (Underpinning Contract mit Zulieferern).</li><li><strong>SOP</strong> (Standard Operating Procedure): schriftliche Schritt-für-Schritt-Anweisung für wiederkehrende Abläufe (z. B. „Server-Neustart nach Patchday“). Sorgt für gleichbleibende Qualität, auch bei Vertretung.</li><li><strong>S.M.A.R.T.</strong>: Selbstüberwachung von Festplatten/SSDs (Temperatur, defekte Sektoren, Betriebsstunden). Grundlage für <strong>Predictive Maintenance</strong>: Teile tauschen, bevor sie ausfallen.</li><li><strong>Load Balancing:</strong> Verteilung von Anfragen auf mehrere Server (Round Robin, nach Last, nach Verbindungen). Erhöht Leistung und Verfügbarkeit; der Load Balancer prüft per Health-Check, welche Server antworten.</li></ul>
+<h3>Notfallkonzept (Business Continuity / Disaster Recovery)</h3>
+<ol><li><strong>Risikoanalyse:</strong> Welche Ausfälle sind möglich (Hardware, Brand, Ransomware, Stromausfall)? Risiko = Eintrittswahrscheinlichkeit × Schadenshöhe.</li><li><strong>Business-Impact-Analyse:</strong> Welche Prozesse sind kritisch? Festlegen von <strong>RTO</strong> und <strong>RPO</strong> (Kapitel 3).</li><li><strong>Maßnahmen:</strong> vorbeugend (Redundanz, USV, Backup, Ersatzteile) und reaktiv (Notfallhandbuch mit Kontaktliste, Wiederanlaufplan, Ausweich-Rechenzentrum).</li><li><strong>Testen und verbessern:</strong> Notfallübungen, Restore-Tests; Verbesserung im <strong>PDCA-Zyklus</strong> (Plan–Do–Check–Act) = kontinuierlicher Verbesserungsprozess (KVP).</li></ol>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Kommandozeile</strong></span></td><td><strong>Wildcards</strong> = * = beliebig viele Zeichen, ? = genau eins (copy C:\system\log\*.log D:\) <span style="color:#7a8599">1×</span> · <strong>Aufruf scheitert</strong> = Programm liegt nicht im PATH/aktuellen Ordner → vollen Pfad angeben oder PATH ergänzen <span style="color:#7a8599">1×</span> · <strong>Zeitsteuerung</strong> = Aufgabenplanung/schtasks (Windows), cron (Linux) <span style="color:#7a8599">1×</span> · <strong>chmod 754</strong> = Eigentümer rwx · Gruppe r-x · Andere r-- (r = 4, w = 2, x = 1) <span style="color:#7a8599">1×</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Software pflegen</strong></span></td><td><strong>Zentrales Patchmanagement</strong> = WSUS o. Ä.: vorher testen, gesteuert verteilen, Bandbreite sparen, Überblick <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: Patch, Update, Upgrade, User-/Device-CAL, MDM/BYOD</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Härtung</strong></span></td><td><strong>Default ändern</strong> = Standardkonten/-passwörter ändern, unnötige Dienste aus, Firewall an, Updates, Logging <span style="color:#7a8599">1×</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü4.1</strong> Wandle um: a) <code>rwxr-xr--</code> · b) <code>rw-------</code> · c) 755 in symbolische Schreibweise · d) Was bewirkt <code>chmod o-r</code> <code>geheim.txt</code> ?</p>
+<p><strong>Ü4.2</strong> Benutzerin ist in Gruppe A (NTFS: Ändern) und Gruppe B (NTFS: Lesen). Freigabeberechtigung: Lesen. Effektives Recht über das Netz?</p>
+<p><strong>Ü4.3</strong> Ein Server ist langsam. Ressourcenmonitor: CPU 25 %, RAM 97 % belegt, Datenträger 100 % aktiv (hauptsächlich pagefile.sys). Was ist der Engpass und was tust du?</p>
+<p><strong>Ü4.4</strong> Ordne zu: a) Mehrere Nutzer melden „kein Internet“ · b) Der Techniker untersucht, warum der Router seit Wochen nachts neu startet · c) Tausch der Core-Switches am Samstag · d) Neue Mitarbeiterin braucht ein Konto.</p></div>
+<h3 class="loesungen">Lösungen Kapitel 4</h3>
+<p><span style="color:#9a6200"><strong>Ü4.1</strong></span> a) 754 · b) 600 · c) <code>rwxr-xr-x</code> · d) Other verlieren das Leserecht.</p>
+<p><span style="color:#9a6200"><strong>Ü4.2</strong></span> NTFS kumulativ = Ändern. Freigabe = Lesen. Restriktiver gewinnt → <strong>Lesen</strong>.</p>
+<p><span style="color:#9a6200"><strong>Ü4.3</strong></span> Engpass ist der <strong>Arbeitsspeicher</strong>: Das System lagert in die Auslagerungsdatei aus, deshalb ist die Platte voll ausgelastet (Folge, nicht Ursache). Maßnahme: RAM erweitern (bei VM: mehr RAM zuweisen) oder speicherhungrige Prozesse ermitteln/verteilen.</p>
+<p><span style="color:#9a6200"><strong>Ü4.4</strong></span> a) Incident · b) Problem · c) Change · d) Service Request</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-03-storage-raid-backup.html">← 3 Storage, RAID &amp; Backup</a><a class="next" href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

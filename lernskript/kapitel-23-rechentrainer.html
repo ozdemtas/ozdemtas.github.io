@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rechentrainer – Kapitel 23 | FISI AP2 Lernskript</title>
+<meta name="description" content="Kapitel 23: Rechentrainer – AP2-Lernskript für Fachinformatiker Systemintegration.">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-23-rechentrainer.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rechentrainer – Kapitel 23 | FISI AP2 Lernskript">
+<meta property="og:description" content="Kapitel 23: Rechentrainer – AP2-Lernskript für Fachinformatiker Systemintegration.">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-23-rechentrainer.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 23: Rechentrainer", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-23-rechentrainer.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a class="active" href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/pruefungspraxis.html">Prüfungspraxis &amp; Anhang</a> / 23 Rechentrainer</div>
+<h1><span class="num">23</span>Rechentrainer</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip">Punktebringer in jeder Prüfung</span><span class="chip">Lernzeit ca. 2 × 120 min</span></div>
+<div class="box box-blick"><div class="box-label">DIE 5-SCHRITTE-METHODE FÜR JEDE RECHENAUFGABE</div><ol><li><strong>Gegeben/Gesucht</strong> herausschreiben, mit Einheiten.</li><li><strong>Einheiten angleichen:</strong> Byte → Bit (× 8), MiB/GiB binär (× 1.024), Mbit/s dezimal (× 1.000.000), W → kW, Minuten → Sekunden.</li><li><strong>Formel</strong> hinschreiben (bringt Teilpunkte, auch wenn das Ergebnis falsch ist).</li><li><strong>Rechnen</strong>, Zwischenergebnisse notieren.</li><li><strong>Plausibilität</strong> prüfen und <strong>Ergebnis mit Einheit</strong> und geforderter Rundung angeben (Antwortsatz).</li></ol></div>
+<h2 id="einheiten-das-fundament">Einheiten: Das Fundament</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Dezimal (SI) – Hersteller, Datenraten</strong></th><th><strong>Binär (IEC) – Betriebssystem, Speicher</strong></th></tr></thead><tbody><tr><td>1 kB = 1.000 Byte</td><td>1 KiB = 1.024 Byte</td></tr><tr><td>1 MB = 1.000² Byte = 1.000.000 Byte</td><td>1 MiB = 1.024² Byte = 1.048.576 Byte</td></tr><tr><td>1 GB = 1.000³ Byte</td><td>1 GiB = 1.024³ Byte = 1.073.741.824 Byte</td></tr><tr><td>1 TB = 1.000⁴ Byte</td><td>1 TiB = 1.024⁴ Byte</td></tr><tr><td>1 Mbit/s = 1.000.000 bit/s · 1 Gbit/s = 10⁹ bit/s</td><td>Datenraten sind <strong>immer dezimal</strong></td></tr></tbody></table></div>
+<p>Merke: <strong>1 Byte = 8 Bit</strong>. Kleines b = Bit, großes B = Byte. 1 TB ≈ 0,909 TiB, 1 GiB ≈ 1,074 GB.</p>
+<div class="box box-fallen"><div class="box-label">PRÜFUNGSREGEL DER ZPA (KATALOG-ANHANG „PRÄFIXE“)</div><p><strong>Physikalische Größen</strong> (Strom, Leistung, Geschwindigkeit, Datenrate) → <strong>Dezimalpräfixe</strong> (k, M, G). <strong>Datenmengen</strong> → <strong>Binärpräfixe</strong> (KiB, MiB, GiB, TiB). Wörtlich: <strong>„Angaben zu Datenmengen sind nur mit Binärpräfixen richtig!“</strong> Gib Speicher- und Dateigrößen deshalb in GiB/TiB an. Nennt eine Aufgabe Herstellerangaben in TB, rechnest du um (→ R9); stehen Plattengrößen schon in TiB (wie in Kap. 3), rechnest du direkt damit.</p></div>
+<h2 id="formelsammlung-mit-beispielen">Formelsammlung mit Beispielen</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Thema</strong></th><th><strong>Formel</strong></th><th><strong>Beispiel</strong></th></tr></thead><tbody><tr><td>Übertragungszeit</td><td>t = Datenmenge (bit) ÷ Datenrate (bit/s) mit Overhead: Datenmenge × (1 + Overhead)</td><td>4 GiB, 100 Mbit/s, 10 % Overhead: 4 × 1.024³ × 8 × 1,1 ÷ 100.000.000 = 377,96 s ≈ 6 min 18 s</td></tr><tr><td>Datenmenge in Zeit</td><td>Datenmenge = Datenrate × Zeit</td><td>10 Gbit/s × 7.200 s = 72.000 Gbit ÷ 8 = 9.000 GB = 9 · 10¹² B ≈ 8,19 TiB</td></tr><tr><td>Bandbreite VoIP</td><td>Codec-Rate × Gespräche × (1 + Overhead)</td><td>20 × 64 kbit/s × 1,1 = 1.408 kbit/s</td></tr><tr><td>IoT/Sensoren</td><td>Geräte × Nachrichtengröße × 8 ÷ Intervall</td><td>500 × 66 B × 8 ÷ 2 s = 132 kbit/s</td></tr><tr><td>Bilddatei (unkomprimiert)</td><td>Breite × Höhe × Farbtiefe (bit) ÷ 8</td><td>1920 × 1080 × 24 ÷ 8 = 6.220.800 B ≈ 5,93 MiB</td></tr><tr><td>Videospeicher</td><td>Bitrate × Kameras × Sekunden ÷ 8</td><td>4 × 6 Mbit/s × 86.400 s × 7 Tage ÷ 8 ≈ 1,65 TiB</td></tr><tr><td>Subnetting</td><td>Hosts = 2h − 2 · Subnetze = 2n · Blockgröße = 256 − Maskenwert</td><td>/27 → 30 Hosts, Block 32</td></tr><tr><td>IPv6-Subnetze</td><td>2(Zielpräfix − Ausgangspräfix)</td><td>/48 → /64: 216 = 65.536</td></tr><tr><td>RAID</td><td>R5: (n−1)·C · R6: (n−2)·C · R10: n/2·C · R15: (n/2−1)·C</td><td>RAID 6, 6 × 2 TiB: (6 − 2) × 2 = 8 TiB</td></tr><tr><td>Stromkosten</td><td>kW × h × €/kWh (24/7 = 8.760 h)</td><td>1,2 kW × 8.760 × 0,30 € = 3.153,60 €</td></tr><tr><td>Leistung</td><td>W = VA × cos φ · P = U × I</td><td>3.000 VA × 0,9 = 2.700 W</td></tr><tr><td>USV-Laufzeit</td><td>nutzbare Akku-Energie (Wh) ÷ Last (W)</td><td>2.000 Wh × 90 % ÷ 1.200 W = 1,5 h = 90 min</td></tr><tr><td>Verfügbarkeit</td><td>MTBF ÷ (MTBF + MTTR) · Ausfall = Zeit × (1 − V)</td><td>99,95 % pro Jahr: 8.760 h × 0,0005 = 4,38 h</td></tr><tr><td>Speicherwachstum</td><td>(Bestand + Jahre × Zuwachs) ÷ max. Füllgrad</td><td>(2.048 + 3 × 512) GiB ÷ 0,8 = 4.480 GiB ≈ 4,38 TiB</td></tr><tr><td>Schlüsselanzahl</td><td>symmetrisch n(n−1)/2 · asymmetrisch 2n</td><td>10 Personen: 45 bzw. 20</td></tr><tr><td>Amortisation</td><td>Investition ÷ Ersparnis pro Periode</td><td>18.000 € ÷ 750 €/Monat = 24 Monate</td></tr><tr><td>Nutzwertanalyse</td><td>Σ (Gewichtung × Punkte)</td><td>siehe unten</td></tr></tbody></table></div>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE: NUTZWERTANALYSE</div><p><em>Drei Firewall-Angebote werden bewertet (Punkte 1–10). Gewichtung: Preis 40 %, Leistung 35 %, Support 25 %.</em></p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Kriterium</strong></th><th><strong>Gewicht</strong></th><th><strong>A Punkte</strong></th><th><strong>A gewichtet</strong></th><th><strong>B Punkte</strong></th><th><strong>B gewichtet</strong></th><th><strong>C Punkte</strong></th><th><strong>C gewichtet</strong></th></tr></thead><tbody><tr><td>Preis</td><td>0,40</td><td>8</td><td>3,20</td><td>6</td><td>2,40</td><td>9</td><td>3,60</td></tr><tr><td>Leistung</td><td>0,35</td><td>6</td><td>2,10</td><td>9</td><td>3,15</td><td>5</td><td>1,75</td></tr><tr><td>Support</td><td>0,25</td><td>7</td><td>1,75</td><td>8</td><td>2,00</td><td>6</td><td>1,50</td></tr><tr><td><strong>Nutzwert</strong></td><td>1,00</td><td></td><td><strong>7,05</strong></td><td></td><td><strong>7,55</strong></td><td></td><td><strong>6,85</strong></td></tr></tbody></table></div>
+<p>Empfehlung: <strong>Angebot B</strong> (höchster Nutzwert), obwohl es nicht das günstigste ist. Vorteil der Methode: auch nicht in Geld messbare Kriterien werden vergleichbar. Nachteil: Gewichtung und Punkte sind subjektiv.</p></div>
+<h2 id="uebungsblock-gemischte-rechenaufgaben">Übungsblock: gemischte Rechenaufgaben</h2>
+<div class="box box-uebung"><div class="box-label">RECHNE JEDE AUFGABE MIT DER 5-SCHRITTE-METHODE</div><p><strong>R1</strong> Ein Videoclip von 750 MiB wird über eine Leitung mit 50 Mbit/s heruntergeladen (ohne Overhead). Wie lange dauert das in ganzen Sekunden (aufrunden)?</p>
+<p><strong>R2</strong> Eine Vollsicherung von 2 TiB soll über 1 Gbit/s laufen, effektiv werden 80 % der Bandbreite genutzt. Wie lange dauert sie (h, min)? Passt sie in ein Backupfenster von 22 bis 5 Uhr?</p>
+<p><strong>R3</strong> Vollsicherung 500 GiB am Sonntag. Täglich ändern sich 5 % (25 GiB), jeden Tag andere Daten. Wie viel Speicher belegen die Teilsicherungen Mo–Sa bei a) inkrementeller, b) differenzieller Sicherung?</p>
+<p><strong>R4</strong> Ein SLA garantiert 99,95 % Verfügbarkeit pro Monat (30 Tage). Wie viele Minuten Ausfall sind erlaubt?</p>
+<p><strong>R5</strong> Eine USV hat 1.200 Wh Akkukapazität, von der 80 % nutzbar sind. Die Last beträgt 1.500 W. Reicht das für die geforderten 30 Minuten?</p>
+<p><strong>R6</strong> 8 Überwachungskameras mit je 4 Mbit/s zeichnen 14 Tage lang rund um die Uhr auf. Wie viel Speicher (in TiB)?</p>
+<p><strong>R7</strong> 10 PCs: Kauf 900 € pro Stück oder Leasing 28 € pro PC und Monat über 36 Monate. Vergleiche die Gesamtkosten und nenne je ein Argument für Kauf und Leasing.</p>
+<p><strong>R8</strong> Ein Unternehmen hat 12 Server à 400 W. Nach Virtualisierung laufen alle Dienste auf 3 Hosts à 650 W. Strom 0,32 €/kWh, 24/7. Jährliche Ersparnis? Die Virtualisierung kostet 15.000 €. Nach wie vielen Monaten hat sie sich amortisiert (nur Strom)?</p>
+<p><strong>R9</strong> Ein Speicher-Array: 12 Platten à 2,4 TB, RAID 10. Wie viel TiB zeigt das Betriebssystem ungefähr an?</p>
+<p><strong>R10</strong> Ein Standort mit 40 Mitarbeitern benötigt je 2 Mbit/s für Anwendungen und zusätzlich 25 VoIP-Gespräche à 100 kbit/s (inkl. Overhead). Welche Mindestbandbreite, wenn 20 % Reserve eingeplant werden?</p></div>
+<h3 class="loesungen">Lösungen Rechentrainer</h3>
+<p><span style="color:#9a6200"><strong>R1</strong></span> 750 × 1.024² × 8 = 6.291.456.000 bit ÷ 50.000.000 bit/s = 125,83 s → <strong>126 s</strong> (2 min 6 s)</p>
+<p><span style="color:#9a6200"><strong>R2</strong></span> 2 × 1.024⁴ B × 8 ≈ 1,76 × 10¹³ bit ÷ (0,8 × 10⁹ bit/s) ≈ 21.990 s ≈ <strong>6 h 6 min 30 s</strong>. Fenster 22–5 Uhr = 7 h → passt.</p>
+<p><span style="color:#9a6200"><strong>R3</strong></span> a) inkrementell: 6 × 25 GiB = <strong>150 GiB</strong> · b) differenziell: 25 + 50 + 75 + 100 + 125 + 150 = <strong>525 GiB</strong></p>
+<p><span style="color:#9a6200"><strong>R4</strong></span> 30 × 24 × 60 = 43.200 min × 0,0005 = <strong>21,6 min</strong></p>
+<p><span style="color:#9a6200"><strong>R5</strong></span> 1.200 Wh × 0,8 = 960 Wh ÷ 1.500 W = 0,64 h = <strong>38,4 min</strong> → reicht.</p>
+<p><span style="color:#9a6200"><strong>R6</strong></span> 8 × 4.000.000 bit/s × 86.400 s × 14 ÷ 8 = 4.838.400.000.000 B = <strong>4,84 TB ≈ 4,40 TiB</strong></p>
+<p><span style="color:#9a6200"><strong>R7</strong></span> Kauf 10 × 900 € = 9.000 € · Leasing 10 × 28 € × 36 = 10.080 € → Leasing 1.080 € teurer. Kauf: günstiger gesamt, Geräte bleiben Eigentum. Leasing: schont Liquidität (keine hohe Anfangsinvestition), planbare monatliche Kosten, Austausch nach Laufzeit, oft Service inklusive.</p>
+<p><span style="color:#9a6200"><strong>R8</strong></span> Vorher 12 × 0,4 kW = 4,8 kW, nachher 3 × 0,65 kW = 1,95 kW → Differenz 2,85 kW × 8.760 h × 0,32 € = <strong>7.989,12 € pro Jahr</strong> (= 665,76 €/Monat). Amortisation: 15.000 ÷ 665,76 = 22,5 → <strong>nach 23 Monaten</strong>.</p>
+<p><span style="color:#9a6200"><strong>R9</strong></span> 12 ÷ 2 × 2,4 TB = 14,4 TB = 14,4 × 10¹² ÷ 1.024⁴ ≈ <strong>13,1 TiB</strong></p>
+<p><span style="color:#9a6200"><strong>R10</strong></span> 40 × 2 Mbit/s = 80 Mbit/s + 25 × 0,1 Mbit/s = 2,5 Mbit/s → 82,5 Mbit/s × 1,2 = <strong>99 Mbit/s</strong></p>
+<nav class="pager"><a class="prev" href="/lernskript/pruefungspraxis.html">← Prüfungspraxis &amp; Anhang</a><a class="next" href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>

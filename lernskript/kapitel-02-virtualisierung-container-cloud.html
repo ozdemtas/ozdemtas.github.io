@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtualisierung, Container &amp; Cloud – Kapitel 2 | FISI AP2 Lernskript</title>
+<meta name="description" content="Hypervisor Typ 1 läuft direkt auf der Hardware (ESXi, Hyper-V, Proxmox VE). Typ 2 läuft auf einem Betriebssystem (VirtualBox, VMware Workstation). Conta…">
+<meta name="author" content="Özdem Tas">
+<link rel="canonical" href="https://ozdemtas.github.io/lernskript/kapitel-02-virtualisierung-container-cloud.html">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Virtualisierung, Container &amp; Cloud – Kapitel 2 | FISI AP2 Lernskript">
+<meta property="og:description" content="Hypervisor Typ 1 läuft direkt auf der Hardware (ESXi, Hyper-V, Proxmox VE). Typ 2 läuft auf einem Betriebssystem (VirtualBox, VMware Workstation). Conta…">
+<meta property="og:url" content="https://ozdemtas.github.io/lernskript/kapitel-02-virtualisierung-container-cloud.html">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/lernskript/skript.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Kapitel 2: Virtualisierung, Container & Cloud", "learningResourceType": "Lernskript", "educationalLevel": "IHK-Abschlussprüfung Teil 2 (AP2)", "inLanguage": "de", "isAccessibleForFree": true, "url": "https://ozdemtas.github.io/lernskript/kapitel-02-virtualisierung-container-cloud.html", "isPartOf": {"@id": "https://ozdemtas.github.io/lernskript/#course"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "author": {"@id": "https://ozdemtas.github.io/#person", "@type": "Person", "name": "Özdem Tas"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/de/">Özdem Tas</a>
+  <a class="brand-sub" href="/lernskript/">FISI AP2 Lernskript</a>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<details class="toc" open>
+<summary>Inhalt</summary>
+<ul><li><a class="start" href="/lernskript/">Start &amp; Fahrplan</a></li></ul>
+<div class="grp"><a href="/lernskript/teil-1-konzeption-administration.html" style="color:inherit;text-decoration:none">Teil 1 · Konzeption &amp; Administration</a></div><ul>
+<li><a href="/lernskript/kapitel-01-server-hardware-energie-usv.html">1 Server-Hardware, Energie &amp; USV</a></li>
+<li><a class="active" href="/lernskript/kapitel-02-virtualisierung-container-cloud.html">2 Virtualisierung, Container &amp; Cloud</a></li>
+<li><a href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup</a></li>
+<li><a href="/lernskript/kapitel-04-betriebssysteme-administration-it-service-management.html">4 Betriebssysteme, Administration &amp; IT-Service-Management</a></li>
+<li><a href="/lernskript/kapitel-05-it-sicherheit-datenschutz.html">5 IT-Sicherheit &amp; Datenschutz</a></li>
+<li><a href="/lernskript/kapitel-06-datenbanken-sql.html">6 Datenbanken &amp; SQL</a></li>
+<li><a href="/lernskript/kapitel-07-programmierung-skripte-schnittstellen.html">7 Programmierung, Skripte &amp; Schnittstellen</a></li>
+<li><a href="/lernskript/kapitel-08-uml-bpmn-projektmanagement-tests.html">8 UML, BPMN, Projektmanagement &amp; Tests</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/teil-2-netzwerke.html" style="color:inherit;text-decoration:none">Teil 2 · Netzwerke</a></div><ul>
+<li><a href="/lernskript/kapitel-09-netzwerkgrundlagen-modelle-topologien-ports.html">9 Netzwerkgrundlagen: Modelle, Topologien &amp; Ports</a></li>
+<li><a href="/lernskript/kapitel-10-ipv4-ipv6-subnetting.html">10 IPv4, IPv6 &amp; Subnetting</a></li>
+<li><a href="/lernskript/kapitel-11-switching-vlan-stp-lacp-poe.html">11 Switching: VLAN, STP, LACP, PoE</a></li>
+<li><a href="/lernskript/kapitel-12-routing-nat.html">12 Routing &amp; NAT</a></li>
+<li><a href="/lernskript/kapitel-13-dhcp-dns-weitere-dienste.html">13 DHCP, DNS &amp; weitere Dienste</a></li>
+<li><a href="/lernskript/kapitel-14-kryptografie-pki-tls.html">14 Kryptografie, PKI &amp; TLS</a></li>
+<li><a href="/lernskript/kapitel-15-e-mail-protokolle-sicherheit.html">15 E-Mail: Protokolle &amp; Sicherheit</a></li>
+<li><a href="/lernskript/kapitel-16-wlan.html">16 WLAN</a></li>
+<li><a href="/lernskript/kapitel-17-firewall-dmz-vpn.html">17 Firewall, DMZ &amp; VPN</a></li>
+<li><a href="/lernskript/kapitel-18-voip-qos-multicast-mqtt.html">18 VoIP, QoS, Multicast &amp; MQTT</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/wiso.html" style="color:inherit;text-decoration:none">WiSo</a></div><ul>
+<li><a href="/lernskript/kapitel-19-ausbildung-arbeitsrecht.html">19 Ausbildung &amp; Arbeitsrecht</a></li>
+<li><a href="/lernskript/kapitel-20-mitbestimmung-tarif-arbeitsschutz.html">20 Mitbestimmung, Tarif &amp; Arbeitsschutz</a></li>
+<li><a href="/lernskript/kapitel-21-sozialversicherung-entgelt.html">21 Sozialversicherung &amp; Entgelt</a></li>
+<li><a href="/lernskript/kapitel-22-unternehmen-vertraege-wirtschaft.html">22 Unternehmen, Verträge &amp; Wirtschaft</a></li>
+</ul>
+<div class="grp"><a href="/lernskript/pruefungspraxis.html" style="color:inherit;text-decoration:none">Prüfungspraxis &amp; Anhang</a></div><ul>
+<li><a href="/lernskript/kapitel-23-rechentrainer.html">23 Rechentrainer</a></li>
+<li><a href="/lernskript/kapitel-24-troubleshooting-log-analyse.html">24 Troubleshooting &amp; Log-Analyse</a></li>
+<li><a href="/lernskript/kapitel-25-pruefungstechnik-operatoren-zeit-netzwerkplaene.html">25 Prüfungstechnik: Operatoren, Zeit, Netzwerkpläne</a></li>
+<li><a href="/lernskript/anhang-a-port-tabelle.html">Anhang A · Port-Tabelle</a></li>
+<li><a href="/lernskript/anhang-b-zahlensysteme-und-zweierpotenzen.html">Anhang B · Zahlensysteme und Zweierpotenzen</a></li>
+<li><a href="/lernskript/anhang-c-linux-und-windows-befehle.html">Anhang C · Linux- und Windows-Befehle</a></li>
+<li><a href="/lernskript/anhang-d-die-30-haeufigsten-fallen.html">Anhang D · Die 30 häufigsten Fallen</a></li>
+<li><a href="/lernskript/anhang-e-abkuerzungen.html">Anhang E · Abkürzungen</a></li>
+</ul>
+</details>
+</aside>
+<main>
+<div class="crumbs"><a href="/de/">Website</a> / <a href="/lernskript/">Lernskript</a> / <a href="/lernskript/teil-1-konzeption-administration.html">Teil 1 · Konzeption &amp; Administration</a> / 2 Virtualisierung, Container &amp; Cloud</div>
+<h1><span class="num">2</span>Virtualisierung, Container &amp; Cloud</h1>
+
+<div class="chips"><span class="chip-red">Relevanz ★★★</span><span class="chip-lila">auch in GA 2</span><span class="chip">Lernzeit ca. 90 min</span></div>
+<div class="box box-blick"><div class="box-label">AUF EINEN BLICK</div><ul><li><strong>Hypervisor Typ 1</strong> läuft direkt auf der Hardware (ESXi, Hyper-V, Proxmox VE). <strong>Typ 2</strong> läuft auf einem Betriebssystem (VirtualBox, VMware Workstation).</li><li><strong>Container</strong> teilen sich den Kernel des Hosts → leichter und schneller als VMs, aber schwächer isoliert.</li><li><strong>Snapshot ist kein Backup.</strong></li><li><strong>IaaS / PaaS / SaaS:</strong> Je weiter rechts, desto mehr verwaltet der Anbieter.</li><li>Skalierung: <strong>horizontal</strong> (mehr Server, scale out) vs. <strong>vertikal</strong> (stärkerer Server, scale up).</li></ul></div>
+<h2 id="virtualisierung-vor-und-nachteile">Virtualisierung: Vor- und Nachteile</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Vorteile</strong></th><th><strong>Nachteile</strong></th></tr></thead><tbody><tr><td><ul><li>Bessere Hardwareauslastung (Konsolidierung)</li><li>Weniger Platz, Strom, Kühlung</li><li>Schnelle Bereitstellung per Vorlage (Template, Klon)</li><li>Snapshots, einfache Migration, Hochverfügbarkeit</li><li>Isolierte Test- und Laborumgebungen</li></ul></td><td><ul><li><strong>Single Point of Failure:</strong> Host fällt aus → alle VMs betroffen (Lösung: Cluster + HA)</li><li>Overhead durch Hypervisor</li><li>Komplexere Administration, Know-how nötig</li><li>Lizenzkosten (z. B. pro Kern)</li><li>Ressourcenkonkurrenz bei Überbuchung</li></ul></td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Merkmal</strong></th><th><strong>Typ 1 – Bare Metal</strong></th><th><strong>Typ 2 – Hosted</strong></th></tr></thead><tbody><tr><td>Läuft auf</td><td>direkt auf der Hardware</td><td>einem Host-Betriebssystem</td></tr><tr><td>Leistung</td><td>hoch, wenig Overhead</td><td>geringer</td></tr><tr><td>Einsatz</td><td>Rechenzentrum, Produktivbetrieb</td><td>Test, Entwicklung, Schulung</td></tr><tr><td>Beispiele</td><td>VMware ESXi, Microsoft Hyper-V, Proxmox VE (KVM), Xen</td><td>Oracle VirtualBox, VMware Workstation</td></tr></tbody></table></div>
+<h3>Wichtige Begriffe</h3>
+<ul><li><strong>Snapshot:</strong> Zustand einer VM zu einem Zeitpunkt. Liegt auf demselben Storage und hängt an der Original-Disk. Fällt der Storage aus, ist beides weg. Deshalb kein Backup, sondern eine Absicherung vor Änderungen (z. B. vor einem Update). Nicht wochenlang stehen lassen, sonst leidet die Performance.</li><li><strong>Live-Migration:</strong> laufende VM ohne Unterbrechung auf einen anderen Host verschieben. Voraussetzung: gemeinsamer Storage (Shared Storage) oder Replikation, kompatible CPUs.</li><li><strong>Hochverfügbarkeit (HA):</strong> Fällt ein Host aus, starten seine VMs automatisch auf anderen Hosts neu. Braucht einen Cluster, sinnvollerweise ab 3 Knoten (Quorum/Mehrheitsentscheidung gegen „Split Brain“).</li><li><strong>Overcommitment:</strong> Den VMs mehr virtuelle Ressourcen zuweisen, als physisch vorhanden sind. Spart Hardware, riskiert aber Engpässe.</li><li><strong>Template / Klon:</strong> vorkonfigurierte Vorlage, aus der neue VMs in Minuten entstehen.</li></ul>
+<h2 id="virtualisierungsarten-und-cluster">Virtualisierungsarten und Cluster</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Art</strong></th><th><strong>Funktionsweise</strong></th><th><strong>Bewertung</strong></th></tr></thead><tbody><tr><td><strong>Vollvirtualisierung</strong></td><td>Gast-Betriebssystem läuft <strong>unverändert</strong>; der Hypervisor stellt komplette virtuelle Hardware bereit, heute <strong>hardwareunterstützt</strong> (Intel VT-x / AMD-V)</td><td>jedes OS möglich (auch Windows), Standard bei ESXi, Hyper-V, KVM</td></tr><tr><td><strong>Paravirtualisierung</strong></td><td>Gast-OS ist <strong>angepasst</strong> und spricht den Hypervisor direkt an, heute v. a. als paravirtualisierte Treiber (VirtIO für Netz und Disk)</td><td>weniger Overhead, bessere I/O-Leistung; Gast muss es unterstützen</td></tr><tr><td><strong>Containervirtualisierung</strong></td><td>keine eigene virtuelle Hardware, gemeinsamer Kernel des Hosts (Docker, LXC)</td><td>sehr leicht, aber nur gleicher Kernel-Typ</td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Cluster-Betriebsart</strong></th><th><strong>Funktionsweise</strong></th><th><strong>Bewertung</strong></th></tr></thead><tbody><tr><td><strong>Active/Passive</strong></td><td>ein Knoten arbeitet, der zweite steht bereit und übernimmt bei Ausfall (<strong>Failover</strong>); Knoten prüfen sich per <strong>Heartbeat</strong></td><td>einfach, sichere Reserve; Standby-Hardware ist ungenutzt</td></tr><tr><td><strong>Active/Active</strong></td><td>alle Knoten arbeiten gleichzeitig, die Last wird verteilt (Load Balancing); fällt einer aus, übernehmen die anderen</td><td>Hardware voll genutzt; so planen, dass die übrigen Knoten die Last tragen (<strong>N+1</strong>)</td></tr></tbody></table></div>
+<p><strong>Failback</strong> = Rückkehr auf den ursprünglichen Knoten nach der Reparatur. Ein Cluster schützt vor Hardwareausfall, nicht vor Datenverlust: Backup bleibt Pflicht.</p>
+<h2 id="netzwerkmodi-von-vms">Netzwerkmodi von VMs</h2>
+<p>Der Hypervisor stellt einen <strong>virtuellen Switch</strong> bereit. Wie die virtuelle Netzwerkkarte einer VM angebunden wird, entscheidet, wer die VM erreicht und was sie selbst erreicht.</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Modus</strong></th><th><strong>Funktionsweise</strong></th><th><strong>Erreichbarkeit</strong></th><th><strong>Typischer</strong> <strong>Einsatz</strong></th></tr></thead><tbody><tr><td><strong>Bridge</strong> (Netzwerkbrücke)</td><td>VM hängt direkt im physischen LAN, bekommt eine eigene IP aus dem LAN</td><td>wie ein eigener Rechner im Netz</td><td>Server-VMs</td></tr><tr><td><strong>NAT</strong></td><td>VM liegt in einem privaten Netz hinter dem Host und nutzt dessen IP nach außen</td><td>kommt ins LAN/Internet, von außen nur per Portweiterleitung</td><td>Client- und Test-VMs</td></tr><tr><td><strong>Host-only</strong></td><td>eigenes Netz nur zwischen Host und VMs</td><td>kein Zugang nach außen</td><td>Labor, Schulung</td></tr></tbody></table></div>
+<p><strong>VLANs in der Virtualisierung:</strong> Der Uplink des Hosts ist ein <strong>Trunk</strong> (tagged); am virtuellen Switch bekommt jede VM ihr VLAN. So landen z. B. Webserver-VM und Datenbank-VM auf demselben Host trotzdem in getrennten Netzen.</p>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE</div><p><em>a) Eine Test-VM soll Updates aus dem Internet laden, aber im Firmennetz nicht erreichbar sein. b) Eine Webserver-VM soll für alle Clients im LAN erreichbar sein. Welcher Netzwerkmodus jeweils?</em></p>
+<p><strong>Lösung:</strong> a) <strong>NAT</strong>: Die VM kommt über die Host-IP nach außen, ist von außen aber nicht direkt erreichbar. b) <strong>Bridge</strong> (bzw. eigenes VLAN am virtuellen Switch): Die VM erhält eine eigene Adresse und ist wie ein physischer Server erreichbar.</p></div>
+<h2 id="container">Container</h2>
+<p>Ein Container verpackt eine Anwendung mit allen Bibliotheken, nutzt aber den <strong>Kernel des Host-Systems</strong>. Er startet in Sekunden und braucht wenig Ressourcen. Werkzeuge: <strong>Docker/Podman</strong> (Container ausführen), <strong>Image</strong> (Vorlage), <strong>Registry</strong> (Ablage für Images), <strong>Kubernetes</strong> (Orchestrierung vieler Container auf vielen Hosts).</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Merkmal</strong></th><th><strong>Virtuelle Maschine</strong></th><th><strong>Container</strong></th></tr></thead><tbody><tr><td>Enthält</td><td>komplettes Gast-Betriebssystem</td><td>nur Anwendung + Bibliotheken</td></tr><tr><td>Kernel</td><td>eigener</td><td>vom Host geteilt</td></tr><tr><td>Startzeit / Größe</td><td>Minuten / GiB</td><td>Sekunden / MiB</td></tr><tr><td>Isolation</td><td>stark</td><td>schwächer (Kernel geteilt)</td></tr><tr><td>Anderes OS möglich?</td><td>ja (Windows-VM auf Linux-Host)</td><td>nein, gleicher Kernel-Typ</td></tr></tbody></table></div>
+<h2 id="cloud-computing">Cloud Computing</h2>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Ebene</strong></th><th><strong>On-Premises</strong></th><th><strong>IaaS</strong></th><th><strong>PaaS</strong></th><th><strong>SaaS</strong></th></tr></thead><tbody><tr><td>Anwendung &amp; Daten</td><td>Kunde</td><td>Kunde</td><td>Kunde</td><td><strong>Anbieter</strong>*</td></tr><tr><td>Laufzeit, Middleware</td><td>Kunde</td><td>Kunde</td><td><strong>Anbieter</strong></td><td><strong>Anbieter</strong></td></tr><tr><td>Betriebssystem</td><td>Kunde</td><td>Kunde</td><td><strong>Anbieter</strong></td><td><strong>Anbieter</strong></td></tr><tr><td>Virtualisierung, Server, Storage, Netz</td><td>Kunde</td><td><strong>Anbieter</strong></td><td><strong>Anbieter</strong></td><td><strong>Anbieter</strong></td></tr><tr><td>Beispiel</td><td>eigenes RZ</td><td>Azure VM, AWS EC2</td><td><p>Azure App Service, Datenbank-as-a-</p>
+<p>Service</p></td><td>Microsoft 365, Salesforce</td></tr></tbody></table></div>
+<p><span style="color:#56627a">* Auch bei SaaS bleibt der Kunde für seine Daten, Benutzerkonten und Zugriffsrechte verantwortlich (Shared Responsibility).</span></p>
+<p><strong>Bereitstellungsmodelle:</strong> Public Cloud (öffentlich, geteilt), Private Cloud (nur für ein Unternehmen), Hybrid Cloud (Kombination, z. B. sensible Daten lokal, Webshop in der Cloud), Community Cloud (mehrere Organisationen mit gleichen Anforderungen), Multi-Cloud (mehrere Anbieter parallel).</p>
+<div class="table-wrap"><table class=""><thead><tr><th><strong>Betriebsform</strong></th><th><strong>Wem gehört die Hardware?</strong></th><th><strong>Wer betreibt/administriert?</strong></th></tr></thead><tbody><tr><td>On-Premises</td><td>Unternehmen, im eigenen Serverraum</td><td>Unternehmen</td></tr><tr><td><strong>Housing</strong> (Colocation)</td><td>Unternehmen, steht im fremden Rechenzentrum (Strom, Kühlung, Anbindung, Zutrittsschutz vom Anbieter)</td><td>Unternehmen</td></tr><tr><td><strong>Hosting</strong> (Dedicated/Managed Server)</td><td>Anbieter, gemietet</td><td>je nach Vertrag Anbieter und/oder Kunde</td></tr><tr><td>Cloud (IaaS/PaaS/SaaS)</td><td>Anbieter, geteilt und virtualisiert</td><td>geteilte Verantwortung (Tabelle oben)</td></tr></tbody></table></div>
+<p><strong>Weitere Betriebsformen:</strong> <strong>Appliance</strong> = vorkonfiguriertes Gerät aus Hard- und Software für genau eine Aufgabe (z. B. Firewall-, Backup- oder NAS-Appliance): schnell einsatzbereit, aber herstellergebunden. <strong>Managed Services</strong> = ein Dienstleister betreibt Systeme (z. B. Firewall, Backup, Arbeitsplätze) zu festen SLA-Bedingungen. <strong>CDN</strong> (Content Delivery Network) = Inhalte liegen verteilt auf Servern nahe beim Nutzer; entlastet den eigenen Webserver und verkürzt Ladezeiten.</p>
+<p><strong>Kriterien zur Auswahl eines Cloud-Anbieters:</strong> Datenschutz (Serverstandort EU, AV-Vertrag, Zertifizierungen wie ISO 27001/BSI C5), Sicherheit, Verfügbarkeit laut SLA, Kosten-Nutzen (Preismodell, Datentransferkosten), Integration in bestehende Systeme (Schnittstellen, Identitätsverwaltung), Skalierbarkeit, Support, Exit-Strategie (Datenexport, kein Lock- in).</p>
+<div class="table-wrap"><table class=""><thead><tr><th></th><th><strong>On-Premises</strong></th><th><strong>Public Cloud</strong></th></tr></thead><tbody><tr><td>Vorteile</td><td>volle Kontrolle über Hardware und Daten, intern unabhängig vom Internet, keine laufende Miete</td><td>hoch skalierbar, Pay-per-Use, keine Hardwarewartung, schnelle Bereitstellung, geringe Anfangsinvestition</td></tr><tr><td>Nachteile</td><td>hohe Investition (CAPEX), eigene Wartung, Überdimensionierung für Lastspitzen</td><td>Abhängigkeit von Anbieter (Lock-in) und Internetanbindung, Latenz, Datenschutz bei Drittland-Speicherung, laufende Kosten (OPEX)</td></tr></tbody></table></div>
+<div class="box box-fallen"><div class="box-label">FALLE: DATENSCHUTZ IN DER CLOUD</div><p>Werden personenbezogene Daten in die Cloud ausgelagert, braucht es einen <strong>Auftragsverarbeitungsvertrag (AVV,</strong> <strong>Art. 28 DSGVO)</strong>. Bei Speicherung außerhalb der EU muss ein angemessenes Datenschutzniveau gesichert sein. In Prüfungen gibt es Punkte für „Rechenzentrumsstandort in der EU wählen“.</p></div>
+<h2 id="skalierung">Skalierung</h2>
+<ul><li><strong>Vertikal (scale up):</strong> mehr CPU/RAM für einen Server. Einfach, aber begrenzt und oft mit Neustart.</li><li><strong>Horizontal (scale out):</strong> weitere Server hinzufügen, Last per <strong>Load Balancer</strong> verteilen. Fast unbegrenzt, erhöht zugleich die Ausfallsicherheit.</li></ul>
+<div class="box box-aufgabe"><div class="box-label">TYPISCHE PRÜFUNGSAUFGABE</div><p><em>Die Firma will ihre Mailserver-Landschaft ablösen und keine eigenen Server mehr betreiben. Welches Cloud-Modell</em> <em>passt? Begründen Sie und nennen Sie ein Risiko.</em></p>
+<p><strong>Lösung:</strong> SaaS (z. B. gehostetes Exchange/Microsoft 365), denn der Anbieter betreibt Infrastruktur, Betriebssystem und Anwendung; das Unternehmen verwaltet nur noch Benutzer und Daten. Risiko: Abhängigkeit von Internetverbindung und Anbieter, Datenschutz (AVV, Serverstandort).</p></div>
+<div class="box box-begriffe"><div class="box-label">BEGRIFFSFAMILIEN – aus den IHK-Prüfungen (Zahl = so oft bisher gefragt)</div><div class="table-wrap"><table class="grid"><tbody><tr><td><span style="color:#5b3fa0"><strong>Cloud-Verträge</strong></span></td><td><strong>SLA-Rechnung</strong> = Ausfall/Jahr = (1 − Verfügbarkeit) × 8.760 h; 99,9 % → 8,76 h <span style="color:#7a8599">2×</span> · <strong>RTO/RPO</strong> = als Cloud-Kennzahlen (siehe Kap. 3) <span style="color:#7a8599">1×</span> · <strong>Backup as a Service</strong> = Sicherung beim Dienstleister: automatisch außer Haus, keine eigene Hardware, skalierbar <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: Pay-per-Use, Latenz, SLA</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Lastverteilung</strong></span></td><td><strong>Least Connections</strong> = Server mit den wenigsten aktiven Verbindungen <span style="color:#7a8599">1×</span> · <strong>IP-Hash</strong> = Client-IP bestimmt den Server → derselbe Client landet immer beim selben Server <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im Text: Load Balancer,</span> <span style="color:#7a8599">Round Robin</span></td></tr><tr><td><span style="color:#5b3fa0"><strong>Bereitstellung</strong></span></td><td><strong>Blue-Green Deployment</strong> = zwei gleiche Umgebungen: neue Version auf „Green“ testen, dann umschalten; Rückfall auf „Blue“ sofort möglich <span style="color:#7a8599">1×</span> · <strong>Cluster aufbauen</strong> = gleiche Hardware/CPU-Generation, gemeinsamer Speicher, ungerade Knotenzahl (Quorum), redundantes Netz <span style="color:#7a8599">1×</span> · <span style="color:#7a8599">außerdem im</span> <span style="color:#7a8599">Text: Vor-/Nachteile der Virtualisierung</span></td></tr></tbody></table></div></div>
+<div class="box box-uebung"><div class="box-label">ÜBUNGEN</div><p><strong>Ü2.1</strong> Ordne zu (IaaS/PaaS/SaaS): a) Entwickler wollen nur Code hochladen, ohne sich um Server zu kümmern. b) Die IT braucht kurzfristig 20 virtuelle Server für einen Lasttest. c) Die Buchhaltung nutzt eine Online-Lohnabrechnung im Browser.</p>
+<p><strong>Ü2.2</strong> Ein Kollege sagt: „Wir brauchen kein Backup, wir machen jede Nacht Snapshots.“ Nimm Stellung (2 Argumente).</p>
+<p><strong>Ü2.3</strong> Nenne zwei Gründe, warum man für einen HA-Cluster mindestens drei Knoten einsetzt.</p></div>
+<h3 class="loesungen">Lösungen Kapitel 2</h3>
+<p><span style="color:#9a6200"><strong>Ü2.1</strong></span> a) PaaS · b) IaaS · c) SaaS</p>
+<p><span style="color:#9a6200"><strong>Ü2.2</strong></span> Snapshots liegen auf demselben Storage wie die VM: Bei Hardwaredefekt, Ransomware oder Löschen des Storage sind sie mit weg. Sie sind abhängig von der Original-Disk, nicht auslagerbar (3-2-1-Regel nicht erfüllt) und verschlechtern auf Dauer die Performance. Ein echtes Backup auf getrennten Medien ist nötig.</p>
+<p><span style="color:#9a6200"><strong>Ü2.3</strong></span> Quorum: Bei Ausfall eines Knotens haben die zwei übrigen noch die Mehrheit und verhindern „Split Brain“. Außerdem kann die Last eines ausgefallenen Knotens auf mehrere andere verteilt werden (N+1-Redundanz).</p>
+<nav class="pager"><a class="prev" href="/lernskript/kapitel-01-server-hardware-energie-usv.html">← 1 Server-Hardware, Energie &amp; USV</a><a class="next" href="/lernskript/kapitel-03-storage-raid-backup.html">3 Storage, RAID &amp; Backup →</a></nav>
+<footer class="foot">
+<p>© Özdem Tas · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de">CC BY-NC-SA 4.0</a> – teilen erlaubt mit Namensnennung, nicht kommerziell.
+Privates Lernskript, kein offizielles Material der IHK oder der ZPA. Angaben ohne Gewähr.</p>
+<p><a href="/de/">Website</a> · <a href="https://www.linkedin.com/in/oezdem-tas">LinkedIn</a> · <a href="https://www.xing.com/profile/Oezdem_Tas">XING</a> · <a href="https://github.com/ozdemtas">GitHub</a></p>
+</footer>
+</main>
+</div>
+<script>
+(function(){var d=document.querySelector('.toc');if(d&&window.innerWidth<900){d.removeAttribute('open');}
+var a=document.querySelector('.toc a.active');var sb=document.querySelector('.sidebar');if(a&&sb&&window.innerWidth>=900){sb.scrollTop=a.offsetTop-sb.clientHeight/2;}})();
+</script>
+</body>
+</html>
